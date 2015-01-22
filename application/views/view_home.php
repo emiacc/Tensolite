@@ -11,7 +11,7 @@
 			<h4 class="panel-title">Panel Title here</h4>
 		</div>
 		<div class="panel-body">
-			Panel Content Here
+			Panel Content Here			
 		</div>
 	</div>
 </div>
@@ -27,7 +27,7 @@
 <script>
 	$(document).ready(function() {
 		App.init();
-		setTimeout(function(){$("#LIresumen").addClass("active");},500);
+		//setTimeout(function(){$("#LIresumen").addClass("active");},500);
 		//setTimeout(function(){$('#page-container').removeClass('page-sidebar-minified');generateSlimScroll($('#sidebar [data-scrollbar="true"]'));},500);
 	});
 </script>	

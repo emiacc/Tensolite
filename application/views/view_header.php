@@ -117,7 +117,7 @@
 							<li class="arrow"></li>
 							<li><a href="javascript:;">Editar Perfil</a></li>
 							<li class="divider"></li>
-							<li><a href="javascript:;">Log Out</a></li>
+							<li><a href="javascript:;">Cerrar Sesión</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -158,26 +158,26 @@
 					    </a>
 						<ul class="sub-menu">
 						    <li id="LIcemento"><a href="<?= base_url(); ?>cemento">Cemento</a></li>
-						    <li id="LIarena"><a href="">Arena</a></li>
-						    <li id="LIbinder"><a href="">Binder</a></li>
+						    <li id="LIarena"><a href="<?= base_url(); ?>arena">Arena</a></li>
+						    <li id="LIbinder"><a href="<?= base_url(); ?>binder">Binder</a></li>
 						</ul>
 					</li>
 
-					<li id="LIproduccion"><a href=""><i class="fa fa-cogs"></i><span>Producción</span></a></li>	
+					<li id="LIproduccion"><a href="<?= base_url(); ?>produccion"><i class="fa fa-cogs"></i><span>Producción</span></a></li>	
 
 					<li id="LIperdida" class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-toggle-down"></i>
 						    <span>Pérdida</span>
 					    </a>
 						<ul class="sub-menu">
-						    <li id="LIenplaya"><a href="">En Playa</a></li>
-						    <li id="LIenproduccion"><a href="">En Producción</a></li>
+						    <li id="LIenplaya"><a href="<?= base_url(); ?>perdidaPlaya">En Playa</a></li>
+						    <li id="LIenproduccion"><a href="<?= base_url(); ?>perdidaProduccion">En Producción</a></li>
 						</ul>
 					</li>
 
-					<li id="LIrrecuperacion"><a href=""><i class="fa fa-refresh"></i><span>Recuperación</span></a></li>
+					<li id="LIrecuperacion"><a href="<?= base_url(); ?>recuperacion"><i class="fa fa-refresh"></i><span>Recuperación</span></a></li>
 
-					<li id="LIdespacho"><a href=""><i class="fa fa-truck"></i><span>Despacho</span></a></li>
+					<li id="LIdespacho"><a href="<?= base_url(); ?>despacho"><i class="fa fa-truck"></i><span>Despacho</span></a></li>
 
 					<!-- begin sidebar minify button -->
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>

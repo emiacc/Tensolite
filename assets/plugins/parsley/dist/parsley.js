@@ -1875,7 +1875,7 @@ window.ParsleyConfig.i18n.en = $.extend(window.ParsleyConfig.i18n.en || {}, {
     url:          "This value should be a valid url.",
     number:       "Ingrese un número válido.",
     integer:      "This value should be a valid integer.",
-    digits:       "This value should be digits.",
+    digits:       "Ingrese un número.",
     alphanum:     "This value should be alphanumeric."
   },
   notblank:       "This value should not be blank.",
@@ -1883,7 +1883,7 @@ window.ParsleyConfig.i18n.en = $.extend(window.ParsleyConfig.i18n.en || {}, {
   pattern:        "This value seems to be invalid.",
   min:            "This value should be greater than or equal to %s.",
   max:            "This value should be lower than or equal to %s.",
-  range:          "This value should be between %s and %s.",
+  range:          "Ingrese un valor de %s a %s.",
   minlength:      "This value is too short. It should have %s characters or more.",
   maxlength:      "This value is too long. It should have %s characters or less.",
   length:         "This value length is invalid. It should be between %s and %s characters long.",

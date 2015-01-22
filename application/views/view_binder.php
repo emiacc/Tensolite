@@ -15,21 +15,10 @@
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 					</div>
-					<h4 class="panel-title">Egreso Cemento</h4>
+					<h4 class="panel-title">Egreso Binder</h4>
 				</div>
 				<div class="panel-body panel-form">
 					<form class="form-horizontal form-bordered" data-parsley-validate="true">
-						<div class="form-group">
-							<label class="control-label col-xs-4" for="selectSiloEgreso">Silo:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<select class="form-control" id="selectSiloEgreso" name="selectSiloEgreso" data-parsley-required="true">											
-                                    <option value="">Seleccione</option>
-                                    <option value="1">Silo A</option>
-                                    <option value="2">Silo B</option>
-                                    <option value="3">Silo C</option>
-                                </select>
-							</div>
-						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputFechaEgreso">Fecha:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
@@ -63,48 +52,42 @@
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 					</div>
-					<h4 class="panel-title">Ingreso Cemento</h4>
+					<h4 class="panel-title">Ingreso Binder</h4>
 				</div>
 				<div class="panel-body panel-form">					
 					<form class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
-							<label class="control-label col-xs-4" for="selectSiloIngreso">Silo:</label>
+							<label class="control-label col-xs-4" for="selectProveedorEgreso">Proveedor:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<select class="form-control" id="selectSiloIngreso" name="selectSiloIngreso" data-parsley-required="true">											
+								<select class="form-control" id="selectProveedorEgreso" name="selectProveedorEgreso" data-parsley-required="true">											
 									<option value="">Seleccione</option>
-									<option value="1">Silo A</option>
-									<option value="2">Silo B</option>
-									<option value="3">Silo C</option>
+									<option value="1">Proveedor A</option>
+									<option value="2">Proveedor B</option>
+									<option value="3">Proveedor C</option>
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-4" for="inputFechaIngreso">Fecha:</label>
+							<label class="control-label col-xs-4" for="inputFechaEgreso">Fecha:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
 								<div class="input-group date" id="datepicker-autoClose2" data-date-format="dd-mm-yyyy" >
-									<input id="inputFechaIngreso" name="inputFechaIngreso" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
+									<input id="inputFechaEgreso" name="inputFechaEgreso" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-4" for="inputNroFactura">Nro Factura:</label>
+							<label class="control-label col-xs-4" for="inputNroFactura">Nro Remito:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
 								<input class="form-control" type="text" id="inputNroFactura" name="inputNroFactura" placeholder="Número Factura" data-parsley-required="true"/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-4" for="inputKgOrigen">Kg Origen:</label>
+							<label class="control-label col-xs-4" for="inputCantidadIngreso">Cantidad:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputKgOrigen" name="inputKgOrigen" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-xs-4" for="inputKgFabrica">Kg Fábrica:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputKgFabrica" name="inputKgFabrica" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
-							</div>
-						</div>
+						</div>						
 						<div class="form-group">
 							<label class="control-label col-xs-4"></label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
@@ -150,10 +133,11 @@
 							<input type="text" size="4" placeholder="Año" maxlength="4" class="form-control" name="inputAnio" id="inputAnio" data-parsley-required="true" data-parsley-range="[1900,2050]"/>			
 						</div>
 						<div class="form-group m-r-10">
-							<select class="form-control" name="selectSiloTabla">
-								<option value="1">Silo A</option>
-								<option value="2">Silo B</option>
-								<option value="3">Silo C</option>
+							<select class="form-control" name="selectProveedorTabla">
+								<option value="0">Todos</option>
+								<option value="1">Proveedor A</option>
+								<option value="2">Proveedor B</option>
+								<option value="3">Proveedor C</option>
 							</select>
 						</div>
 						<button type="submit" class="btn btn-sm btn-primary m-r-5" style="margin-top: -5px;">Buscar</button>
@@ -165,20 +149,18 @@
 							<thead>
 								<tr>
 									<th>Día</th>
-									<th>Factura</th>
-									<th>Kg Ori</th>
-									<th>Kg Fab</th>
-									<th>Dif</th>
-									<th>Consumo</th>
-									<th>Stock</th>
+									<th>Proveedor</th>
+									<th>Remito</th>
+									<th>Cantidad</th>									
+									<th>Consumo</th>									
 								</tr>
 							</thead>
 							<tbody>
 								<script type="text/javascript">
-									for (var i = 1; i < 20; i++) {
-										document.write("<tr><td>"+i+"</td><td>2125</td><td>25</td><td>23</td><td>2</td><td>-</td><td>2512</td></tr>");
+									for (var i = 1; i < 25; i++) {
+										document.write("<tr><td>"+i+"</td><td>Proveedor</td><td>2125</td><td>235,4</td><td>-</td></tr>");
 										if(i==3 || i==8 || i==16)
-											document.write("<tr><td>"+i+"</td><td>-</td><td>-</td><td>-</td><td>-</td><td>405</td><td>2512</td></tr>");
+											document.write("<tr><td>"+i+"</td><td>-</td><td>-</td><td>-</td><td>405</td></tr>");
 									};
 								</script>											
 							</tbody>
@@ -208,7 +190,7 @@
 		FormPlugins.init();
 		//cambio el item activo en el sidebar
 		$("#ULsidebar > li").removeClass("active");
-		$("#LImateria").addClass("active");$("#LIcemento").addClass("active");
+		$("#LImateria").addClass("active");$("#LIbinder").addClass("active");
 		
 		//Completar los input con la fecha actual
 		d = new Date(); 
