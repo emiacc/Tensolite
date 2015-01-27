@@ -150,7 +150,7 @@
 				<ul id="ULsidebar" class="nav">
 					<li class="nav-header">Navegación</li>
 					
-					<li id="LIresumen" class="active"><a href="<?= base_url(); ?>home"><i class="fa fa-laptop"></i><span>Resumen</span></a></li>
+					<li id="LIresumen" class="active"><a href="<?= base_url(); ?>resumen"><i class="fa fa-laptop"></i><span>Resumen</span></a></li>
 
 					<li id="LImateria" class="has-sub">
 						<a href="javascript:;"><b class="caret pull-right"></b><i class="fa fa-cubes"></i>

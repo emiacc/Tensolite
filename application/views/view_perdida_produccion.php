@@ -5,14 +5,63 @@
 	@media screen and (max-width:2500px){.table-responsive{width:100%;margin-bottom:15px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;-ms-overflow-style:-ms-autohiding-scrollbar;border:1px solid #ddd}.table-responsive>.table{margin-bottom:0}.table-responsive>.table>thead>tr>th,.table-responsive>.table>tbody>tr>th,.table-responsive>.table>tfoot>tr>th,.table-responsive>.table>thead>tr>td,.table-responsive>.table>tbody>tr>td,.table-responsive>.table>tfoot>tr>td{white-space:nowrap}.table-responsive>.table-bordered{border:0}.table-responsive>.table-bordered>thead>tr>th:first-child,.table-responsive>.table-bordered>tbody>tr>th:first-child,.table-responsive>.table-bordered>tfoot>tr>th:first-child,.table-responsive>.table-bordered>thead>tr>td:first-child,.table-responsive>.table-bordered>tbody>tr>td:first-child,.table-responsive>.table-bordered>tfoot>tr>td:first-child{border-left:0}.table-responsive>.table-bordered>thead>tr>th:last-child,.table-responsive>.table-bordered>tbody>tr>th:last-child,.table-responsive>.table-bordered>tfoot>tr>th:last-child,.table-responsive>.table-bordered>thead>tr>td:last-child,.table-responsive>.table-bordered>tbody>tr>td:last-child,.table-responsive>.table-bordered>tfoot>tr>td:last-child{border-right:0}.table-responsive>.table-bordered>tbody>tr:last-child>th,.table-responsive>.table-bordered>tfoot>tr:last-child>th,.table-responsive>.table-bordered>tbody>tr:last-child>td,.table-responsive>.table-bordered>tfoot>tr:last-child>td{border-bottom:0}}
 </style>
 <!-- begin #content -->
-<div id="content" class="content">			
+<div id="content" class="content">
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>				
+			</div>
+			<h4 class="panel-title">Ingreso Pérdida en Producción</h4>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" action="" method="POST" data-parsley-validate="true">	
+				<div class="form-group m-r-10">
+					<div class="input-group date" id="datepicker-autoClose" data-date-format="dd-mm-yyyy" >
+						<input id="inputFechaPerdidaProduccion" name="inputFechaPerdidaProduccion" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					</div>
+				</div>				
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<select class="form-control" name="selectBanco" id="selectBanco" data-parsley-required="true">
+						<option value="">Banco...</option>
+						<option value="1">Banco 1</option>
+						<option value="2">Banco 2</option>
+						<option value="3">Banco 3</option>
+						<option value="4">Banco 4</option>
+						<option value="5">Banco 5</option>
+						<option value="6">Banco 6</option>
+						<option value="7">Banco 7</option>
+						<option value="8">Banco 8</option>
+					</select>
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<select class="form-control" name="selectMedida" id="selectMedida" data-parsley-required="true">
+						<option value="">Medida...</option>
+						<option value="1">1.0</option>
+						<option value="2">1.2</option>
+						<option value="3">1.4</option>
+						<option value="4">1.5</option>
+						<option value="5">1.6</option>
+						<option value="6">1.8</option>
+						<option value="7">2.0</option>
+						<option value="8">2.2</option>
+					</select>
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad" id="inputCantidad" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
+			</form>
+		</div>
+	</div>			
+	<div class="panel panel-inverse">
+		<div class="panel-heading">
+			<div class="panel-heading-btn">
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>				
 			</div>
 			<h4 class="panel-title">Pérdida en Producción Diaria</h4>
 		</div>
@@ -71,45 +120,7 @@
 				</table>
 			</div>	
 		</div>
-	</div>	
-	<div class="panel panel-inverse">
-		<div class="panel-heading">
-			<div class="panel-heading-btn">
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-			</div>
-			<h4 class="panel-title">Ingreso Pérdida en Producción</h4>
-		</div>
-		<div class="panel-body">
-			<form class="form-inline" action="" method="POST" data-parsley-validate="true">	
-				<div class="form-group m-r-10">
-					<div class="input-group date" id="datepicker-autoClose" data-date-format="dd-mm-yyyy" >
-						<input id="inputFechaPerdidaProduccion" name="inputFechaPerdidaProduccion" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
-						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-					</div>
-				</div>				
-				<div class="form-group m-r-10" style="margin-top: 5px;">
-					<select class="form-control" name="selectBanco" id="selectBanco" data-parsley-required="true">
-						<option value="">Seleccione</option>
-						<option value="1">Banco 1</option>
-						<option value="2">Banco 2</option>
-						<option value="3">Banco 3</option>
-						<option value="4">Banco 4</option>
-						<option value="5">Banco 5</option>
-						<option value="6">Banco 6</option>
-						<option value="7">Banco 7</option>
-						<option value="8">Banco 8</option>
-					</select>
-				</div>
-				<div class="form-group m-r-10" style="margin-top: 5px;">			
-					<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad" id="inputCantidad" data-parsley-required="true" data-parsley-type="number"/>			
-				</div>
-				<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
-			</form>
-		</div>
-	</div>	
+	</div>		
 </div>
 <!-- end #content -->
 		

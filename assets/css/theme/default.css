@@ -19,19 +19,19 @@ Website: http://www.seantheme.com/color-admin-v1.3/
 .page-sidebar-minified .sidebar .nav > li.has-sub.active > a,
 .label.label-theme,
 .btn.btn-scroll-to-top {
-    background: #00acac;
+    background: #348fe2;
 }
 .navbar.navbar-inverse .navbar-brand {
     color: #fff !important;
 }
 .text-theme,
 .sidebar .sub-menu > li.active > a:before {
-    color: #00acac;
+    color: #348fe2;
 }
 
 @media (max-width: 767px) {
     .navbar-inverse .navbar-header {
-        background: #00acac;
+        background: #348fe2;
     }
 }
 

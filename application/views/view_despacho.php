@@ -5,37 +5,24 @@
 	@media screen and (max-width:2500px){.table-responsive{width:100%;margin-bottom:15px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;-ms-overflow-style:-ms-autohiding-scrollbar;border:1px solid #ddd}.table-responsive>.table{margin-bottom:0}.table-responsive>.table>thead>tr>th,.table-responsive>.table>tbody>tr>th,.table-responsive>.table>tfoot>tr>th,.table-responsive>.table>thead>tr>td,.table-responsive>.table>tbody>tr>td,.table-responsive>.table>tfoot>tr>td{white-space:nowrap}.table-responsive>.table-bordered{border:0}.table-responsive>.table-bordered>thead>tr>th:first-child,.table-responsive>.table-bordered>tbody>tr>th:first-child,.table-responsive>.table-bordered>tfoot>tr>th:first-child,.table-responsive>.table-bordered>thead>tr>td:first-child,.table-responsive>.table-bordered>tbody>tr>td:first-child,.table-responsive>.table-bordered>tfoot>tr>td:first-child{border-left:0}.table-responsive>.table-bordered>thead>tr>th:last-child,.table-responsive>.table-bordered>tbody>tr>th:last-child,.table-responsive>.table-bordered>tfoot>tr>th:last-child,.table-responsive>.table-bordered>thead>tr>td:last-child,.table-responsive>.table-bordered>tbody>tr>td:last-child,.table-responsive>.table-bordered>tfoot>tr>td:last-child{border-right:0}.table-responsive>.table-bordered>tbody>tr:last-child>th,.table-responsive>.table-bordered>tfoot>tr:last-child>th,.table-responsive>.table-bordered>tbody>tr:last-child>td,.table-responsive>.table-bordered>tfoot>tr:last-child>td{border-bottom:0}}
 </style>
 <!-- begin #content -->
-<div id="content" class="content">		
+<div id="content" class="content">
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>				
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 			</div>
-			<h4 class="panel-title">Ingreso Producción</h4>
+			<h4 class="panel-title">Ingreso Despacho</h4>
 		</div>
 		<div class="panel-body">
 			<form class="form-inline" action="" method="POST" data-parsley-validate="true">	
 				<div class="form-group m-r-10">
 					<div class="input-group date" id="datepicker-autoClose" data-date-format="dd-mm-yyyy" >
-						<input id="inputFechaProduccion" name="inputFechaProduccion" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
+						<input id="inputFechaDespacho" name="inputFechaDespacho" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
 						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 					</div>
-				</div>				
-				<div class="form-group m-r-10" style="margin-top: 5px;">
-					<select class="form-control" name="selectBanco" id="selectBanco" data-parsley-required="true">
-						<option value="">Banco...</option>
-						<option value="1">Banco 1</option>
-						<option value="2">Banco 2</option>
-						<option value="3">Banco 3</option>
-						<option value="4">Banco 4</option>
-						<option value="5">Banco 5</option>
-						<option value="6">Banco 6</option>
-						<option value="7">Banco 7</option>
-						<option value="8">Banco 8</option>
-					</select>
-				</div>
+				</div>	
 				<div class="form-group m-r-10" style="margin-top: 5px;">
 					<select class="form-control" name="selectMedida" id="selectMedida" data-parsley-required="true">
 						<option value="">Medida...</option>
@@ -48,14 +35,14 @@
 						<option value="7">2.0</option>
 						<option value="8">2.2</option>
 					</select>
-				</div>
+				</div>			
 				<div class="form-group m-r-10" style="margin-top: 5px;">			
 					<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad" id="inputCantidad" data-parsley-required="true" data-parsley-type="number"/>			
 				</div>
 				<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
 			</form>
 		</div>
-	</div>		
+	</div>			
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
@@ -63,13 +50,10 @@
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 			</div>
-			<h4 class="panel-title">Producción Diaria</h4>
+			<h4 class="panel-title">Despacho Mensual</h4>
 		</div>
 		<div class="panel-body">
-			<form class="form-inline text-center" action="" method="POST" data-parsley-validate="true">						
-				<div class="form-group m-r-10">			
-					<input type="text" size="2" placeholder="Día" maxlength="2" class="form-control" name="inputDia" id="inputDia" data-parsley-required="true" data-parsley-range="[1,31]"/>			
-				</div>
+			<form class="form-inline text-center" action="" method="POST" data-parsley-validate="true">					
 				<div class="form-group m-r-10">
 					<select class="form-control" name="selectMes" id="selectMes">
 						<option value="0">Enero</option>
@@ -92,12 +76,12 @@
 				<button type="submit" class="btn btn-sm btn-primary m-r-5" style="margin-top: -5px;">Buscar</button>
 			</form>
 			<hr>
-			<h3 class="text-center">7 de Enero 2015</h3>
+			<h3 class="text-center">Enero 2015</h3>
 			<div class="table-responsive">
 				<table class="table table-striped text-center">
 					<thead>
 						<tr>
-							<th>Banco</th>
+							<th>Día</th>
 							<script type="text/javascript">
 								for (var i = 1.0; i < 8; i+=0.1) {	
 									document.write("<th>"+i.toFixed(1)+"</th>");
@@ -107,7 +91,7 @@
 					</thead>
 					<tbody>
 						<script type="text/javascript">
-							for (var i = 1; i < 9; i++) {
+							for (var i = 1; i < 20; i++) {
 								var s = "<tr><td>"+i+"</td>";
 								for (var j = 1; j < 72; j++) {
 									s += "<td>"+(j-i)+"</td>"
@@ -120,7 +104,7 @@
 				</table>
 			</div>	
 		</div>
-	</div>	
+	</div>		
 </div>
 <!-- end #content -->
 		
@@ -140,17 +124,16 @@
 		FormPlugins.init();
 		//cambio el item activo en el sidebar
 		$("#ULsidebar > li").removeClass("active");
-		$("#LIproduccion").addClass("active");
+		$("#LIdespacho").addClass("active");$("#LIenplaya").addClass("active");
 		
 		//Completar los input con la fecha actual
 		d = new Date(); 
 		mes = (d.getMonth()+1);
 		if(mes < 10) mes = "0"+mes;
 		currentDay = d.getDate()+"-"+mes+"-"+ d.getFullYear();
-		$("#inputFechaProduccion").attr("value",currentDay);
+		$("#inputFechaDespacho").attr("value",currentDay);
 		$('#inputAnio').attr("value",d.getFullYear());
-		$('#selectMes').attr("value",d.getMonth());
-		$('#inputDia').attr("value",d.getDate());
+		$('#selectMes').attr("value",d.getMonth());		
 	});
 </script>	
 </body>
