@@ -9,7 +9,7 @@
 					<p>3219</p>	
 				</div>
 				<div class="stats-link">
-					<a href="javascript:;">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a href="<?= base_url(); ?>cemento">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>
@@ -21,7 +21,7 @@
 					<p>4506</p>	
 				</div>
 				<div class="stats-link">
-					<a href="javascript:;">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a href="<?= base_url(); ?>produccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>				
@@ -33,7 +33,7 @@
 					<p>1485</p>	
 				</div>
 				<div class="stats-link">
-					<a href="javascript:;">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a href="<?= base_url(); ?>despacho">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>				
@@ -45,7 +45,7 @@
 					<p>1624</p>	
 				</div>
 				<div class="stats-link">
-					<a href="javascript:;">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a href="<?= base_url(); ?>perdidaPlaya">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 					<p>1211</p>	
 				</div>
 				<div class="stats-link">
-					<a href="javascript:;">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a href="<?= base_url(); ?>recuperacion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>
@@ -65,6 +65,7 @@
 
 	<div class="row">
 		<div class="col-md-8">
+
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
 					<div class="panel-heading-btn">
@@ -78,6 +79,21 @@
 					<div id="interactive-chart" class="height-sm"></div>
 				</div>
 			</div>
+
+			<div class="panel panel-inverse">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+					</div>
+					<h4 class="panel-title">Producción</h4>
+				</div>
+				<div class="panel-body">
+					<div id="stacked-chart" class="height-sm"></div>
+				</div>
+			</div>	
+
 		</div>
 		<div class="col-md-4">			
 			<div class="panel panel-inverse">
@@ -123,8 +139,22 @@
 					</table>
 				</div>
 			</div>
+
+			<div class="panel panel-inverse">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+					</div>
+					<h4 class="panel-title">Producción por categoría</h4>
+				</div>
+				<div class="panel-body">
+					<div id="donut-chart" class="height-sm"></div>
+				</div>
+			</div>	
 		</div>
-	</div>
+	</div>		
 </div>
 <!-- end #content -->
 		
@@ -136,6 +166,7 @@
 <script src="<?= base_url(); ?>assets/plugins/flot/jquery.flot.time.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/flot/jquery.flot.resize.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/flot/jquery.flot.pie.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/flot/jquery.flot.stack.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/sparkline/jquery.sparkline.js"></script>
 <script src="<?= base_url(); ?>assets/js/dashboard.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
