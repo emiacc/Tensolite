@@ -33,7 +33,7 @@
                     La página que estás buscando no existe.
                 </div>
                 <div>
-                    <a href="<?= base_url(); ?>home" class="btn btn-success">Volver al Inicio</a>
+                    <a href="<?= base_url(); ?>resumen" class="btn btn-success">Volver al Inicio</a>
                 </div>
             </div>
         </div>

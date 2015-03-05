@@ -171,7 +171,7 @@
 <script src="<?= base_url(); ?>assets/js/dashboard.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
-	
+
 <script>
 	$(document).ready(function() {
 		App.init();

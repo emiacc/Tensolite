@@ -118,7 +118,7 @@
 							<li class="arrow"></li>
 							<li><a href="javascript:;">Editar Perfil</a></li>
 							<li class="divider"></li>
-							<li><a href="javascript:;">Cerrar Sesión</a></li>
+							<li><a href="<?= base_url() ?>login/cerrar_sesion">Cerrar Sesión</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -177,6 +177,8 @@
 					</li>
 
 					<li id="LIrecuperacion"><a href="<?= base_url(); ?>recuperacion"><i class="fa fa-refresh"></i><span>Recuperación</span></a></li>
+
+					<li id="LIdeposito"><a href="<?= base_url(); ?>deposito"><i class="fa fa-database"></i><span>Depósito</span></a></li>
 
 					<li id="LIdespacho"><a href="<?= base_url(); ?>despacho"><i class="fa fa-truck"></i><span>Despacho</span></a></li>
 
