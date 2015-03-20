@@ -159,8 +159,12 @@
 					    </a>
 						<ul class="sub-menu">
 						    <li id="LIcemento"><a href="<?= base_url(); ?>cemento">Cemento</a></li>
-						    <li id="LIarena"><a href="<?= base_url(); ?>arena">Arena</a></li>
-						    <li id="LIbinder"><a href="<?= base_url(); ?>binder">Binder</a></li>
+						    <li id="LIarena"><a href="<?= base_url(); ?>materiaPrima/index/arena">Arena</a></li>
+						    <li id="LIbinder"><a href="<?= base_url(); ?>materiaPrima/index/binder">Binder</a></li>
+						    <li id="LIacelerante"><a href="<?= base_url(); ?>materiaPrima/index/acelerante">Acelerante</a></li>
+						    <li id="LIplastificante"><a href="<?= base_url(); ?>materiaPrima/index/plastificante">Plastificante</a></li>
+						    <li id="LItriturado"><a href="<?= base_url(); ?>materiaPrima/index/triturado">Triturado</a></li>
+						    <li id="LIceniza"><a href="<?= base_url(); ?>materiaPrima/index/ceniza">Ceniza</a></li>
 						</ul>
 					</li>
 

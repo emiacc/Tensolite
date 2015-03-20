@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://192.168.1.107/tensolite';
+$config['base_url']	= 'http://192.168.1.113/tensolite';
 
 /*
 |--------------------------------------------------------------------------

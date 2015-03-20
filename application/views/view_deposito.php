@@ -2,9 +2,7 @@
 <link href="<?= base_url(); ?>assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
 <link href="<?= base_url(); ?>assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
 <style type="text/css">
-.tab-pane > div.row{
-	margin-top: 30px;
-}
+.tab-pane > div.row{	margin-top: 30px;	}
 .lugar{
 	text-align: center;
 	color: white;
@@ -16,9 +14,7 @@
 .lugar-gris{	background-color: #C2C2C4;	}
 .lugar-rojo{	background-color: #BE5073;	}
 .lugar-verde{	background-color: #0BABAD;	}
-#tab-sector-1 > div > .lugar{
-	margin-left: 2%;
-}
+#tab-sector-1 > div > .lugar{	margin-left: 2%;	}
 #tab-sector-2 > div > .lugar{
 	margin-left: 1%;	
 	width: 8%;	
@@ -48,7 +44,7 @@
 				</ul>
 				<div class="tab-content">
 					<!-- Sector 1 -->
-					<div class="tab-pane fade active in" id="tab-sector-1">			
+					<div class="tab-pane fade active in" id="tab-sector-1">
 						<h3 class="text-center">Sector 1</h3>
 						<div class="row">
 							<div class="col-xs-2 lugar lugar-gris" id="s1.1.1">6.80</div>
@@ -58,57 +54,58 @@
 							<div class="col-xs-2 lugar lugar-gris" id="s1.1.5">5.80</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-2 lugar lugar-verde">6.80</div>
-							<div class="col-xs-2 lugar lugar-verde">6.60</div>
-							<div class="col-xs-2 lugar lugar-verde">6.20</div>
-							<div class="col-xs-2 lugar lugar-rojo">6.00</div>
-							<div class="col-xs-2 lugar lugar-verde">5.80</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.2.1">6.80</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.2.2">6.60</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.2.3">6.20</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.2.4">6.00</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.2.5">5.80</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-2 lugar lugar-gris">7.20</div>
-							<div class="col-xs-2 lugar lugar-gris">7.00</div>
-							<div class="col-xs-2 lugar lugar-gris">6.40</div>
-							<div class="col-xs-2 lugar lugar-verde">6.00</div>
-							<div class="col-xs-2 lugar lugar-rojo">5.80</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.3.1">7.20</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.3.2">7.00</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.3.3">6.40</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.3.4">6.00</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.3.5">5.80</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-2 lugar lugar-rojo">7.20</div>
-							<div class="col-xs-2 lugar lugar-verde">7.00</div>
-							<div class="col-xs-2 lugar lugar-rojo">6.40</div>
-							<div class="col-xs-2 lugar lugar-rojo">6.00</div>
-							<div class="col-xs-2 lugar lugar-verde">5.80</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.4.1">7.20</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.4.2">7.00</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.4.3">6.40</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.4.4">6.00</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.4.5">5.80</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-2 lugar lugar-gris">6.80</div>
-							<div class="col-xs-2 lugar lugar-gris">6.60</div>
-							<div class="col-xs-2 lugar lugar-gris">6.20</div>
-							<div class="col-xs-2 lugar lugar-gris">6.00</div>
-							<div class="col-xs-2 lugar lugar-gris">5.80</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.5.1">6.80</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.5.2">6.60</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.5.3">6.20</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.5.4">6.00</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.5.5">5.80</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-2 lugar lugar-verde">6.80</div>
-							<div class="col-xs-2 lugar lugar-verde">6.60</div>
-							<div class="col-xs-2 lugar lugar-verde">6.20</div>
-							<div class="col-xs-2 lugar lugar-rojo">6.00</div>
-							<div class="col-xs-2 lugar lugar-verde">5.80</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.6.1">6.80</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.6.2">6.60</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.6.3">6.20</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.6.4">6.00</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.6.5">5.80</div>
 						</div>	
 						<div class="row">
-							<div class="col-xs-2 lugar lugar-gris">7.20</div>
-							<div class="col-xs-2 lugar lugar-gris">7.00</div>
-							<div class="col-xs-2 lugar lugar-gris">6.40</div>
-							<div class="col-xs-2 lugar lugar-verde">6.00</div>
-							<div class="col-xs-2 lugar lugar-rojo">5.80</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.7.1">7.20</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.7.2">7.00</div>
+							<div class="col-xs-2 lugar lugar-gris" id="s1.7.3">6.40</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.7.4">6.00</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.7.5">5.80</div>
 						</div>
 						<div class="row">
-							<div class="col-xs-2 lugar lugar-rojo">7.20</div>
-							<div class="col-xs-2 lugar lugar-verde">7.00</div>
-							<div class="col-xs-2 lugar lugar-rojo">6.40</div>
-							<div class="col-xs-2 lugar lugar-rojo">6.00</div>
-							<div class="col-xs-2 lugar lugar-verde">5.80</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.8.1">7.20</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.8.2">7.00</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.8.3">6.40</div>
+							<div class="col-xs-2 lugar lugar-rojo" id="s1.8.4">6.00</div>
+							<div class="col-xs-2 lugar lugar-verde" id="s1.8.5">5.80</div>
 						</div>								
 					</div> 
 					<!-- Sector 2 -->
 					<div class="tab-pane fade" id="tab-sector-2">
+						<h3 class="text-center">Sector 2</h3>
 						<div class="row">
 							<div class="col-xs-1 lugar lugar-gris" id="s2.1.1">5.60</div>
 							<div class="col-xs-1 lugar lugar-gris" id="s2.1.2">5.40</div>
@@ -216,6 +213,7 @@
 					</div>
 					<!-- Sector 3 -->
 					<div class="tab-pane fade" id="tab-sector-3">
+						<h3 class="text-center">Sector 3</h3>
 						<div class="row">							
 							<div class="col-xs-1 lugar lugar-gris" id="s3.1.1">3.60</div>
 							<div class="col-xs-1 lugar lugar-gris" id="s3.1.2">3.50</div>
@@ -368,9 +366,7 @@ $(document).ready(function() {
 			content: function() {
 				return '<form><input type="hidden" value='+$(this).attr("id") +' name="lugar"><input style="width:50px;" type="number" name="cant"> <button type="submit" class="btn btn-primary btn-xs">Ok</button></form>';
 			}
-		});
-
-		
+		});		
 	});
 
 $('body').on('click', function (e) {
