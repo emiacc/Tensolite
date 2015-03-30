@@ -16,15 +16,15 @@
 					<h4 class="panel-title">Egreso Cemento</h4>
 				</div>
 				<div class="panel-body panel-form">
-					<form class="form-horizontal form-bordered" data-parsley-validate="true">
+					<form action="<?= base_url(); ?>cemento/egreso" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="selectSiloEgreso">Silo:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
 								<select class="form-control" id="selectSiloEgreso" name="selectSiloEgreso" data-parsley-required="true">											
                                     <option value="">Seleccione</option>
-                                    <option value="1">Silo A</option>
-                                    <option value="2">Silo B</option>
-                                    <option value="3">Silo C</option>
+                                    <?php foreach ($silos as $silo) {
+										echo '<option value="'.$silo->id_silo.'">'.$silo->nombre.'</option>';
+									} ?>									
                                 </select>
 							</div>
 						</div>
@@ -63,15 +63,15 @@
 					<h4 class="panel-title">Ingreso Cemento</h4>
 				</div>
 				<div class="panel-body panel-form">					
-					<form class="form-horizontal form-bordered" data-parsley-validate="true">
+					<form action="<?= base_url(); ?>cemento/ingreso" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="selectSiloIngreso">Silo:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
 								<select class="form-control" id="selectSiloIngreso" name="selectSiloIngreso" data-parsley-required="true">											
 									<option value="">Seleccione</option>
-									<option value="1">Silo A</option>
-									<option value="2">Silo B</option>
-									<option value="3">Silo C</option>
+									<?php foreach ($silos as $silo) {
+										echo '<option value="'.$silo->id_silo.'">'.$silo->nombre.'</option>';
+									} ?>
 								</select>
 							</div>
 						</div>
@@ -103,6 +103,12 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="control-label col-xs-4" for="inputPrecio">Precio:</label>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+								<input class="form-control inputNumerico" type="text" id="inputPrecio" name="inputPrecio" data-parsley-type="number" placeholder="Precio" data-parsley-required="true"/>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="control-label col-xs-4"></label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
 								<button type="submit" class="btn btn-primary">Registrar</button>
@@ -125,21 +131,21 @@
 					<h4 class="panel-title">Conrtol Mensual</h4>
 				</div>
 				<div class="panel-body">
-					<form class="form-inline text-center" action="" method="POST" data-parsley-validate="true">						
+					<form action="<?= base_url(); ?>cemento" method="POST" class="form-inline text-center" action="" method="POST" data-parsley-validate="true">						
 						<div class="form-group m-r-10">
 							<select class="form-control" name="selectMes" id="selectMes">
-								<option value="0">Enero</option>
-								<option value="1">Febrero</option>
-								<option value="2">Marzo</option>
-								<option value="3">Abril</option>
-								<option value="4">Mayo</option>
-								<option value="5">Junio</option>
-								<option value="6">Julio</option>
-								<option value="7">Agosto</option>
-								<option value="8">Septiembre</option>
-								<option value="9">Octubre</option>
-								<option value="10">Noviembre</option>
-								<option value="11">Diciembre</option>
+								<option value="1">Enero</option>
+								<option value="2">Febrero</option>
+								<option value="3">Marzo</option>
+								<option value="4">Abril</option>
+								<option value="5">Mayo</option>
+								<option value="6">Junio</option>
+								<option value="7">Julio</option>
+								<option value="8">Agosto</option>
+								<option value="9">Septiembre</option>
+								<option value="10">Octubre</option>
+								<option value="11">Noviembre</option>
+								<option value="12">Diciembre</option>
 							</select>
 						</div>
 						<div class="form-group m-r-10">			
@@ -147,36 +153,43 @@
 						</div>
 						<div class="form-group m-r-10">
 							<select class="form-control" name="selectSiloTabla">
-								<option value="1">Silo A</option>
-								<option value="2">Silo B</option>
-								<option value="3">Silo C</option>
+								<?php foreach ($silos as $silo) {
+										echo '<option value="'.$silo->id_silo.'">'.$silo->nombre.'</option>';
+								} ?>
 							</select>
 						</div>
 						<button type="submit" class="btn btn-sm btn-primary m-r-5" style="margin-top: -5px;">Buscar</button>
 					</form>
 					<hr>
-					<h3 class="text-center">Enero 2015</h3>
+					<h3 class="text-center"><?=$mes." ".$anio;?></h3>
 					<div class="table-responsive">
 						<table class="table table-striped text-center">
 							<thead>
 								<tr>
 									<th>Día</th>
+									<th>Silo</th>
 									<th>Factura</th>
 									<th>Kg Ori</th>
 									<th>Kg Fab</th>
 									<th>Dif</th>
 									<th>Consumo</th>
-									<th>Stock</th>
 								</tr>
 							</thead>
 							<tbody>
-								<script type="text/javascript">
-									for (var i = 1; i < 20; i++) {
-										document.write("<tr><td>"+i+"</td><td>2125</td><td>25</td><td>23</td><td>2</td><td>-</td><td>2512</td></tr>");
-										if(i==3 || i==8 || i==16)
-											document.write("<tr><td>"+i+"</td><td>-</td><td>-</td><td>-</td><td>-</td><td>405</td><td>2512</td></tr>");
-									};
-								</script>											
+								<?php									
+									foreach ($tabla as $row)
+									{
+										echo "<tr>";
+										echo "<td>".$row->dia."</td>";
+										echo "<td>"; if(isset($row->nombre)) echo $row->nombre; echo "</td>";
+										echo "<td>"; if(isset($row->nro_factura)) echo $row->nro_factura; echo "</td>";
+										echo "<td>"; if(isset($row->kg_origen)) echo $row->kg_origen; echo "</td>";
+										echo "<td>"; if(isset($row->kg_fabrica)) echo $row->kg_fabrica; echo "</td>";
+										echo "<td>"; if(isset($row->dif)) echo $row->dif; echo "</td>";
+										echo "<td>"; if(isset($row->consumo)) echo $row->consumo; echo "</td>";
+										echo "</tr>";
+									} 
+								?>												
 							</tbody>
 						</table>
 					</div>
@@ -214,7 +227,7 @@
 		$("#inputFechaIngreso").attr("value",currentDay);
 		$("#inputFechaEgreso").attr("value",currentDay);
 		$('#inputAnio').attr("value",d.getFullYear());
-		$('#selectMes').attr("value",d.getMonth());
+		$('#selectMes').attr("value",d.getMonth()+1);
 		
 		//Reemplazar comas por puntos en los campos numericos
 		$(".inputNumerico").keyup(function(event) {
@@ -224,6 +237,8 @@
   				$(this).val(t);
   			}			
 		});
+
+		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
 	});
 </script>	
 </body>

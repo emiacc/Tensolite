@@ -58,14 +58,14 @@ class MateriaPrima extends CI_Controller {
 
 	public function ids($materia) {
 		switch ($materia) {
-			case 'cemento':	return 1; break;
-			case 'arena' : return 2; break;	
-			case 'binder' : return 3; break;	
-			case 'acelerante' : return 4; break;	
-			case 'plastificante' : return 5; break;	
-			case 'triturado' : return 6; break;	
-			case 'ceniza' : return 7; break;	
-			default: return 0; break;
+			case 'cemento':	return 1;
+			case 'arena' : return 2;	
+			case 'binder' : return 3;	
+			case 'acelerante' : return 4;	
+			case 'plastificante' : return 5;	
+			case 'triturado' : return 6;	
+			case 'ceniza' : return 7;	
+			default: return 0;
 		}
 	}
 	public function meses($mes) {

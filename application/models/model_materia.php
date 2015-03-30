@@ -50,6 +50,10 @@ class Model_materia extends CI_Model {
    		return $this->db->get('proveedores')->result();		
    	}
 
+   	public function getSilos(){
+   		return $this->db->get('silos')->result();		
+   	}
+
    	public function getTabla($materia, $mes, $anio, $proveedor){
    		$prov = '';
    		if($proveedor != -1) $prov = " AND i.id_proveedor = ".$proveedor;
@@ -60,6 +64,64 @@ class Model_materia extends CI_Model {
 	    $query = $this->db->query("SELECT DATE_FORMAT(e.fecha,'%e') as dia, e.consumo 
 									FROM egresos_aridos e
 									WHERE e.id_materia = $materia AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
+	    $tabla = array_merge($tabla,$query->result());
+	    foreach ($tabla as $key => $row) {
+    		$aux[$key] = $row->dia;
+		}
+		if(isset($aux))		
+			array_multisort($aux, SORT_ASC, $tabla);
+	    return $tabla;
+	}
+
+	public function egresoCemento($fecha, $cantidad, $silo, $usuario) {   	
+	   	//obtengo el numero de egreso para la materia prima actual
+	   	$this->db->select('MAX(id_egreso) as max');
+	    $this->db->from('egresos_cemento');
+	    $this->db->where('id_silo', $silo);
+	    $consulta = $this->db->get();
+		$fila = $consulta->row_array();
+		$egreso = 1 + $fila['max'];   		
+		//insert en la base de datos
+		$data = array(
+	               'id_silo' => $silo,
+	               'id_egreso' => $egreso,
+	               'fecha' => $fecha,
+	               'consumo' => $cantidad,
+	               'id_usuario' => $usuario
+	            );
+		$this->db->insert('egresos_cemento', $data); 
+    }
+
+    public function ingresoCemento($fecha, $origen, $fabrica, $remito, $silo, $precio ,$usuario) {   	
+	   	//obtengo el numero de ingreso para la materia prima actual
+	   	$this->db->select('MAX(id_ingreso) as max');
+	    $this->db->from('ingresos_cemento');
+	    $this->db->where('id_silo', $silo);
+	    $consulta = $this->db->get();
+		$fila = $consulta->row_array();
+		$ingreso = 1 + $fila['max'];   		
+		//insert en la base de datos
+		$data = array(
+	               'id_silo' => $silo,
+	               'id_ingreso' => $ingreso,
+	               'fecha' => $fecha,
+	               'nro_factura' => $remito,
+	               'kg_origen' => $origen,
+	               'kg_fabrica' => $fabrica,
+	               'precio' => $precio,
+	               'id_usuario' => $usuario
+	            );
+		$this->db->insert('ingresos_cemento', $data); 
+   	}
+
+   	public function getTablaCemento($mes, $anio, $silo){
+   		$query = $this->db->query("SELECT DATE_FORMAT(i.fecha,'%e') as dia, s.nombre, i.nro_factura, i.kg_origen, i.kg_fabrica, (i.kg_origen-i.kg_fabrica) as dif 
+									FROM ingresos_cemento i, silos s 
+									WHERE i.id_silo = s.id_silo AND YEAR(i.fecha) = $anio AND MONTH(i.fecha) = $mes AND i.id_silo = $silo ORDER BY i.fecha");
+	    $tabla = $query->result();
+	    $query = $this->db->query("SELECT DATE_FORMAT(e.fecha,'%e') as dia, e.consumo, s.nombre 
+									FROM egresos_cemento e, silos s
+									WHERE e.id_silo = s.id_silo AND e.id_silo = $silo AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
 	    $tabla = array_merge($tabla,$query->result());
 	    foreach ($tabla as $key => $row) {
     		$aux[$key] = $row->dia;
