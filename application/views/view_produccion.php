@@ -128,76 +128,33 @@
 					<thead>
 						<tr>
 							<th>Banco</th>
-							<script type="text/javascript">
-								var m;
-								for (var i = 1.0; i < 7.2; i+=0.1) {
-									m = i.toFixed(1)-Math.floor(i);
-									m = m.toFixed(1);
-									console.log(m);
-									if(m==0.2 || m==0.4 || m==0.5 || m==0.6 || m==0.8 || m==0.0 || m ==1.0)		
-										document.write("<th>"+i.toFixed(1)+"</th>");
+							<?php
+								for ($j = 10; $j < 73; $j++) {
+									if($j % 2 == 0 || $j % 5 == 0){
+										echo "<th>".number_format(($j/10),1)."</th>";
+									}
 								}
-							</script>							
+							?>							
 						</tr>
 					</thead>
 					<tbody>
 						<?php 
-							function medidas($med){
-								switch ($med) {
-									case 1: return 10;
-									case 2: return 12;
-									case 3: return 14;
-									case 4: return 15;
-									case 5: return 16;
-									case 6: return 18;
-									case 7: return 20;
-									case 8: return 22;
-									case 9: return 24;
-									case 10: return 25;
-									case 11: return 26;
-									case 12: return 28;
-									case 13: return 30;
-									case 14: return 32;
-									case 15: return 34;
-									case 16: return 35;
-									case 17: return 36;
-									case 18: return 38;
-									case 19: return 40;									
-									case 20: return 42;
-									case 21: return 44;
-									case 22: return 45;
-									case 23: return 46;
-									case 24: return 48;
-									case 25: return 50;
-									case 26: return 52;
-									case 27: return 54;
-									case 28: return 55;
-									case 29: return 56;
-									case 30: return 58;
-									case 31: return 60;
-									case 32: return 62;
-									case 33: return 64;
-									case 34: return 65;
-									case 35: return 66;
-									case 36: return 68;
-									case 37: return 70;
-									case 38: return 72;
-								}
-							}
 							for ($i = 1; $i < 9; $i++) {
 								$s = "";
 								$s = $s."<tr><td>".$i."</td>";
-								for ($j = 1; $j < 39; $j++) {
-									$band = FALSE;
-									for ($k=0; $k < sizeof($tabla); $k++) { 
-										if($tabla[$k]->nro_banco == $i && $tabla[$k]->medida == medidas($j)) {
-											$s = $s."<td>".$tabla[$k]->cant."</td>";
-											$band = TRUE;
-										}											
-									}
-									if($band == FALSE)
-										$s = $s."<td>0</td>";
-								}	
+								for ($j = 10; $j < 73; $j++) {
+									if($j % 2 == 0 || $j % 5 == 0){
+										$band = FALSE;
+										for ($k=0; $k < sizeof($tabla); $k++) { 
+											if($tabla[$k]->nro_banco == $i && $tabla[$k]->medida == $j) {
+												$s = $s."<td>".$tabla[$k]->cant."</td>";
+												$band = TRUE;
+											}											
+										}
+										if($band == FALSE)
+											$s = $s."<td>0</td>";
+									}	
+								}
 								$s = $s."</tr>";
 								echo $s;							
 							}
