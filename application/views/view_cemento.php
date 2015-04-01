@@ -4,7 +4,8 @@
 
 <!-- begin #content -->
 <div id="content" class="content">	
-	<div class="row">    	
+	<div class="row">   
+		<?php if($data['rol'] < 3 ){ ?> 	
     	<div class="col-md-6">		
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
@@ -121,6 +122,7 @@
 
 		<!-- begin tabla -->	
 		<div class="col-md-6">
+			<?php }  else echo("<div class='col-md-12'>"); ?>
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
 					<div class="panel-heading-btn">

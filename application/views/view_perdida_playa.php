@@ -6,6 +6,7 @@
 </style>
 <!-- begin #content -->
 <div id="content" class="content">	
+	<?php if($data['rol'] < 3 ){ ?>	
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
@@ -72,7 +73,8 @@
 				<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
 			</form>
 		</div>
-	</div>		
+	</div>	
+	<?php } ?>	
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
@@ -176,7 +178,9 @@
 		currentDay = d.getDate()+"-"+mes+"-"+ d.getFullYear();
 		$("#inputFechaPerdida").attr("value",currentDay);
 		$('#inputAnio').attr("value",d.getFullYear());
-		$('#selectMes').attr("value",d.getMonth()+1);		
+		$('#selectMes').attr("value",d.getMonth()+1);	
+
+		if(<?=$mensaje;?>== 1) alert('Registrado con exito');	
 	});
 </script>	
 </body>

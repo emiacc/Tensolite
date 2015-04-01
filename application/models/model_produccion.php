@@ -63,5 +63,43 @@ class Model_produccion extends CI_Model {
 	    $tabla = $query->result();
 	    return $tabla;
 	}
+
+	//recuperacion
+	public function ingreso_recuperacion($fecha, $medida, $cantidad, $usuario) {
+		$data = array(
+	               'fecha' => $fecha,
+	               'medida' => $medida,
+	               'cantidad' => $cantidad,
+	               'id_usuario' => $usuario
+	            );
+		$this->db->insert('recuperaciones', $data); 
+	}
+
+	public function getTabla_recuperacion($mes, $anio){
+   		$query = $this->db->query("SELECT SUM(cantidad) as cant, medida, DAY(fecha) as dia
+									FROM recuperaciones 
+									WHERE YEAR(fecha) = $anio AND MONTH(fecha) = $mes GROUP BY fecha, medida");
+	    $tabla = $query->result();
+	    return $tabla;
+	}
+
+	//despacho
+	public function ingreso_despacho($fecha, $medida, $cantidad, $usuario) {
+		$data = array(
+	               'fecha' => $fecha,
+	               'medida' => $medida,
+	               'cantidad' => $cantidad,
+	               'id_usuario' => $usuario
+	            );
+		$this->db->insert('despachos', $data); 
+	}
+
+	public function getTabla_despacho($mes, $anio){
+   		$query = $this->db->query("SELECT SUM(cantidad) as cant, medida, DAY(fecha) as dia
+									FROM despachos 
+									WHERE YEAR(fecha) = $anio AND MONTH(fecha) = $mes GROUP BY fecha, medida");
+	    $tabla = $query->result();
+	    return $tabla;
+	}
 }
 ?>

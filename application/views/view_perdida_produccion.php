@@ -6,6 +6,7 @@
 </style>
 <!-- begin #content -->
 <div id="content" class="content">
+	<?php if($data['rol'] == 1 || $data['rol'] == 3){ ?>	
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
@@ -85,7 +86,8 @@
 				<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
 			</form>
 		</div>
-	</div>			
+	</div>
+	<?php } ?>			
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
@@ -194,6 +196,8 @@
 		$('#inputAnio').attr("value",d.getFullYear());
 		$('#selectMes').attr("value",d.getMonth()+1);
 		$('#inputDia').attr("value",d.getDate());
+
+		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
 	});
 </script>	
 </body>
