@@ -5,6 +5,11 @@ class Model_produccion extends CI_Model {
     	parent::__construct();
    	}
 
+   	public function getUser($usuario){
+   		$this->db->select('nombre, apellido, foto');
+   		return $this->db->get_where('usuarios', array('id_usuario' => $usuario))->row();
+   	}
+
    	public function ingreso_produccion($fecha, $banco, $medida, $cantidad, $usuario) {
    		$data = array(
 	               'fecha' => $fecha,

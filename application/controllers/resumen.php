@@ -10,6 +10,8 @@ class Resumen extends CI_Controller {
   	}
 
 	public function index()	{
+		$this->load->model('model_perfil');
+		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_resumen', $this->data);
 	}

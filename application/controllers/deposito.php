@@ -10,12 +10,46 @@ class Deposito extends CI_Controller {
 	    $this->load->model('model_deposito');
   	}
 
-	public function index($mensaje = 0)	{
+	public function index($mensaje = 0, $sector = 1)	{
 		$this->data['mensaje'] = $mensaje;
 		$this->data['lugares'] = $this->model_deposito->getLugares();
-		
-		$this->load->view('view_header');
+		$this->data['sector'] = $sector;
+
+		$this->data['despachos'] = $this->model_deposito->getDespachos();
+		$this->data['producciones'] = $this->model_deposito->getProducciones();
+
+		$this->load->model('model_perfil');
+		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+		$this->load->view('view_header', $this->data);
 		$this->load->view('view_deposito', $this->data);
+	}
+
+	public function ingreso() {		
+		$lugar = $this->input->post('lugar');
+		$cantidad = $this->input->post('cant');
+		if($cantidad < 1) {
+			redirect('deposito/index/2');
+			return;
+		}
+        $this->model_deposito->ingreso($lugar, $cantidad, 1, $this->data['data']['id_usuario']);
+        if($lugar<41) $s = 1;
+        elseif($lugar<129) $s = 2;
+        else $s = 3;
+        redirect('deposito/index/1/'.$s);
+	}
+
+	public function egreso() {		
+		$lugar = $this->input->post('lugar');
+		$cantidad = $this->input->post('cant');
+		if($cantidad < 1) {
+			redirect('deposito/index/2');
+			return;
+		}
+        $this->model_deposito->ingreso($lugar, $cantidad, 0, $this->data['data']['id_usuario']);
+        if($lugar<41) $s = 1;
+        elseif($lugar<129) $s = 2;
+        else $s = 3;
+        redirect('deposito/index/1/'.$s);
 	}
 }
 ?>

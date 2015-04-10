@@ -1,4 +1,4 @@
 
 RewriteEngine on
-RewriteCond $1 !^(index\.php|assets|images|robots\.txt)
+RewriteCond $1 !^(index\.php|assets|uploads|images|robots\.txt)
 RewriteRule ^(.*)$ /tensolite/index.php/$1 [L]

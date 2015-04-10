@@ -5,6 +5,11 @@ class Model_materia extends CI_Model {
     	parent::__construct();
    	}
 
+	public function getUser($usuario){
+   		$this->db->select('nombre, apellido, foto');
+   		return $this->db->get_where('usuarios', array('id_usuario' => $usuario))->row();
+   	}
+   	
    	public function egreso($fecha, $cantidad, $usuario, $materia) {   	
 	   	//obtengo el numero de egreso para la materia prima actual
 	   	$this->db->select('MAX(id_egreso) as max');

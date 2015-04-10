@@ -241,6 +241,7 @@
 		});
 
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
+		if(<?=$mensaje;?>== 2) alert('Error');
 	});
 </script>	
 </body>

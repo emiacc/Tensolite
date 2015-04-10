@@ -26,7 +26,9 @@ class Cemento extends CI_Controller {
        	$this->data['mes'] = $this->meses($mes);
        	$this->data['anio'] = $anio;
 
-		$this->load->view('view_header');
+		$this->load->model('model_perfil');
+		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+		$this->load->view('view_header', $this->data);
 		$this->load->view('view_cemento', $this->data);
 	}
 

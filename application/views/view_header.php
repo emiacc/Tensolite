@@ -111,12 +111,12 @@
 					</li>
 					<li class="dropdown navbar-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="<?= base_url(); ?>assets/img/user-4.jpg" alt="" /> 
-							<span class="hidden-xs">Nombre</span> <b class="caret"></b>
+							<img src="<?=base_url();?>uploads/profile/<?=$usuario->foto;?>" alt="" /> 
+							<span class="hidden-xs"><?=$usuario->nombre;?></span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu animated fadeInLeft">
 							<li class="arrow"></li>
-							<li><a href="javascript:;">Editar Perfil</a></li>
+							<li><a href="<?= base_url() ?>perfil">Editar Perfil</a></li>
 							<li class="divider"></li>
 							<li><a href="<?= base_url() ?>login/cerrar_sesion">Cerrar Sesión</a></li>
 						</ul>
@@ -138,11 +138,11 @@
 				<ul class="nav">
 					<li class="nav-profile">
 						<div class="image">
-							<a href="javascript:;"><img src="<?= base_url(); ?>assets/img/user-4.jpg" alt="" /></a>
+							<a href="javascript:;"><img src="<?=base_url();?>uploads/profile/<?=$usuario->foto;?>" alt="" /></a>
 						</div>
 						<div class="info">
-							Nombre
-							<small>Cargo</small>
+							<?=$usuario->nombre;?>
+							<small><?=$usuario->apellido;?></small>
 						</div>
 					</li>
 				</ul>
