@@ -1,6 +1,6 @@
 <!-- begin #content -->
 <div id="content" class="content">			
-	<div class="row">
+	<div class="row no-print">
 		<div class="col-md-3 col-sm-6 ui-sortable">
 			<div class="widget widget-stats bg-green">
 				<div class="stats-icon"><i class="fa fa-cubes"></i></div>
@@ -200,11 +200,20 @@
 <script src="<?= base_url(); ?>assets/js/dashboard.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
-
+<style>
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+</style>
 <script>
 	$(document).ready(function() {
 		App.init();
-		Dashboard.init();			
+		Dashboard.init();		
+		//window.print();	
 	});
 </script>	
 </body>

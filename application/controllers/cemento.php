@@ -8,6 +8,7 @@ class Cemento extends CI_Controller {
 	    $this->data = array();       
 	    $this->data['data'] = $this->session->userdata('user_data');
 	    $this->load->model('model_materia');
+		$this->load->model('model_perfil');
   	}
 
 	public function index($mensaje = 0)	{
@@ -26,8 +27,9 @@ class Cemento extends CI_Controller {
        	$this->data['mes'] = $this->meses($mes);
        	$this->data['anio'] = $anio;
 
-		$this->load->model('model_perfil');
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
+		
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_cemento', $this->data);
 	}
@@ -50,6 +52,7 @@ class Cemento extends CI_Controller {
         $precio = $this->input->post('inputPrecio');
         $fecha = date('Y-m-d',strtotime($fecha));
         $this->model_materia->ingresoCemento($fecha, $origen, $fabrica, $remito, $silo, $precio,$this->data['data']['id_usuario']);
+        $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Ingreso ".$fabrica." de cemento");
         redirect('cemento/index/1');
 	}
 	

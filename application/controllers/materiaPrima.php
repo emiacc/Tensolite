@@ -8,6 +8,7 @@ class MateriaPrima extends CI_Controller {
 	    $this->data = array();       
 	    $this->data['data'] = $this->session->userdata('user_data');
 	    $this->load->model('model_materia');
+	    $this->load->model('model_perfil');
   	}
 
 	public function index($materia = 'nada', $mensaje = 0) {
@@ -29,8 +30,10 @@ class MateriaPrima extends CI_Controller {
        	$this->data['mes'] = $this->meses($mes);
        	$this->data['anio'] = $anio;
 
-		$this->load->model('model_perfil');
+		
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
+		
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_materia', $this->data);		
 	}
@@ -55,6 +58,7 @@ class MateriaPrima extends CI_Controller {
         $precio = $this->input->post('inputPrecio');
         $fecha = date('Y-m-d',strtotime($fecha));
         $this->model_materia->ingreso($fecha, $cantidad, $remito, $proveedor, $precio,$this->data['data']['id_usuario'], $this->ids($materia));
+        $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Ingreso ".$cantidad." de ".$materia);
         redirect('materiaPrima/index/'.$materia.'/1');
 	}
 

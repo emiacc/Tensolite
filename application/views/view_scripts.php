@@ -16,3 +16,12 @@
 <script src="<?= base_url(); ?>assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/jquery-cookie/jquery.cookie.js"></script>
 <!-- ================== END BASE JS ================== -->
+
+<script>
+    
+      function leerNotificaciones() {
+        $.ajax({
+          url: '<?=base_url()?>perfil/leerNotificaciones/<?=$usuario->id_usuario?>',
+        });
+      }
+</script>

@@ -26,11 +26,10 @@
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="fade in"><span class="spinner"></span></div>
 	<!-- end #page-loader -->
-	
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 		<!-- begin #header -->
-		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+		<div id="header" class="header navbar navbar-default navbar-fixed-top no-print">
 			<!-- begin container-fluid -->
 			<div class="container-fluid">
 				<!-- begin mobile sidebar expand / collapse button -->
@@ -46,67 +45,32 @@
 					</button>
 				</div>
 				<!-- end mobile sidebar expand / collapse button -->
-				
 				<!-- begin header navigation right -->
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
-						<a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle f-s-14">
+						<a href="#" onclick="leerNotificaciones();" data-toggle="dropdown" class="dropdown-toggle f-s-14">
 							<i class="fa fa-bell-o"></i>
-							<span class="label">1</span>
+							<?php $cant = sizeof($notificaciones); if($cant>0){ ?>
+							<span class="label"><?=$cant;?></span>
+							<?php } ?>
 						</a>
-						<ul class="dropdown-menu media-list pull-right animated fadeInDown">
+						<ul class="dropdown-menu media-list pull-right animated fadeInDown" style="min-width:280px;">
                             <li class="dropdown-header">Notifications</li>
                             
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left media-object bg-red"><i class="fa fa-bug"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Server Error Reports</h6>
-                                        <div class="text-muted">3 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left"><img src="<?= base_url(); ?>assets/img/user-1.jpg" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">John Smith</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted">25 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left"><img src="<?= base_url(); ?>assets/img/user-2.jpg" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Olivia</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted">35 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left media-object bg-green"><i class="fa fa-plus"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New User Registered</h6>
-                                        <div class="text-muted">1 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                        	<li class="media">
-                                <a href="javascript:;">
-                                    <div class="pull-left media-object bg-blue"><i class="fa fa-envelope"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New Email From John</h6>
-                                        <div class="text-muted">2 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-footer text-center">
-                                <a href="javascript:;">View more</a>
-                            </li>
+                            <?php foreach ($notificaciones as $notificacion) {	?>
+                            	<li class="media">
+                               		<a href="javascript:;">
+                                   		<div class="pull-left">
+                                   			<img src="<?= base_url(); ?>uploads/profile/<?=$notificacion->foto?>" class="media-object" alt="" />
+                                   		</div>
+                                   		<div class="media-body">
+                                       		<h6 class="media-heading"><?=$notificacion->nombre.", ".$notificacion->apellido?></h6>
+                                       		<p><?=$notificacion->descripcion?></p>
+                                       		<div class="text-muted"><?php $date = new DateTime($notificacion->fecha); echo $date->format('d-m-Y H:i:s');?></div>
+                                   		</div>
+                                	</a>
+                            	</li>
+                            <?php } ?>                           
 						</ul>
 					</li>
 					<li class="dropdown navbar-user">
@@ -131,14 +95,14 @@
 
 
 		<!-- begin #sidebar -->
-		<div id="sidebar" class="sidebar">
+		<div id="sidebar" class="sidebar no-print">
 			<!-- begin sidebar scrollbar -->
 			<div data-scrollbar="true" data-height="100%">
 				<!-- begin sidebar user -->
 				<ul class="nav">
-					<li class="nav-profile">
+					<li class="nav-profile" onclick="location.href='<?= base_url() ?>perfil'" style="cursor:pointer;">
 						<div class="image">
-							<a href="javascript:;"><img src="<?=base_url();?>uploads/profile/<?=$usuario->foto;?>" alt="" /></a>
+							<img src="<?=base_url();?>uploads/profile/<?=$usuario->foto;?>" alt="" />
 						</div>
 						<div class="info">
 							<?=$usuario->nombre;?>

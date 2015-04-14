@@ -49,7 +49,7 @@ class Model_materia extends CI_Model {
 	               'id_usuario' => $usuario
 	            );
 		$this->db->insert('ingresos_aridos', $data); 
-   	}
+	}
 
    	public function getProveedores(){
    		return $this->db->get('proveedores')->result();		

@@ -26,6 +26,7 @@
 				<div class="form-group">
 					<label class="control-label col-xs-4" for="inputFoto"><img width="80" height="80" src="<?=base_url();?>uploads/profile/<?=$usuario->foto;?>"></label>
 					<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+						<label>Foto:</label>
 						<input class="form-control" type="file" id="inputFoto" name="userfile" placeholder="Foto" />
 					</div>
 				</div>

@@ -8,6 +8,7 @@ class PerdidaProduccion extends CI_Controller {
 	    $this->data = array();       
 	    $this->data['data'] = $this->session->userdata('user_data');
 	    $this->load->model('model_produccion');
+		$this->load->model('model_perfil');
   	}
 
 	public function index($mensaje = 0)	{
@@ -24,8 +25,9 @@ class PerdidaProduccion extends CI_Controller {
        	$this->data['mes'] = $this->meses($mes);
        	$this->data['anio'] = $anio;
 
-		$this->load->model('model_perfil');
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
+		
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_perdida_produccion', $this->data);
 	}
@@ -37,6 +39,7 @@ class PerdidaProduccion extends CI_Controller {
         $cantidad = $this->input->post('inputCantidad');
         $fecha = date('Y-m-d',strtotime($fecha));
         $this->model_produccion->ingreso_perdida_produccion($fecha, $banco, $medida, $cantidad, $this->data['data']['id_usuario']);
+        $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Perdida en producción ".$cantidad." de ".number_format((($medida)/10),2));
         redirect('PerdidaProduccion/index/1');
 	}
 

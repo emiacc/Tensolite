@@ -13,6 +13,7 @@ class Perfil extends CI_Controller {
 	public function index($mensaje = 0)	{
 		$this->data['mensaje'] = $mensaje;
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_perfil', $this->data);
 	}
@@ -57,6 +58,10 @@ class Perfil extends CI_Controller {
         	$this->model_perfil->editar_pass($pass1, $this->data['data']['id_usuario']);
        		redirect('perfil/index/1');
 		}	
+    }
+
+    public function leerNotificaciones($id_usuario = 0){
+    	$this->model_perfil->leerNotificaciones($id_usuario);
     }
 }
 ?>
