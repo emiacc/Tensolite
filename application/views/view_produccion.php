@@ -81,7 +81,46 @@
 					</select>
 				</div>
 				<div class="form-group m-r-10" style="margin-top: 5px;">			
-					<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad" id="inputCantidad" data-parsley-required="true" data-parsley-type="number"/>			
+					<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad" id="inputCantidad" data-parsley-required="true" data-parsley-type="digits"/>			
+				</div>
+				<br>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Cemento" class="form-control" name="inputCemento" id="inputCemento" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<select class="form-control" name="selectSilo" id="selectSilo" data-parsley-required="true">
+						<option value="">Seleccione</option>
+                        <?php foreach ($silos as $silo) {
+							echo '<option value="'.$silo->id_silo.'">'.$silo->nombre.'</option>';
+						} ?>
+					</select>
+				</div>
+				<br>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Arena Tipo1" class="form-control" name="inputArena" id="inputArena" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Arena Tipo2" class="form-control" name="inputArena2" id="inputArena2" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Binder" class="form-control" name="inputBinder" id="inputBinder" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<br>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Triturado" class="form-control" name="inputTriturado" id="inputTriturado" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Acelerante" class="form-control" name="inputAcelerante" id="inputAcelerante" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Plastificante" class="form-control" name="inputPlastificante" id="inputPlastificante" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<br>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Ceniza" class="form-control" name="inputCeniza" id="inputCeniza" data-parsley-required="true" data-parsley-type="number"/>			
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">			
+					<input type="text" placeholder="Agua" class="form-control" name="inputAgua" id="inputAgua" data-parsley-required="true" data-parsley-type="number"/>			
 				</div>
 				<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
 			</form>

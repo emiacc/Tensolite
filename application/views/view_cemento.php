@@ -7,6 +7,7 @@
 	<div class="row">   
 		<?php if($data['rol'] < 3 ){ ?> 	
     	<div class="col-md-6">		
+    		<!--
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
 					<div class="panel-heading-btn">
@@ -53,7 +54,7 @@
 					</form>
 				</div>
 			</div>
-
+			-->
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
 					<div class="panel-heading-btn">

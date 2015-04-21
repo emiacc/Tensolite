@@ -123,7 +123,8 @@
 					    </a>
 						<ul class="sub-menu">
 						    <li id="LIcemento"><a href="<?= base_url(); ?>cemento">Cemento</a></li>
-						    <li id="LIarena"><a href="<?= base_url(); ?>materiaPrima/index/arena">Arena</a></li>
+						    <li id="LIarena"><a href="<?= base_url(); ?>materiaPrima/index/arena">Arena Tipo1</a></li>
+						    <li id="LIarena2"><a href="<?= base_url(); ?>materiaPrima/index/arena2">Arena Tipo2</a></li>
 						    <li id="LIbinder"><a href="<?= base_url(); ?>materiaPrima/index/binder">Binder</a></li>
 						    <li id="LIacelerante"><a href="<?= base_url(); ?>materiaPrima/index/acelerante">Acelerante</a></li>
 						    <li id="LIplastificante"><a href="<?= base_url(); ?>materiaPrima/index/plastificante">Plastificante</a></li>

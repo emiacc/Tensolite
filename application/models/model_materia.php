@@ -135,5 +135,33 @@ class Model_materia extends CI_Model {
 			array_multisort($aux, SORT_ASC, $tabla);
 	    return $tabla;
 	}
+
+	public function getStockCemento($silo) {
+		$this->db->select('SUM(kg_fabrica) as sum');
+	    $this->db->from('ingresos_cemento');
+	    $this->db->where('id_silo', $silo);
+	    $consulta = $this->db->get()->row();
+		$ingresos = $consulta->sum;
+		$this->db->select('SUM(consumo) as sum');
+	    $this->db->from('egresos_cemento');
+	    $this->db->where('id_silo', $silo);
+	    $consulta = $this->db->get()->row();
+		$egresos = $consulta->sum;
+		return $ingresos-$egresos;		
+	}
+
+	public function getStockMateria($materia){
+		$this->db->select('SUM(cantidad) as sum');
+	    $this->db->from('ingresos_aridos');
+	    $this->db->where('id_materia', $materia);
+	    $consulta = $this->db->get()->row();
+		$ingresos = $consulta->sum;
+		$this->db->select('SUM(consumo) as sum');
+	    $this->db->from('egresos_aridos');
+	    $this->db->where('id_materia', $materia);
+	    $consulta = $this->db->get()->row();
+		$egresos = $consulta->sum;
+		return $ingresos-$egresos;		
+	}
 }
 ?>

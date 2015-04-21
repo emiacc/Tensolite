@@ -71,12 +71,14 @@ class MateriaPrima extends CI_Controller {
 			case 'plastificante' : return 5;	
 			case 'triturado' : return 6;	
 			case 'ceniza' : return 7;	
+			case 'arena2' : return 8;	
+			case 'agua' : return 9;	
 			default: return 0;
 		}
 	}
 	public function meses($mes) {
 		switch ($mes) {
-			case 1: return 'Enereo';
+			case 1: return 'Enero';
 			case 2: return 'Febrero';
 			case 3: return 'Marzo';
 			case 4: return 'Abril';
