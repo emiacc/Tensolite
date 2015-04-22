@@ -56,6 +56,77 @@
 
 	//grafico cemento por silo
 	echo '<script>var stockSilos = [["Silo A",'.$stockSilos[0].'],["Silo B",'.$stockSilos[1].'],["Silo C",'.$stockSilos[2].']];</script>';	
+	
+	//consumo materia
+	echo '<script>var consumoCemento = [';
+	$tot = count($consumoCemento);
+	$i = 0; $consumoTotalCemento = 0;
+	foreach ($consumoCemento as $value) {
+		$consumoTotalCemento += $value->cant;
+		$i++;
+		if($i <> $tot)
+			echo $value->cant.",";
+		else
+			echo $value->cant;
+	}
+	echo ']; var consumoArena = [';	
+	$tot = count($consumoArena);
+	$i = 0; $consumoTotalArena = 0;
+	foreach ($consumoArena as $value) {
+		$consumoTotalArena += $value->cant;
+		$i++;
+		if($i <> $tot)
+			echo $value->cant.",";
+		else
+			echo $value->cant;
+	}
+	echo ']; var consumoBinder = [';
+	$tot = count($consumoBinder);
+	$i = 0; $consumoTotalBinder = 0;
+	foreach ($consumoBinder as $value) {
+		$consumoTotalBinder += $value->cant;
+		$i++;
+		if($i <> $tot)
+			echo $value->cant.",";
+		else
+			echo $value->cant;
+	}
+	echo ']; var consumoAcelerante = [';
+	$tot = count($consumoAcelerante);
+	$i = 0; $consumoTotalAcelerante = 0;
+	foreach ($consumoAcelerante as $value) {
+		$consumoTotalAcelerante += $value->cant;
+		$i++;
+		if($i <> $tot)
+			echo $value->cant.",";
+		else
+			echo $value->cant;
+	}
+	echo ']; var consumoPlastificante = [';
+	$tot = count($consumoPlastificante);
+	$i = 0; $consumoTotalPlastificante = 0;
+	foreach ($consumoPlastificante as $value) {
+		$consumoTotalPlastificante += $value->cant;
+		$i++;
+		if($i <> $tot)
+			echo $value->cant.",";
+		else
+			echo $value->cant;
+	}
+	echo ']; var consumoCeniza = [';
+	$tot = count($consumoCeniza);
+	$i = 0; $consumoTotalCeniza = 0;
+	foreach ($consumoCeniza as $value) {
+		$consumoTotalCeniza += $value->cant;
+		$i++;
+		if($i <> $tot)
+			echo $value->cant.",";
+		else
+			echo $value->cant;
+	}
+	echo '];</script>';
+	echo '<script> var prodCat = '.$produccionCategoria.'; </script>';
+
 ?>
 <div id="content" class="content">	
 	<div class="row no-print">
@@ -196,10 +267,10 @@
 				<div class="stats-icon"><i class="fa fa-cubes"></i></div>
 				<div class="stats-info">
 					<h4>Stock</h4>
-					<p>3219</p>	
+					<p><?=$stockWidget?>m</p>	
 				</div>
 				<div class="stats-link">
-					<a href="<?= base_url(); ?>cemento">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a href="<?= base_url(); ?>deposito">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>
@@ -208,7 +279,7 @@
 				<div class="stats-icon"><i class="fa fa-cogs"></i></div>
 				<div class="stats-info">
 					<h4>Producción</h4>
-					<p>4506</p>	
+					<p><?=$produccionWidget;?></p>	
 				</div>
 				<div class="stats-link">
 					<a href="<?= base_url(); ?>produccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -220,7 +291,7 @@
 				<div class="stats-icon"><i class="fa fa-truck"></i></div>
 				<div class="stats-info">
 					<h4>Despacho</h4>
-					<p>1485</p>	
+					<p><?=$despachoWidget;?></p>	
 				</div>
 				<div class="stats-link">
 					<a href="<?= base_url(); ?>despacho">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -232,7 +303,7 @@
 				<div class="stats-icon"><i class="fa fa-toggle-down"></i></div>
 				<div class="stats-info">
 					<h4>Pérdida Playa</h4>
-					<p>1624</p>	
+					<p><?=$perdidaPlayaWidget;?></p>	
 				</div>
 				<div class="stats-link">
 					<a href="<?= base_url(); ?>perdidaPlaya">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -244,7 +315,7 @@
 				<div class="stats-icon"><i class="fa fa-toggle-down"></i></div>
 				<div class="stats-info">
 					<h4>Pérdida Producción</h4>
-					<p>1624</p>	
+					<p><?=$perdidaProdWidget;?></p>	
 				</div>
 				<div class="stats-link">
 					<a href="<?= base_url(); ?>perdidaProduccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -256,7 +327,7 @@
 				<div class="stats-icon"><i class="fa fa-refresh"></i></div>
 				<div class="stats-info">
 					<h4>Recupero</h4>
-					<p>1211</p>	
+					<p><?=$recuperacionWidget;?></p>	
 				</div>
 				<div class="stats-link">
 					<a href="<?= base_url(); ?>recuperacion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -332,33 +403,33 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><label class="label label-danger">Cemento</label></td>
-								<td>13,203</td>
+								<td><a href="<?= base_url(); ?>cemento"><label class="label label-danger">Cemento</label></a></td>
+								<td><?=$consumoTotalCemento;?></td>
 								<td><div id="sparkline-cemento"></div></td>
 							</tr>
 							<tr>
-								<td><label class="label label-warning">Arena</label></td>
-								<td>21,181</td>
+								<td><a href="<?= base_url(); ?>materiaPrima/index/arena"><label class="label label-warning">Arena</label></a></td>
+								<td><?=$consumoTotalArena;?></td>
 								<td><div id="sparkline-arena"></div></td>
 							</tr>
 							<tr>
-								<td><label class="label label-success">Binder</label></td>
-								<td>10,030</td>
+								<td><a href="<?= base_url(); ?>materiaPrima/index/binder"><label class="label label-success">Binder</label></a></td>
+								<td><?=$consumoTotalBinder;?></td>
 								<td><div id="sparkline-binder"></div></td>
 							</tr>
 							<tr>
-								<td><label class="label label-primary">Acelerante</label></td>
-								<td>12,187</td>
+								<td><a href="<?= base_url(); ?>materiaPrima/index/acelerante"><label class="label label-primary">Acelerante</label></a></td>
+								<td><?=$consumoTotalAcelerante;?></td>
 								<td><div id="sparkline-acelerante"></div></td>
 							</tr>
 							<tr>
-								<td><label class="label label-default">Plastificante</label></td>
-								<td>12,187</td>
+								<td><a href="<?= base_url(); ?>materiaPrima/index/plastificante"><label class="label label-default">Plastificante</label></a></td>
+								<td><?=$consumoTotalPlastificante;?></td>
 								<td><div id="sparkline-plastificante"></div></td>
 							</tr>
 							<tr>
-								<td><label class="label label-inverse">Ceniza</label></td>
-								<td>12,187</td>
+								<td><a href="<?= base_url(); ?>materiaPrima/index/ceniza"><label class="label label-inverse">Ceniza</label></a></td>
+								<td><?=$consumoTotalCeniza;?></td>
 								<td><div id="sparkline-ceniza"></div></td>
 							</tr>							
 						</tbody>
