@@ -139,14 +139,14 @@ class Model_resumen extends CI_Model {
       }
 
    public function getStock() {
-      $query = $this->db->query("SELECT l.id_lugar,l.cantidad,l.medida,l.paquetes, 
+      $query = $this->db->query("SELECT l.id_lugar,l.cantidad,l.medida,l.paquetes,l.vigas_x_paq, 
          ( IFNULL( (SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 1 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) 
          - IFNULL( (SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 0 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) ) as cant 
          FROM lugares l");
       $resultado = $query->result();
       $suma = 0;
       foreach ($resultado as $value) {
-         $suma += $value->cant*($value->cantidad*$value->paquetes)*($value->medida/10);
+         $suma += $value->cant*($value->vigas_x_paq*$value->paquetes)*($value->medida/10);
       }
       return $suma;
    }

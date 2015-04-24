@@ -36,6 +36,92 @@
 			<h4 class="panel-title">Depósito</h4>
 		</div>
 		<div class="panel-body" style="background:#c1ccd1;">
+			<div class="row">
+				<div class="col-xs-6 nopadding">
+					<div class="col-sm-3 col-xs-6 ui-sortable">
+						<div class="widget widget-stats bg-green">
+							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
+							<div class="stats-info">
+								<h4>AS</h4>
+								<p><?=number_format($aster,1)?>%</p>	
+								<h4>15648</h4>	
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 col-xs-6 ui-sortable">
+						<div class="widget widget-stats bg-green">
+							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
+							<div class="stats-info">
+								<h4>A1</h4>
+								<p><?=number_format($a1,1)?>%</p>	
+								<h4>9408</h4>		
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 col-xs-6 ui-sortable">
+						<div class="widget widget-stats bg-green">
+							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
+							<div class="stats-info">
+								<h4>A2</h4>
+								<p><?=number_format($a2,1)?>%</p>	
+								<h4>7056</h4>		
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 col-xs-6 ui-sortable">
+						<div class="widget widget-stats bg-green">
+							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
+							<div class="stats-info">
+								<h4>B1</h4>
+								<p><?=number_format($b1,1)?>%</p>	
+								<h4>7056</h4>		
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 nopadding">
+					<div class="col-sm-3 col-xs-6 ui-sortable">
+						<div class="widget widget-stats bg-green">
+							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
+							<div class="stats-info">
+								<h4>B2</h4>
+								<p><?=number_format($b2,1)?>%</p>	
+								<h4>5880</h4>		
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 col-xs-6 ui-sortable">
+						<div class="widget widget-stats bg-green">
+							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
+							<div class="stats-info">
+								<h4>C</h4>
+								<p><?=number_format($c,1)?>%</p>	
+								<h4>8232</h4>		
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 col-xs-6 ui-sortable">
+						<div class="widget widget-stats bg-green">
+							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
+							<div class="stats-info">
+								<h4>D</h4>
+								<p><?=number_format($d,1)?>%</p>	
+								<h4>7776</h4>		
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 col-xs-6 ui-sortable">
+						<div class="widget widget-stats bg-green">
+							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
+							<div class="stats-info">
+								<h4>E</h4>
+								<p><?=number_format($e,1)?>%</p>	
+								<h4>3960</h4>		
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row">			    
 				<ul class="nav nav-tabs">
 					<li class="<?php if($sector==1) echo 'active'; ?>"><a href="#tab-sector-1" data-toggle="tab">Sector 1</a></li>
@@ -108,7 +194,11 @@
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
-
+<style type="text/css">
+	.nopadding{
+		padding: 0 !important;
+	}
+</style>
 <script>
 	$(document).ready(function() {
 		App.init();

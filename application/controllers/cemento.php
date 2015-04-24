@@ -30,6 +30,11 @@ class Cemento extends CI_Controller {
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
 		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
 		
+		$this->data['stockActual1'] =  $this->model_materia->getStockCemento(1);
+		$this->data['stockActual2'] =  $this->model_materia->getStockCemento(2);
+		$this->data['stockActual3'] =  $this->model_materia->getStockCemento(3);
+
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_cemento', $this->data);
 	}

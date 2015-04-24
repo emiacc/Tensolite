@@ -34,6 +34,9 @@ class MateriaPrima extends CI_Controller {
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
 		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
 		
+		$this->data['stockActual'] =  $this->model_materia->getStockMateria($this->ids($materia));
+		$this->data['stockMaximo'] =  $this->model_materia->getStockMateriaMaximo($this->ids($materia));
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_materia', $this->data);		
 	}

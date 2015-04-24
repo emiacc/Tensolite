@@ -163,5 +163,13 @@ class Model_materia extends CI_Model {
 		$egresos = $consulta->sum;
 		return $ingresos-$egresos;		
 	}
+
+
+	public function getStockMateriaMaximo($materia){
+		$this->db->select('capacidad_max');
+	    $this->db->from('materia_prima');
+	    $this->db->where('id_materia', $materia);
+	    return  $this->db->get()->row()->capacidad_max;
+	}
 }
 ?>

@@ -10,13 +10,14 @@ class Model_produccion extends CI_Model {
    		return $this->db->get_where('usuarios', array('id_usuario' => $usuario))->row();
    	}
 
-   	public function ingreso_produccion($fecha, $banco, $medida, $cantidad, $usuario) {
+   	public function ingreso_produccion($fecha, $banco, $medida, $cantidad, $usuario, $turno) {
    		$data = array(
 	               'fecha' => $fecha,
 	               'nro_banco' => $banco,
 	               'medida' => $medida,
 	               'cantidad' => $cantidad,
-	               'id_usuario' => $usuario
+	               'id_usuario' => $usuario,
+	               'turno' => $turno
 	            );
 		$this->db->insert('producciones', $data); 
    	}

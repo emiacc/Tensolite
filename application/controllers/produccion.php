@@ -41,8 +41,9 @@ class Produccion extends CI_Controller {
 		$banco = $this->input->post('selectBanco');
         $medida = $this->input->post('selectMedida');
         $cantidad = $this->input->post('inputCantidad');
+        $turno = $this->input->post('selectTurno');
         $fecha = date('Y-m-d',strtotime($fecha));
-        $this->model_produccion->ingreso_produccion($fecha, $banco, $medida, $cantidad, $this->data['data']['id_usuario']);
+        $this->model_produccion->ingreso_produccion($fecha, $banco, $medida, $cantidad, $this->data['data']['id_usuario'],$turno);
         $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Producción ".$cantidad." de ".number_format((($medida)/10),2));
         
 
@@ -99,6 +100,20 @@ class Produccion extends CI_Controller {
         
         $agua = $this->input->post('inputAgua');
         $this->model_materia->egreso($fecha, $agua, $this->data['data']['id_usuario'], 9);
+        
+
+        //acero
+        if ($medida <= 30) $consumo = 5752.28;
+        elseif ($medida <= 34) $consumo = 2125.84+3188.76;
+        elseif ($medida <= 38) $consumo = 7502.98;
+        elseif ($medida <= 42) $consumo = 3907.80+11254.46;
+        elseif ($medida <= 46) $consumo = 16318.97;
+        elseif ($medida <= 54) $consumo = 7252.88+10879.32;
+        elseif ($medida <= 62) $consumo = 1693.38+8675.32;
+        elseif ($medida <= 72) $consumo = 750.30+1125.45+4003.99;
+        else $consumo = 0;
+
+        $this->model_materia->egreso($fecha, $consumo, $this->data['data']['id_usuario'], 10);
 
         redirect('produccion/index/1');
 	}

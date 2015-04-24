@@ -102,6 +102,40 @@
 					</form>					
 				</div>
 			</div>
+			<?php if($data['rol']==1){ ?>
+			<div class="panel panel-inverse">
+				<div class="panel-heading">
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+					</div>
+					<h4 class="panel-title">Stock <?=ucwords($materia); ?></h4>
+				</div>
+				<div class="panel-body panel-form">
+					<br>
+					<h4 class="text-center">Stock Actual: <?=$stockActual?></h4>
+					<?php if($stockMaximo!=0){ ?>
+					<h4 class="text-center"><?=number_format((($stockActual*100)/$stockMaximo),2)."%"?> en Silo</h4>
+					<?php } ?>
+					<hr>
+					<form action="<?= base_url(); ?>materiaPrima/stock_real/<?=$materia;?>" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+						<div class="form-group">
+							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-xs-4"></label>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+								<button type="submit" class="btn btn-primary">Registrar</button>
+							</div>
+						</div>
+					</form>	
+				</div>
+			</div>
+			<?php } ?>
 		</div>
 
 		<!-- begin tabla -->	

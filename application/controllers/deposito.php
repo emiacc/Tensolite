@@ -22,6 +22,15 @@ class Deposito extends CI_Controller {
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
 		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
 		
+		$this->data['aster'] = $this->model_deposito->getAS();
+		$this->data['a1'] = $this->model_deposito->getA1();
+		$this->data['a2'] = $this->model_deposito->getA2();
+		$this->data['b1'] = $this->model_deposito->getB1();
+		$this->data['b2'] = $this->model_deposito->getB2();
+		$this->data['c'] = $this->model_deposito->getC();
+		$this->data['d'] = $this->model_deposito->getD();
+		$this->data['e'] = $this->model_deposito->getE();
+		
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_deposito', $this->data);
 	}

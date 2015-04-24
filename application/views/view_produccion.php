@@ -84,6 +84,13 @@
 					<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad" id="inputCantidad" data-parsley-required="true" data-parsley-type="digits"/>			
 				</div>
 				<br>
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<select class="form-control" name="selectTurno" id="selectTurno" data-parsley-required="true">
+						<option value="">Turno</option>
+						<option value="0">Mañana</option>
+						<option value="1">Tarde</option>
+					</select>
+				</div>
 				<div class="form-group m-r-10" style="margin-top: 5px;">			
 					<input type="text" placeholder="Cemento" class="form-control" name="inputCemento" id="inputCemento" data-parsley-required="true" data-parsley-type="number"/>			
 				</div>
