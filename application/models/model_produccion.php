@@ -107,5 +107,54 @@ class Model_produccion extends CI_Model {
 	    $tabla = $query->result();
 	    return $tabla;
 	}
+
+	//orden produccion
+	public function ingreso_orden($fecha, $banco, $medida, $cortes, $usuario) {
+   		$data = array(
+	               'fecha' => $fecha,
+	               'nro_banco' => $banco,
+	            );
+		$this->db->insert('ordenes_produccion', $data); 
+		$idOrden = $this->db->insert_id();
+
+		foreach($cortes as $key=>$val) {
+            $data = array(
+		               'fecha' => $fecha,
+		               'nro_banco' => $banco,
+		               'medida' => $medida[$key],
+		               'cortes' => $val,
+		               'id_usuario' => $usuario,
+		               'id_orden' => $idOrden
+		            );
+			$this->db->insert('producciones', $data); 
+        }
+        return $idOrden;
+	}
+
+	public function getOrdenes() {
+		return $this->db->order_by("fecha", "asc")->get_where('ordenes_produccion', array('procesado' => 0))->result();
+	}
+	public function getProducciones() {
+		return $this->db->get_where('producciones', array('solicitud' => 0))->result();
+	}
+
+	public function update_produccion($id, $produ, $cantidad, $usuario, $turno){
+		$data = array(
+               'procesado' => 1
+            );
+		$this->db->where('id_orden', $id);
+		$this->db->update('ordenes_produccion', $data);
+
+		foreach($produ as $key=>$val) {            
+			$data = array(
+	               'cantidad' => $cantidad[$key],
+	               'id_usuario' => $usuario,
+	               'turno' => $turno,
+	               'solicitud' => 1
+	            );
+			$this->db->where('id_produccion', $val);
+			$this->db->update('producciones', $data); 
+		}
+	}
 }
 ?>

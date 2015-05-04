@@ -1,47 +1,57 @@
-ASTER = 1248 
+ASTER = 15648
 SELECT SUM(total) as total FROM
-((SELECT SUM(cantidad*paquetes) as total FROM `lugares` WHERE paquetes=1 AND medida <= 30)
+((SELECT SUM(cantidad*paquetes*vigas_X_paq) as total FROM `lugares` WHERE paquetes=1 AND medida <= 30)
 UNION
 (SELECT SUM(cantidad) as total FROM `lugares` WHERE paquetes=0 AND medida <= 30)) AS xx
 
-A1 = 768
+A1 = 9408
 SELECT SUM(total) as total FROM
-((SELECT SUM(cantidad*paquetes) as total FROM `lugares` WHERE paquetes=1 AND medida > 30 AND medida <=34)
+((SELECT SUM(cantidad*paquetes*vigas_X_paq) as total FROM `lugares` WHERE paquetes=1 AND medida > 30 AND medida <=34)
 UNION
 (SELECT SUM(cantidad) as total FROM `lugares` WHERE paquetes=0 AND medida > 30 AND medida <=34)) AS xx
 
-A2 = 576
+A2 = 7056
 SELECT SUM(total) as total FROM
-((SELECT SUM(cantidad*paquetes) as total FROM `lugares` WHERE paquetes=1 AND medida > 34 AND medida <=38)
+((SELECT SUM(cantidad*paquetes*vigas_X_paq) as total FROM `lugares` WHERE paquetes=1 AND medida > 34 AND medida <=38)
 UNION
 (SELECT SUM(cantidad) as total FROM `lugares` WHERE paquetes=0 AND medida > 34 AND medida <=38)) AS xx
 
-B1 = 576
+B1 = 7056
 SELECT SUM(total) as total FROM
-((SELECT SUM(cantidad*paquetes) as total FROM `lugares` WHERE paquetes=1 AND medida > 38 AND medida <=42)
+((SELECT SUM(cantidad*paquetes*vigas_X_paq) as total FROM `lugares` WHERE paquetes=1 AND medida > 38 AND medida <=42)
 UNION
 (SELECT SUM(cantidad) as total FROM `lugares` WHERE paquetes=0 AND medida > 38 AND medida <=42)) AS xx
 
-B2 = 408
+B2 = 5880
 SELECT SUM(total) as total FROM
-((SELECT SUM(cantidad*paquetes) as total FROM `lugares` WHERE paquetes=1 AND medida > 42 AND medida <=46)
+((SELECT SUM(cantidad*paquetes*vigas_X_paq) as total FROM `lugares` WHERE paquetes=1 AND medida > 42 AND medida <=46)
 UNION
 (SELECT SUM(cantidad) as total FROM `lugares` WHERE paquetes=0 AND medida > 42 AND medida <=46)) AS xx
 
-C = 672
+C = 8232
 SELECT SUM(total) as total FROM
-((SELECT SUM(cantidad*paquetes) as total FROM `lugares` WHERE paquetes=1 AND medida > 46 AND medida <=54)
+((SELECT SUM(cantidad*paquetes*vigas_X_paq) as total FROM `lugares` WHERE paquetes=1 AND medida > 46 AND medida <=54)
 UNION
 (SELECT SUM(cantidad) as total FROM `lugares` WHERE paquetes=0 AND medida > 46 AND medida <=54)) AS xx
 
-D = 336
+D = 7776
 SELECT SUM(total) as total FROM
-((SELECT SUM(cantidad*paquetes) as total FROM `lugares` WHERE paquetes=1 AND medida > 54 AND medida <=62)
+((SELECT SUM(cantidad*paquetes*vigas_X_paq) as total FROM `lugares` WHERE paquetes=1 AND medida > 54 AND medida <=62)
 UNION
 (SELECT SUM(cantidad) as total FROM `lugares` WHERE paquetes=0 AND medida > 54 AND medida <=62)) AS xx
 
-E = 120
+E = 3960
 SELECT SUM(total) as total FROM
-((SELECT SUM(cantidad*paquetes) as total FROM `lugares` WHERE paquetes=1 AND medida > 62 AND medida <=72)
+((SELECT SUM(cantidad*paquetes*vigas_X_paq) as total FROM `lugares` WHERE paquetes=1 AND medida > 62 AND medida <=72)
 UNION
 (SELECT SUM(cantidad) as total FROM `lugares` WHERE paquetes=0 AND medida > 62 AND medida <=72)) AS xx
+
+
+
+
+
+SELECT l.medida,l.paquetes,l.cantidad, 
+ ( IFNULL( (SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 1 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) 
+ - IFNULL( (SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 0 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) ) as cant 
+FROM lugares l
+WHERE l.medida <= 30

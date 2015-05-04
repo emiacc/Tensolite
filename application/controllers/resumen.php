@@ -17,7 +17,7 @@ class Resumen extends CI_Controller {
 		$mes = $this->input->post('mes-filtro');
         $anio = $this->input->post('anio-filtro');
        	if($anio < 2013) $anio = '';
-        if($mes == '') { $mes = date('n')-1; }
+        if($mes == '') { $mes = date('n'); }
        	if($anio == '')	{ $anio = date('Y'); if($mes==0) { $mes = 12; $anio--; }}
        	$this->data["periodo"] = $this->meses($mes)." de ".$anio;
 
