@@ -1,0 +1,21 @@
+
+@media print
+{   
+	body
+	{
+		margin-top: -50px !important;
+	} 
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+#ingreso-modal{
+	margin-top: -15px;
+	font-weight: normal;
+}
+
+.datepicker{
+	z-index: 1055 !important;
+}

@@ -26,6 +26,10 @@ class Recuperacion extends CI_Controller {
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
 		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
 		
+		//grafico
+		$this->data["resumenRecuperacion"] = $this->model_produccion->resumenRecuperacion($mes,$anio);
+		$this->data["widgetRecuperacion"] = $this->model_produccion->getRecuperacionWidget($mes,$anio);
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_recuperacion', $this->data);
 	}

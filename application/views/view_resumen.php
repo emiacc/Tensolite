@@ -55,7 +55,7 @@
 	echo "]; </script>";
 
 	//grafico cemento por silo
-	echo '<script>var stockSilos = [["Silo A",'.$stockSilos[0].'],["Silo B",'.$stockSilos[1].'],["Silo C",'.$stockSilos[2].']];</script>';	
+	echo '<script>var stockSilos = [["Silo A",'.($stockSilos[0]*100/140).'],["Silo B",'.($stockSilos[1]*100/140).'],["Silo C",'.($stockSilos[2]*100/140).']];</script>';	
 	
 	//consumo materia
 	echo '<script>var consumoCemento = [';
@@ -147,7 +147,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title">Modal Dialog</h4>
+					<h4 class="modal-title">Filtro</h4>
 				</div>
 				<div class="modal-body">
 					<div class="radio">
@@ -458,7 +458,7 @@
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					</div>
-					<h4 class="panel-title">Cemento por Silo</h4>
+					<h4 class="panel-title">Cemento por Silo %</h4>
 				</div>
 				<div class="panel-body">
 					<div id="bar-chart" class="height-sm"></div>
@@ -483,19 +483,6 @@
 <script src="<?= base_url(); ?>assets/js/dashboard.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
-<style>
-@media print
-{   
-	body
-	{
-		margin-top: -50px !important;
-	} 
-    .no-print, .no-print *
-    {
-        display: none !important;
-    }
-}
-</style>
 <script>
 	$(document).ready(function() {
 		App.init();

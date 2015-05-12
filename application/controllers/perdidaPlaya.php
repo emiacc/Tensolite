@@ -27,6 +27,10 @@ class PerdidaPlaya extends CI_Controller {
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
 		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
 		
+		//grafico
+		$this->data["resumenPerdida"] = $this->model_produccion->resumenPerdida($mes,$anio,1);
+		$this->data["widgetPerdida"] = $this->model_produccion->getPerdidaWidget($mes,$anio,1);
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_perdida_playa', $this->data);
 	}

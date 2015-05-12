@@ -26,6 +26,10 @@ class Despacho extends CI_Controller {
 		$this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
 		$this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
 		
+		//grafico
+		$this->data["resumenDespacho"] = $this->model_produccion->resumenDespacho($mes,$anio);
+		$this->data["widgetDespacho"] = $this->model_produccion->getDespachoWidget($mes,$anio);
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_despacho', $this->data);
 	}
@@ -43,7 +47,7 @@ class Despacho extends CI_Controller {
 
 	public function meses($mes) {
 		switch ($mes) {
-			case 1: return 'Enereo';
+			case 1: return 'Enero';
 			case 2: return 'Febrero';
 			case 3: return 'Marzo';
 			case 4: return 'Abril';

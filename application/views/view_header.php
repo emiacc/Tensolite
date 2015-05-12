@@ -20,6 +20,7 @@
 	<link href="<?= base_url(); ?>assets/css/style.min.css" rel="stylesheet" />
 	<link href="<?= base_url(); ?>assets/css/style-responsive.min.css" rel="stylesheet" />
 	<link href="<?= base_url(); ?>assets/css/theme/default.css" rel="stylesheet" id="theme" />
+	<link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 </head>
 <body>
@@ -34,7 +35,7 @@
 			<div class="container-fluid">
 				<!-- begin mobile sidebar expand / collapse button -->
 				<div class="navbar-header">
-					<a href="index.html" class="navbar-brand">
+					<a href="<?= base_url()?>resumen" class="navbar-brand">
 						<img src="<?= base_url(); ?>assets/img/logo.jpg" alt="" style="max-width: 110%;max-height: 110%;">
 						Tensolite
 					</a>
