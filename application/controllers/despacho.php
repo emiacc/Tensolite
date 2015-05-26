@@ -38,9 +38,36 @@ class Despacho extends CI_Controller {
 		$fecha = $this->input->post('inputFechaDespacho');
 		$medida = $this->input->post('selectMedida');
         $cantidad = $this->input->post('inputCantidad');
+        if($cantidad < 1) {
+			redirect('despacho/index/2');
+			return;
+		}
         $fecha = date('Y-m-d',strtotime($fecha));
         $this->model_produccion->ingreso_despacho($fecha, $medida, $cantidad, $this->data['data']['id_usuario']);
         $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Despacho ".$cantidad." de ".number_format((($medida)/10),2));
+
+        //resto en deposito
+        $sector = $this->input->post('selectSector');
+		$fila = $this->input->post('selectFila');
+		$columna = $this->input->post('selectColumna');
+		if($sector == 1)
+			$lugar = (($fila-1)*5)+$columna;
+		elseif ($sector == 2) 			
+			$lugar = 40+(($fila-1)*11)+$columna;		
+		else {//sector 3
+			if($fila < 4 )
+				$lugar = 128+(($fila-1)*12)+$columna;
+			elseif ($fila == 4)
+				$lugar = 128+(($fila-1)*12)+$columna+1;
+			elseif ($fila < 8) 
+				$lugar = 128+(($fila-1)*12)+$columna+2;
+			else
+				$lugar = 128+(($fila-1)*12)+$columna+3;
+		}
+
+		$this->load->model('model_deposito');
+        $this->model_deposito->ingreso($lugar, $cantidad, 0, $this->data['data']['id_usuario']);
+       
         
         redirect('despacho/index/1');
 	}

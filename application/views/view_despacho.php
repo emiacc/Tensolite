@@ -19,7 +19,7 @@
 			echo "[".$value->diaY.",".$value->cant."]";
 	}
 	echo '];</script>';
-	echo '<script>var legend = "Despacho"; color="purpleDark";</script>';
+	echo '<script>var legend = "Despacho"; color="#5b6392";</script>';
 ?>
 
 <!-- begin #content -->
@@ -113,6 +113,54 @@
 							<div class="col-md-9 ui-sortable">			
 								<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad" id="inputCantidad" data-parsley-required="true" data-parsley-type="number"/>			
 							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label ui-sortable">Sector</label>
+							<div class="col-md-9 ui-sortable">
+								<select class="form-control" name="selectSector" id="selectSector" data-parsley-required="true">
+									<option value="">Sector...</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>									
+								</select>
+							</div>			
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label ui-sortable">Fila</label>
+							<div class="col-md-9 ui-sortable">
+								<select class="form-control" name="selectFila" id="selectFila" data-parsley-required="true">
+									<option value="">Fila...</option>
+									<option value="1">A</option>
+									<option value="2">B</option>
+									<option value="3">C</option>									
+									<option value="4">D</option>									
+									<option value="5">E</option>									
+									<option value="6">F</option>									
+									<option value="7">G</option>									
+									<option value="8">H</option>									
+								</select>
+							</div>			
+						</div>	
+						<div class="form-group">
+							<label class="col-md-3 control-label ui-sortable">Columna</label>
+							<div class="col-md-9 ui-sortable">
+								<select class="form-control" name="selectColumna" id="selectColumna" data-parsley-required="true">
+									<option value="">Columna...</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>									
+									<option value="4">4</option>									
+									<option value="5">5</option>									
+									<option value="6">6</option>									
+									<option value="7">7</option>									
+									<option value="8">8</option>									
+									<option value="9">9</option>									
+									<option value="10">10</option>									
+									<option value="11">11</option>									
+									<option value="12">12</option>									
+									<option value="13">13</option>									
+								</select>
+							</div>			
 						</div>
 						<div class="form-group">
 							<div class="col-md-9 col-md-offset-3 ui-sortable">

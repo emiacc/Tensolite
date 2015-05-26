@@ -11,17 +11,25 @@
 	padding-top: 2px!important;
 	cursor: pointer;
 }
+.cuadrilla{
+	text-align: center;
+	padding-top: 2px!important;
+}
 .lugar-gris{	background-color: #C2C2C4;	}
 .lugar-rojo{	background-color: #BE5073;	}
 .lugar-verde{	background-color: #0BABAD;	}
-#tab-sector-1 > div > .lugar{	margin-left: 2%;	}
-#tab-sector-2 > div > .lugar{
+#tab-sector-1 > div > .lugar, #tab-sector-1 > div > .cuadrilla{	margin-left: 2%;	}
+#tab-sector-2 > div > .lugar, #tab-sector-2 > div > .cuadrilla{
 	margin-left: 1%;	
 	width: 8%;	
 }
-#tab-sector-3 > div > .lugar{
+#tab-sector-3 > div > .lugar, #tab-sector-3 > div > .cuadrilla{
 	margin-left: 1%;	
 	width: 6.6%;	
+}
+.naval{
+	position: absolute;
+	width: 10px;
 }
 </style>
 <!-- begin #content -->
@@ -136,18 +144,53 @@
 								if($sector==1) echo '<div class="tab-pane fade active in" id="tab-sector-1">';
 								else echo '<div class="tab-pane fade" id="tab-sector-1">';
 								echo '<h3 class="text-center">Sector 1</h3>';
+								echo '<div class="row">
+										<div class="col-xs-2 cuadrilla">1</div>
+										<div class="col-xs-2 cuadrilla">2</div>
+										<div class="col-xs-2 cuadrilla">3</div>
+										<div class="col-xs-2 cuadrilla">4</div>
+										<div class="col-xs-2 cuadrilla">5</div>
+									  </div>';
 								$col = 'col-xs-2';
 							}
 							elseif($lugar->id_lugar == 41) {
 								if($sector==2) echo '</div></div><div class="tab-pane fade active in" id="tab-sector-2">';
 								else echo '</div></div><div class="tab-pane fade" id="tab-sector-2">';
 								echo '<h3 class="text-center">Sector 2</h3>';
+								echo '<div class="row">
+										<div class="col-xs-1 cuadrilla">1</div>
+										<div class="col-xs-1 cuadrilla">2</div>
+										<div class="col-xs-1 cuadrilla">3</div>
+										<div class="col-xs-1 cuadrilla">4</div>
+										<div class="col-xs-1 cuadrilla">5</div>
+										<div class="col-xs-1 cuadrilla">6</div>
+										<div class="col-xs-1 cuadrilla">7</div>
+										<div class="col-xs-1 cuadrilla">8</div>
+										<div class="col-xs-1 cuadrilla">9</div>
+										<div class="col-xs-1 cuadrilla">10</div>
+										<div class="col-xs-1 cuadrilla">11</div>
+									  </div>';
 								$col = 'col-xs-1';
 							}
 							elseif ($lugar->id_lugar == 129) {
 								if($sector==3) echo '</div></div><div class="tab-pane fade active in" id="tab-sector-3">';
 								else echo '</div></div><div class="tab-pane fade" id="tab-sector-3">';
 								echo '<h3 class="text-center">Sector 3</h3>';
+								echo '<div class="row">
+										<div class="col-xs-1 cuadrilla">1</div>
+										<div class="col-xs-1 cuadrilla">2</div>
+										<div class="col-xs-1 cuadrilla">3</div>
+										<div class="col-xs-1 cuadrilla">4</div>
+										<div class="col-xs-1 cuadrilla">5</div>
+										<div class="col-xs-1 cuadrilla">6</div>
+										<div class="col-xs-1 cuadrilla">7</div>
+										<div class="col-xs-1 cuadrilla">8</div>
+										<div class="col-xs-1 cuadrilla">9</div>
+										<div class="col-xs-1 cuadrilla">10</div>
+										<div class="col-xs-1 cuadrilla">11</div>
+										<div class="col-xs-1 cuadrilla">12</div>
+										<div class="col-xs-1 cuadrilla">13</div>
+									  </div>';
 							}
 							if($lugar->columna == 1 && $lugar->fila == 1){
 								echo '<div class="row">';
@@ -218,6 +261,19 @@
 
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');		
 		if(<?=$mensaje;?>== 2) alert('Número incorrecto');		
+
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(1)').prepend('<div class="naval">A</div>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(2)').prepend('<div class="naval">B</div>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(3)').prepend('<div class="naval">C</div>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(4)').prepend('<div class="naval">D</div>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(5)').prepend('<div class="naval">E</div>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(6)').prepend('<div class="naval">F</div>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(7)').prepend('<div class="naval">G</div>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(8)').prepend('<div class="naval">H</div>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(5)').prepend('<br><br>')});
+		
+
+		
 	});
 
 	$('body').on('click', function (e) {
