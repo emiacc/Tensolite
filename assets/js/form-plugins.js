@@ -15,7 +15,39 @@ var handleDatepicker = function () {
 		todayHighlight: true,
 		autoclose: true
 	});
+	$("#datepicker-autoClose1").datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
 	$("#datepicker-autoClose2").datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
+	$("#datepicker-autoClose3").datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
+	$("#datepicker-autoClose4").datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
+	$("#datepicker-autoClose5").datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
+	$("#datepicker-autoClose6").datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
+	$("#datepicker-autoClose7").datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
+	$("#datepicker-autoClose8").datepicker({
+		todayHighlight: true,
+		autoclose: true
+	});
+	$("#datepicker-autoClose9").datepicker({
 		todayHighlight: true,
 		autoclose: true
 	})
