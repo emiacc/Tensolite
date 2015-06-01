@@ -151,6 +151,8 @@
 					<li id="LIdeposito"><a href="<?= base_url(); ?>deposito"><i class="fa fa-database"></i><span>Depósito</span></a></li>
 
 					<li id="LIdespacho"><a href="<?= base_url(); ?>despacho"><i class="fa fa-truck"></i><span>Despacho</span></a></li>
+					
+					<li id="LImantenimiento"><a href="<?= base_url(); ?>mantenimiento"><i class="fa fa-paperclip"></i><span>Mantenimiento</span></a></li>
 
 					<!-- begin sidebar minify button -->
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>

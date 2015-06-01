@@ -120,7 +120,7 @@
 		FormPlugins.init();
 		//cambio el item activo en el sidebar
 		$("#ULsidebar > li").removeClass("active");
-		$("#LIproduccion").addClass("active");
+		$("#LImantenimiento").addClass("active");
 		
 		
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
