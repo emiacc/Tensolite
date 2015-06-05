@@ -66,4 +66,37 @@ class Model_mantenimiento extends CI_Model {
 			$this->db->update('mantenimiento_detalle', $data); 
 		}
 	}
+
+
+
+
+	//CALIDAD//
+	//CALIDAD//
+	public function ingreso_calidad($fecha, $tipo, $sector, $deteccion, $analisis, $plan, $verificacion, $id_usuario) 
+	{
+   		$data = array(
+	               'fecha_deteccion' => $fecha,
+	               'id_usuario' => $id_usuario,
+	               'tipo' => $tipo,
+	               'sector' => $sector,
+	               'deteccion' => $deteccion,
+	               'analisis' => $analisis,
+	               'plan' => $plan,
+	               'verificacion' => $verificacion,
+	            );
+		$this->db->insert('formularios_calidad', $data); 
+		$idOrden = $this->db->insert_id();
+		
+        return $idOrden;
+	}
+
+	public function getFormularios()
+	{
+		//return $this->db->get('formularios_calidad')->result();
+
+		$this->db->select('formularios_calidad.*, usuarios.nombre, usuarios.apellido');
+		$this->db->from('formularios_calidad');
+		$this->db->join('usuarios', 'usuarios.id_usuario = formularios_calidad.id_usuario');
+		return $this->db->get()->result();
+	}
 }
