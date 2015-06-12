@@ -2,102 +2,10 @@
 <link href="<?= base_url(); ?>assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
 <link href="<?= base_url(); ?>assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
 <link href="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
-<style type="text/css">
-	tr{cursor:pointer;}
-	.stats-info > h4, .stats-info > p{
-		color: black !important;
-	}
-</style>
+<style type="text/css">tr{cursor:pointer;}</style>
 <!-- begin #content -->
 <div id="content" class="content">
-	<?php if($data['rol'] == 1) { ?>
-	<div class="panel panel-inverse">
-		<div class="panel-heading">
-			<div class="panel-heading-btn">
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>				
-			</div>
-			<h4 class="panel-title">Formularios Calidad</h4>
-		</div>
-		<div class="panel-body">
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-xs-4"><button id="nueva" type="button" class="btn btn-primary m-l-20 m-t-20">Nueva Solicitud</button></div>
-					<div class="col-xs-8">
-						<div class="col-sm-2 col-xs-2 ui-sortable" style='background-color:#FFBABA;'>
-							<div class="widget widget-stats" >
-								<div class="stats-info">
-									<h4>Pendientes</h4>
-									<p><?=$estados['pendientes']?></p>	
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-2 col-xs-2 ui-sortable" style='background-color:#FFE8AD;'>
-							<div class="widget widget-stats" >
-								<div class="stats-info">
-									<h4>En Proceso</h4>
-									<p><?=$estados['proceso']?></p>	
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-2 col-xs-2 ui-sortable" style='background-color:#94DDCF;'>
-							<div class="widget widget-stats" >
-								<div class="stats-info">
-									<h4>Cerrados</h4>
-									<p><?=$estados['cerrado']?></p>	
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br>
-				<div class="table-responsive">
-					<table id="data-table" class="table table-striped table-bordered">
-						<thead>
-							<tr>
-								<th>Nº</th>
-								<th>Tipo</th>
-								<th>Sector</th>
-								<th>Fecha Registro</th>
-								<th>Fecha Detección</th>
-								<th>Usuario</th>
-								<th>Estado</th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php 
-							foreach ($formularios as $formulario) 
-							{
-								$fechaR = new DateTime($formulario->fecha_real);
-								$fechaD = new DateTime($formulario->fecha_deteccion);
-								$estado = $formulario->estado;
-								if($estado == 0) $estado = "<td style='background-color:#FFBABA;'>Pendiente</td>";
-								elseif ($estado == 1) $estado = "<td style='background-color:#FFE8AD;'>En Proceso</td>";
-								else $estado = "<td style='background-color:#94DDCF;'>Cerrado</td>";
-
-								echo "<tr id='".$formulario->id_formulario."'>";
-								echo "<td>".$formulario->id_formulario."</td>";
-								echo "<td>".$formulario->tipo."</td>";
-								echo "<td>".$formulario->sector."</td>";
-								echo "<td>".date_format($fechaR,'d-m-Y')."</td>";
-								echo "<td>".date_format($fechaD,'d-m-Y')."</td>";
-								echo "<td>".$formulario->nombre.", ".$formulario->apellido."</td>";
-								echo $estado;
-								echo "</tr>";
-							}
-						?>							
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>                
-	</div>
-
-
-	<?php } ?>
-
-	<?php /* if($data['rol'] <= 3) { ?>
+	<?php if($data['rol'] <= 3) { ?>
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
@@ -108,6 +16,7 @@
 			<h4 class="panel-title">Solicitud de Formulario</h4>
 		</div>
 		<div class="panel-body">
+
 			<form class="form-horizontal form-bordered" action="<?= base_url(); ?>calidad/nuevoFormulaio" method="POST" data-parsley-validate="true">	
 				
 				<div class="form-group">
@@ -179,15 +88,17 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label ui-sortable"></label>
 					<div class="col-md-8 ui-sortable">
-						<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>			
+						<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>	
+						<button id="volver" type="button" class="btn btn-sm btn-primary m-l-10">Volver</button>		
 					</div>
 				</div>		
 			</form>
 		</div>
 	</div>	
 
-	<?php } */ ?>	
-
+	<?php } ?>	
+	
+		
 </div>
 
 
@@ -210,20 +121,12 @@
 		FormPlugins.init();
 		//cambio el item activo en el sidebar
 		$("#ULsidebar > li").removeClass("active");
-		$("#LIcalidad").addClass("active");
+		$("#LIcalidad").addClass("active");		
+
+		$('#volver').click(function () {
+	        location.href = '<?= base_url(); ?>calidad';	        
+	    });
 		
-		if(<?=$mensaje;?> == 0) console.log('0');
-		else if(<?=$mensaje;?>== 1) alert('Registrado con exito');
-		else if(<?=$mensaje;?>== 2) alert('Editado con exito');
-		else alert('Registrado con exito. Nro de Solicitud: '+<?=$mensaje;?>);
-
-		$('#data-table tbody').on('click', 'tr', function () {
-	        location.href = '<?= base_url(); ?>calidad/form/'+$(this).attr('id');	        
-	    });
-
-	    $('#nueva').click(function () {
-	        location.href = '<?= base_url(); ?>calidad/nuevoForm';	        
-	    });
 	});
 </script>
 </body>

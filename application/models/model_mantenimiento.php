@@ -90,6 +90,23 @@ class Model_mantenimiento extends CI_Model {
         return $idOrden;
 	}
 
+	public function editar_calidad($id_formulario, $fecha, $tipo, $sector, $deteccion, $analisis, $plan, $verificacion, $cerrarF, $id_usuario)
+	{
+		$data = array(
+	               'fecha_deteccion' => $fecha,
+	               'id_usuario' => $id_usuario,
+	               'tipo' => $tipo,
+	               'sector' => $sector,
+	               'deteccion' => $deteccion,
+	               'analisis' => $analisis,
+	               'plan' => $plan,
+	               'verificacion' => $verificacion,
+	               'estado' => $cerrarF
+	            );
+			$this->db->where('id_formulario', $id_formulario);
+			$this->db->update('formularios_calidad', $data); 
+	}
+
 	public function getFormularios()
 	{
 		//return $this->db->get('formularios_calidad')->result();
@@ -99,4 +116,35 @@ class Model_mantenimiento extends CI_Model {
 		$this->db->join('usuarios', 'usuarios.id_usuario = formularios_calidad.id_usuario');
 		return $this->db->get()->result();
 	}
+
+	public function getFormulario($id)
+	{
+		$this->db->select('formularios_calidad.*, usuarios.nombre, usuarios.apellido');
+		$this->db->from('formularios_calidad');
+		$this->db->join('usuarios', 'usuarios.id_usuario = formularios_calidad.id_usuario');
+		$this->db->where('id_formulario', $id);
+		return $this->db->get()->row();
+	}
+
+	public function getEstados()
+	{
+		$estados = array();
+		$this->db->select('count(*) as pendientes');
+		$this->db->from('formularios_calidad');
+		$this->db->where('estado', 0);
+		$estados['pendientes'] = $this->db->get()->row()->pendientes;
+
+		$this->db->select('count(*) as proceso');
+		$this->db->from('formularios_calidad');
+		$this->db->where('estado', 1);
+		$estados['proceso'] = $this->db->get()->row()->proceso;
+
+		$this->db->select('count(*) as cerrado');
+		$this->db->from('formularios_calidad');
+		$this->db->where('estado', 2);
+		$estados['cerrado'] = $this->db->get()->row()->cerrado;
+
+		return $estados;
+	}
+
 }
