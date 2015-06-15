@@ -117,18 +117,19 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group no-print" style="display:none">
 					<label class="col-md-4 control-label ui-sortable">Cerrar Formulario</label>
 					<div class="col-md-8 ui-sortable">
 						<input type="checkbox" id="cerrarF" name="cerrarF">
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group no-print">
 					<label class="col-md-4 control-label ui-sortable"></label>
 					<div class="col-md-8 ui-sortable">
-						<button type="submit" class="btn btn-sm btn-primary m-r-5 no-print">Editar</button>								
-						<button type="button" class="btn btn-sm btn-primary m-l-10 volver no-print">Volver</button>				
+						<button type="submit" id="btnGuardar" class="btn btn-sm btn-primary m-r-5">Guardar</button>								
+						<button type="button" class="btn btn-sm btn-primary m-l-10 volver">Volver</button>				
+						<button type="button" id="btnCerrar" class="btn btn-sm btn-default m-l-10">Cerrar</button>				
 					</div>
 				</div>		
 			</form>
@@ -172,7 +173,40 @@
 	    if('<?=$formulario->estado?>' == '2')
 	    {
 	    	$('#cerrarF').prop('checked', true);
+	    	$("textarea").each(function(){
+	    		$(this).prop('readonly', true);
+	    	});
+	    	$("select").each(function(){
+	    		$(this).prop('disabled', true);
+	    	});
+
+	    	$("#inputFechaOrden").prop('disabled', true);
+	    	$("#btnGuardar").prop('disabled', true);
+	    	$("#btnCerrar").prop('disabled', true);
+
+	    	$('form').on('submit', function(event) {
+	    		event.preventDefault();
+	    		alert("NO SE PUEDE EDITAR");
+	    	});
+
 	    }
+
+	    $("#btnCerrar").click(function(){
+	    	$("#cerrarF").prop('checked', true);
+	    	var enviar = true;
+	    	$("textarea").each(function(){
+        		if(this.value=='')
+        		{
+        			alert("Debe completar todos los campos");
+        			enviar = false;
+        		}        		
+    		});
+
+    		if(enviar == true)
+        	{
+        		$("form").submit();
+        	}
+	    });
 	});
 </script>
 </body>
