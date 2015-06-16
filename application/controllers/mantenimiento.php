@@ -47,4 +47,12 @@ class Mantenimiento extends CI_Controller {
         $this->model_mantenimiento->update_produccion($id, $detalle, $verificado, $fecha, $comentario, $this->data['data']['id_usuario']);
         redirect('mantenimiento/index/1');
 	}
+
+	public function imprimir($id = 0)
+	{
+		$this->data['solicitud'] = $this->model_mantenimiento->getSolicitudesId($id);
+        $this->data['detalles'] = $this->model_mantenimiento->getDetallesId($id);
+
+		$this->load->view('impresion/mantenimiento_print_view', $this->data);
+	}
 }

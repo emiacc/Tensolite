@@ -24,7 +24,8 @@
 				<ul class="list-inline pull-right" style="margin:0;">
 					<li><button type="button" class="btn btn-sm btn-primary m-l-10 volver no-print" style="margin-top: -15px;">Volver</button></li>
 					<li><div style="background-color: #AAA; width:1px; height: 30px;"></div></li>					
-					<li><a href="#" onclick="window.print()"><i class="fa fa-print fa-3x"></i></a></li>
+					<!-- <li><a href="#" onclick="window.print()"><i class="fa fa-print fa-3x"></i></a></li> -->
+					<li><a href="<?= base_url(); ?>calidad/imprimir/<?=$formulario->id_formulario?>"><i class="fa fa-print fa-3x"></i></a></li>
 				</ul>
 			</div>
 		</div>

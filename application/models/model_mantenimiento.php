@@ -15,6 +15,16 @@ class Model_mantenimiento extends CI_Model {
 		return $this->db->get('mantenimiento_detalle')->result();
 	}
 
+	public function getSolicitudesId($id) 
+   	{
+		return $this->db->order_by("fecha", "asc")->get_where('solicitudes_mantenimiento', array('id_solicitud' => $id, 'estado' => 0))->row();
+	}
+
+	public function getDetallesId($id) 
+	{
+		return $this->db->get_where('mantenimiento_detalle', array('id_solicitud' => $id))->result();
+	}
+
 	public function ingreso_orden($fecha, $descripcion, $tiempo, $id_usuario) 
 	{
    		$data = array(

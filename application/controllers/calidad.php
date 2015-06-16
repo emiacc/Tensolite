@@ -80,4 +80,11 @@ class Calidad extends CI_Controller {
 		$this->load->view('view_calidad_nuevo_form', $this->data);
 
 	}
+
+	public function imprimir($id = 0)
+	{
+		$this->data['formulario'] = $this->model_mantenimiento->getFormulario($id);
+		
+		$this->load->view('impresion/calidad_print_view', $this->data);
+	}
 }

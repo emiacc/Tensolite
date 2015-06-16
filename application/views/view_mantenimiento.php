@@ -81,7 +81,7 @@
 				</div>
 				<div class="col-xs-8" id="formulario">
 					<div class="media-body">
-						<h4 class="media-heading">Nº Solicitud: </h4>
+						<h4 style="display:inline-block;" class="media-heading">Nº Solicitud: </h4>
 					</div>
 					<form class="form-inline" action="<?= base_url(); ?>mantenimiento/ingresoUpdate" method="POST" data-parsley-validate="true">	
 						<fieldset disabled>
@@ -130,6 +130,8 @@
 			var id = $(this).data("id");
 			$("#formulario > form > fieldset").removeAttr("disabled");
 			$("#formulario > div > h4").html("Nº Solicitud: "+id);
+			$("#print-ico").remove();
+			$("#formulario > div").append('<a id="print-ico" href="<?= base_url(); ?>mantenimiento/imprimir/'+id+'" style="margin-left: 50px;"><i class="fa fa-print fa-2x"></i></a>');
 			$("#id_solicitud").val(id);
 
 			$("#solicitudItem").html('');
