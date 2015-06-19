@@ -109,7 +109,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 					<div class="height-sm" data-scrollbar="true">
 						<ul class="media-list media-list-with-divider">
 							<?php foreach($ordenes as $orden): ?>
@@ -125,7 +125,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-xs-7" id="formulario">
+				<div class="col-xs-8" id="formulario">
 					<div class="media-body">
 						<h4 class="media-heading">Nº Orden: </h4>
 					</div>
@@ -144,8 +144,9 @@
 								</select>
 							</div>
 							<br>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Cemento" class="form-control" name="inputCemento" id="inputCemento" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Kg</span>
 							</div>
 							<div class="form-group m-r-10" style="margin-top: 5px;">
 								<select class="form-control" name="selectSilo" id="selectSilo" data-parsley-required="true">
@@ -156,31 +157,39 @@
 								</select>
 							</div>
 							<br>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Arena Tipo1" class="form-control" name="inputArena" id="inputArena" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Kg</span>
 							</div>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Arena Tipo2" class="form-control" name="inputArena2" id="inputArena2" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Kg</span>
 							</div>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Binder" class="form-control" name="inputBinder" id="inputBinder" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Kg</span>
 							</div>
 							<br>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Triturado" class="form-control" name="inputTriturado" id="inputTriturado" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Kg</span>
 							</div>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Acelerante" class="form-control" name="inputAcelerante" id="inputAcelerante" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Kg</span>
 							</div>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Plastificante" class="form-control" name="inputPlastificante" id="inputPlastificante" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Kg</span>
 							</div>
 							<br>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Ceniza" class="form-control" name="inputCeniza" id="inputCeniza" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Kg</span>
 							</div>
-							<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
 								<input type="text" placeholder="Agua" class="form-control" name="inputAgua" id="inputAgua" data-parsley-required="true" data-parsley-type="number"/>			
+								<span class="input-group-addon">Lt</span>
 							</div>
 							<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
 						</fieldset>

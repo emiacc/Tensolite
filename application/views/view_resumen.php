@@ -128,6 +128,31 @@
 	echo '<script> var prodCat = '.$produccionCategoria.'; </script>';
 
 ?>
+<style type="text/css">
+	.print{display:none;}
+	@media print
+	{
+		.print{
+	    	display: inline-block;
+	    }
+
+	    .panel-heading-btn{
+	    	display: none;
+	    }
+
+	    .panel-inverse{	    	
+	    	border-width: 1px 0 1px 0;
+	    	border-style: solid;
+    		border-color: gray;
+	    }
+
+	    .panel-heading, .panel-title{
+	    	background-color: gray !important;
+	    	
+	    }
+	    
+	}
+</style>
 <div id="content" class="content">	
 	<div class="row no-print">
 		<div class="panel panel-inverse">				
@@ -403,32 +428,32 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><a href="<?= base_url(); ?>cemento"><label class="label label-danger">Cemento</label></a></td>
+								<td><a class="no-print" href="<?= base_url(); ?>cemento"><label class="label label-danger">Cemento</label></a><label class="print">Cemento</label></td>
 								<td><?=$consumoTotalCemento;?></td>
 								<td><div id="sparkline-cemento"></div></td>
 							</tr>
 							<tr>
-								<td><a href="<?= base_url(); ?>materiaPrima/index/arena"><label class="label label-warning">Arena</label></a></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/arena"><label class="label label-warning">Arena</label></a><label class="print">Arena</label></td>
 								<td><?=$consumoTotalArena;?></td>
 								<td><div id="sparkline-arena"></div></td>
 							</tr>
 							<tr>
-								<td><a href="<?= base_url(); ?>materiaPrima/index/binder"><label class="label label-success">Binder</label></a></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/binder"><label class="label label-success">Binder</label></a><label class="print">Binder</label></td>
 								<td><?=$consumoTotalBinder;?></td>
 								<td><div id="sparkline-binder"></div></td>
 							</tr>
 							<tr>
-								<td><a href="<?= base_url(); ?>materiaPrima/index/acelerante"><label class="label label-primary">Acelerante</label></a></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/acelerante"><label class="label label-primary">Acelerante</label></a><label class="print">Acelerante</label></td>
 								<td><?=$consumoTotalAcelerante;?></td>
 								<td><div id="sparkline-acelerante"></div></td>
 							</tr>
 							<tr>
-								<td><a href="<?= base_url(); ?>materiaPrima/index/plastificante"><label class="label label-default">Plastificante</label></a></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/plastificante"><label class="label label-default">Plastificante</label></a><label class="print">Plastificante</label></td>
 								<td><?=$consumoTotalPlastificante;?></td>
 								<td><div id="sparkline-plastificante"></div></td>
 							</tr>
 							<tr>
-								<td><a href="<?= base_url(); ?>materiaPrima/index/ceniza"><label class="label label-inverse">Ceniza</label></a></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/ceniza"><label class="label label-inverse">Ceniza</label></a><label class="print">Ceniza</label></td>
 								<td><?=$consumoTotalCeniza;?></td>
 								<td><div id="sparkline-ceniza"></div></td>
 							</tr>							

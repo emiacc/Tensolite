@@ -144,6 +144,7 @@
 								if($sector==1) echo '<div class="tab-pane fade active in" id="tab-sector-1">';
 								else echo '<div class="tab-pane fade" id="tab-sector-1">';
 								echo '<h3 class="text-center">Sector 1</h3>';
+								echo '<h5 class="text-center">Nave 1</h5>';
 								echo '<div class="row">
 										<div class="col-xs-2 cuadrilla">1</div>
 										<div class="col-xs-2 cuadrilla">2</div>
@@ -157,6 +158,7 @@
 								if($sector==2) echo '</div></div><div class="tab-pane fade active in" id="tab-sector-2">';
 								else echo '</div></div><div class="tab-pane fade" id="tab-sector-2">';
 								echo '<h3 class="text-center">Sector 2</h3>';
+								echo '<h5 class="text-center">Nave 1</h5>';
 								echo '<div class="row">
 										<div class="col-xs-1 cuadrilla">1</div>
 										<div class="col-xs-1 cuadrilla">2</div>
@@ -176,6 +178,7 @@
 								if($sector==3) echo '</div></div><div class="tab-pane fade active in" id="tab-sector-3">';
 								else echo '</div></div><div class="tab-pane fade" id="tab-sector-3">';
 								echo '<h3 class="text-center">Sector 3</h3>';
+								echo '<h5 class="text-center">Nave 1</h5>';
 								echo '<div class="row">
 										<div class="col-xs-1 cuadrilla">1</div>
 										<div class="col-xs-1 cuadrilla">2</div>
@@ -270,7 +273,7 @@
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(6)').prepend('<div class="naval">F</div>')});
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(7)').prepend('<div class="naval">G</div>')});
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(8)').prepend('<div class="naval">H</div>')});
-		$('.tab-pane').each(function(){ $(this).find('div.row:eq(5)').prepend('<br><br>')});
+		$('.tab-pane').each(function(){ $(this).find('div.row:eq(5)').prepend('<br><br><h5 class="text-center">Nave 2</h5>')});
 		
 
 		

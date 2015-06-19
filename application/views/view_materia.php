@@ -83,8 +83,9 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Cantidad:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
 								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
 						<div class="form-group">

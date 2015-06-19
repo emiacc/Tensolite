@@ -72,12 +72,16 @@ class Model_mantenimiento extends CI_Model {
 
 		}
 
-		foreach($detalle as $key=>$val) {            
-			foreach ($verificado as $v) {
-				if($val == $v){ $e = 1; break;}
-				else $e=0;
+		foreach($detalle as $key=>$val) {      
+			if(isset($verificado) && sizeof($verificado) > 0)
+			{
+				foreach ($verificado as $v) {
+					if($val == $v){ $e = 1; break;}
+					else $e=0;
+				}
 			}
-			
+			else $e=0;
+
 			if($fecha[$key] <> '')
 				$fechaI = date('Y-m-d',strtotime($fecha[$key]));
 			else
@@ -108,7 +112,7 @@ class Model_mantenimiento extends CI_Model {
 		$this->db->from('solicitudes_mantenimiento');
 		$this->db->where('estado', 0);
 		$estados['pendientes'] = $this->db->get()->row()->pendientes;
-		
+
 		$this->db->select('count(*) as proceso');
 		$this->db->from('solicitudes_mantenimiento');
 		$this->db->where('estado', 1);

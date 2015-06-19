@@ -9,6 +9,9 @@
     {
         display: none !important;
     }
+    .print{
+    	display: inline-block;
+    }
 }
 
 #ingreso-modal{
