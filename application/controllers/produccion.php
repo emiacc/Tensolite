@@ -46,7 +46,15 @@ class Produccion extends CI_Controller {
         $fecha = date('Y-m-d',strtotime($fecha));
         $cortes = $this->input->post('inputCortes');
         $medida = $this->input->post('selectMedida');
-        $nroSolicitud = $this->model_produccion->ingreso_orden($fecha, $banco, $medida, $cortes, $this->data['data']['id_usuario']);
+
+
+        $confeccionado = $this->input->post("confeccionado");
+        $supervisor = $this->input->post("supervisor");
+        $medidor = $this->input->post("medidor");
+        $cosechador = $this->input->post("cosechador");
+        $jefe = $this->input->post("jefe");
+
+        $nroSolicitud = $this->model_produccion->ingreso_orden($fecha, $banco, $medida, $cortes, $confeccionado, $supervisor, $medidor, $cosechador, $jefe, $this->data['data']['id_usuario']);
         redirect('produccion/index/'.$nroSolicitud);
         
     }
@@ -227,5 +235,13 @@ class Produccion extends CI_Controller {
 			case 12: return 'Diciemrbe';
 		}
 	}
+
+    public function imprimir($id = 0)
+    {
+        $this->data['solicitud'] = $this->model_produccion->getSolicitudesId($id);
+        $this->data['detalles'] = $this->model_produccion->getDetallesId($id);
+
+        $this->load->view('impresion/produccion_print_view', $this->data);
+    }
 }
 ?>

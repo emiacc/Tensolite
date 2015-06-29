@@ -38,6 +38,23 @@
 					</select>
 				</div>
 				<br>
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<input type="text" placeholder="Confeccionado" class="form-control" name="confeccionado" id="confeccionado"/>			
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<input type="text" placeholder="Supervisor" class="form-control" name="supervisor" id="supervisor"/>			
+				</div>
+				<br>
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<input type="text" placeholder="Medidor-Marcador" class="form-control" name="medidor" id="medidor"/>			
+				</div>
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<input type="text" placeholder="Cosechador" class="form-control" name="cosechador" id="cosechador"/>			
+				</div>
+				<br>
+				<div class="form-group m-r-10" style="margin-top: 5px;">
+					<input type="text" placeholder="Jefe de Planta" class="form-control" name="jefe" id="jefe"/>			
+				</div>
 				<div id="items">
 					<div id="item">
 						<div class="form-group m-r-10" style="margin-top: 5px;">			
@@ -89,7 +106,7 @@
 						<br>
 					</div>
 				</div>				
-				<div id="mas" style="cursor:pointer;"><i class="fa fa-2x fa-plus-square"></i></div>	
+				<div id="mas" style="cursor:pointer;"><i class="fa fa-2x fa-plus-square"></i> Agregar Medida</div>	
 				<br>
 				<button type="submit" class="btn btn-sm btn-primary m-r-5">Generar</button>			
 			</form>
@@ -128,6 +145,7 @@
 				<div class="col-xs-8" id="formulario">
 					<div class="media-body">
 						<h4 class="media-heading">Nº Orden: </h4>
+						<div id="icop"></div>
 					</div>
 					<form class="form-inline" action="<?= base_url(); ?>produccion/ingresoUpdate" method="POST" data-parsley-validate="true">	
 						<fieldset disabled>
@@ -318,6 +336,9 @@
 			var id = $(this).data("id");
 			$("#formulario > form > fieldset").removeAttr("disabled");
 			$("#formulario > div > h4").html("Nº Orden: "+id);
+
+			$("#icop").html('<a href="http://192.168.1.113/tensolite/produccion/imprimir/'+id+'"><i class="fa fa-print fa-2x"></i></a>')
+
 			$("#id_orden").val(id);
 
 			$("#producionesItem").html('');

@@ -30,6 +30,10 @@ class Despacho extends CI_Controller {
 		$this->data["resumenDespacho"] = $this->model_produccion->resumenDespacho($mes,$anio);
 		$this->data["widgetDespacho"] = $this->model_produccion->getDespachoWidget($mes,$anio);
 
+
+		$this->data['solicitudes'] = $this->model_produccion->getSolicitudesDespacho();
+        
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_despacho', $this->data);
 	}
@@ -72,6 +76,68 @@ class Despacho extends CI_Controller {
         redirect('despacho/index/1');
 	}
 
+	public function ingresoNuevo() {		
+		$fecha = $this->input->post('inputFechaDespacho');
+		$medida = $this->input->post('selectMedida');
+        $cantidad = $this->input->post('inputCantidad');
+		$filas = $this->input->post('selectFila');
+        /*if($cantidad < 1) {
+			redirect('despacho/index/2');
+			return;
+		}*/
+
+        $fecha = date('Y-m-d',strtotime($fecha));
+
+
+
+		$ordendecarga = $this->input->post("ordendecarga");
+		$cliente = $this->input->post("cliente");
+		$transporte = $this->input->post("transporte");
+		$entro = $this->input->post("entro");
+		$salio = $this->input->post("salio");
+		$puentista = $this->input->post("puentista");
+		$oppinza = $this->input->post("oppinza");
+		$opcamion = $this->input->post("opcamion");
+		$observaciones = $this->input->post("observaciones");
+
+        $this->model_produccion->ingreso_despacho_orden($fecha, $medida, $cantidad, $filas, $ordendecarga, $cliente, $transporte, $entro, $salio, $puentista, $oppinza, $opcamion, $observaciones, $this->data['data']['id_usuario']);
+
+
+        $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Despacho el ".$fecha);
+
+        
+        //resto en deposito
+		$this->load->model('model_deposito');
+        $sectores = $this->input->post('selectSector');
+		$columnas = $this->input->post('selectColumna');
+		
+		foreach($sectores as $key=>$sector) {
+			$columna = $columnas[$key];
+			$fila = $filas[$key];
+
+			if($sector == 1)
+				$lugar = (($fila-1)*5)+$columna;
+			elseif ($sector == 2) 			
+				$lugar = 40+(($fila-1)*11)+$columna;		
+			else 
+			{//sector 3
+				if($fila < 4 )
+					$lugar = 128+(($fila-1)*12)+$columna;
+				elseif ($fila == 4)
+					$lugar = 128+(($fila-1)*12)+$columna+1;
+				elseif ($fila < 8) 
+					$lugar = 128+(($fila-1)*12)+$columna+2;
+				else
+					$lugar = 128+(($fila-1)*12)+$columna+3;
+			}
+
+        	$this->model_deposito->ingreso($lugar, $cantidad[$key], 0, $this->data['data']['id_usuario']);
+       	}
+        
+        redirect('despacho/index/1');
+	}
+
+
 	public function meses($mes) {
 		switch ($mes) {
 			case 1: return 'Enero';
@@ -104,6 +170,14 @@ class Despacho extends CI_Controller {
 			case 11: return 30;
 			case 12: return 31;
 		}
+	}
+
+	public function imprimir($id = 0)
+	{
+		$this->data['solicitud'] = $this->model_produccion->getSolicitudesDespachoId($id);
+        $this->data['detalles'] = $this->model_produccion->getDetallesDespachoId($id);
+
+		$this->load->view('impresion/despacho_print_view', $this->data);
 	}
 }
 ?>

@@ -144,11 +144,17 @@
 	    	border-width: 1px 0 1px 0;
 	    	border-style: solid;
     		border-color: gray;
+    		margin-bottom: 80px;
 	    }
 
-	    .panel-heading, .panel-title{
+	    .panel-heading{
+	    	border: 1px solid black;
 	    	background-color: gray !important;
-	    	
+	    	color: white;
+	    }
+
+	    #wid{
+	    	margin-bottom: 50px;
 	    }
 	    
 	}
@@ -286,8 +292,8 @@
 		</div>
 	</div>
 	<!-- modal-filtro -->		
-	<div class="row no-print">
-		<div class="col-md-2 col-sm-6 ui-sortable">
+	<div class="row" id="wid">
+		<div class="col-md-2 col-xs-4 ui-sortable">
 			<div class="widget widget-stats bg-green">
 				<div class="stats-icon"><i class="fa fa-cubes"></i></div>
 				<div class="stats-info">
@@ -295,11 +301,11 @@
 					<p><?=$stockWidget?>m</p>	
 				</div>
 				<div class="stats-link">
-					<a href="<?= base_url(); ?>deposito">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a class="no-print" href="<?= base_url(); ?>deposito">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2 col-sm-6">
+		<div class="col-md-2 col-xs-4">
 			<div class="widget widget-stats bg-blue">
 				<div class="stats-icon"><i class="fa fa-cogs"></i></div>
 				<div class="stats-info">
@@ -307,11 +313,11 @@
 					<p><?=$produccionWidget;?></p>	
 				</div>
 				<div class="stats-link">
-					<a href="<?= base_url(); ?>produccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a class="no-print" href="<?= base_url(); ?>produccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>				
-		<div class="col-md-2 col-sm-6">
+		<div class="col-md-2 col-xs-4">
 			<div class="widget widget-stats bg-purple">
 				<div class="stats-icon"><i class="fa fa-truck"></i></div>
 				<div class="stats-info">
@@ -319,11 +325,11 @@
 					<p><?=$despachoWidget;?></p>	
 				</div>
 				<div class="stats-link">
-					<a href="<?= base_url(); ?>despacho">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a class="no-print" href="<?= base_url(); ?>despacho">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>				
-		<div class="col-md-2 col-sm-6">
+		<div class="col-md-2 col-xs-4">
 			<div class="widget widget-stats bg-red">
 				<div class="stats-icon"><i class="fa fa-toggle-down"></i></div>
 				<div class="stats-info">
@@ -331,11 +337,11 @@
 					<p><?=$perdidaPlayaWidget;?></p>	
 				</div>
 				<div class="stats-link">
-					<a href="<?= base_url(); ?>perdidaPlaya">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a class="no-print" href="<?= base_url(); ?>perdidaPlaya">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2 col-sm-6">
+		<div class="col-md-2 col-xs-4">
 			<div class="widget widget-stats bg-orange">
 				<div class="stats-icon"><i class="fa fa-toggle-down"></i></div>
 				<div class="stats-info">
@@ -343,11 +349,11 @@
 					<p><?=$perdidaProdWidget;?></p>	
 				</div>
 				<div class="stats-link">
-					<a href="<?= base_url(); ?>perdidaProduccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a class="no-print" href="<?= base_url(); ?>perdidaProduccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2 col-sm-6">
+		<div class="col-md-2 col-xs-4">
 			<div class="widget widget-stats bg-black">
 				<div class="stats-icon"><i class="fa fa-refresh"></i></div>
 				<div class="stats-info">
@@ -355,7 +361,7 @@
 					<p><?=$recuperacionWidget;?></p>	
 				</div>
 				<div class="stats-link">
-					<a href="<?= base_url(); ?>recuperacion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
+					<a class="no-print" href="<?= base_url(); ?>recuperacion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
 				</div>
 			</div>
 		</div>

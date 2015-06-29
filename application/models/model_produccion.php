@@ -109,9 +109,14 @@ class Model_produccion extends CI_Model {
 	}
 
 	//orden produccion
-	public function ingreso_orden($fecha, $banco, $medida, $cortes, $usuario) {
+	public function ingreso_orden($fecha, $banco, $medida, $cortes, $confeccionado, $supervisor, $medidor, $cosechador, $jefe, $usuario) {
    		$data = array(
 	               'fecha' => $fecha,
+	               'confeccionado' => $confeccionado, 
+	               'supervisor' => $supervisor, 
+	               'medidor' => $medidor, 
+	               'cosechador' => $cosechador, 
+	               'jefe' => $jefe,
 	               'nro_banco' => $banco,
 	            );
 		$this->db->insert('ordenes_produccion', $data); 
@@ -155,6 +160,42 @@ class Model_produccion extends CI_Model {
 			$this->db->where('id_produccion', $val);
 			$this->db->update('producciones', $data); 
 		}
+	}
+
+	
+	public function ingreso_despacho_orden($fecha, $medida, $cantidad, $filas, $ordendecarga, $cliente, $transporte, $entro, $salio, $puentista, $oppinza, $opcamion, $observaciones, $usuario) {
+   		$data = array(
+	               'fecha' => $fecha,
+	               'ordendecarga' => $ordendecarga, 
+	               'cliente' => $cliente, 
+	               'transporte' => $transporte, 
+	               'entro' => $entro, 
+	               'salio' => $salio, 
+	               'puentista' => $puentista, 
+	               'oppinza' => $oppinza, 
+	               'opcamion' => $opcamion, 
+	               'observaciones' => $observaciones,
+	               'id_usuario' => $usuario,
+	            );
+		$this->db->insert('ordenes_despacho', $data); 
+		$idOrden = $this->db->insert_id();
+
+		foreach($cantidad as $key=>$val) {
+            if($filas[$key] == 'A' || $filas[$key] == 'A' || $filas[$key] == 'C' || $filas[$key] == 'D')
+            	$nave = 1;
+            else
+            	$nave = 2;
+            $data = array(
+		               'fecha' => $fecha,
+		               'medida' => $medida[$key],
+		               'cantidad' => $val,
+		               'id_usuario' => $usuario,
+		               'id_orden' => $idOrden,
+		               'nave' => $nave
+		            );
+			$this->db->insert('despachos', $data); 
+        }
+        return $idOrden;
 	}
 
 	//grafico perdidas
@@ -201,5 +242,42 @@ class Model_produccion extends CI_Model {
       if($res == '') $res = 0;
       return $res;
    }
+
+
+	public function getSolicitudesId($id) 
+    {
+   		return $this->db->get_where('ordenes_produccion', array('id_orden' => $id))->row();
+	}
+
+	public function getDetallesId($id) 
+	{
+		return $this->db->get_where('producciones', array('id_orden' => $id))->result();
+	}
+
+
+
+
+
+
+
+	//despachos
+	public function getSolicitudesDespacho() 
+   	{
+		$this->db->select('ordenes_despacho.*, usuarios.nombre, usuarios.apellido');
+		$this->db->from('ordenes_despacho');
+		$this->db->join('usuarios', 'usuarios.id_usuario = ordenes_despacho.id_usuario');
+		return $this->db->get()->result();
+	}
+	
+	public function getSolicitudesDespachoId($id) 
+   	{
+		return $this->db->order_by("fecha", "asc")->get_where('ordenes_despacho', array('id_orden' => $id))->row();
+	}
+
+	public function getDetallesDespachoId($id) 
+	{
+		return $this->db->get_where('despachos', array('id_orden' => $id))->result();
+	}
+	
 }
 ?>
