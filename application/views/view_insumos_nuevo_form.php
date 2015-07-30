@@ -16,10 +16,10 @@
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>				
 			</div>
-			<h4 class="panel-title">Solicitud de Trabajo de Mantenimiento</h4>
+			<h4 class="panel-title">Solicitud de Insumos</h4>
 		</div>
 		<div class="panel-body">
-			<form class="form-inline" action="<?= base_url(); ?>mantenimiento/ingresoSolicitud" method="POST" data-parsley-validate="true">	
+			<form class="form-inline" action="<?= base_url(); ?>insumos/ingresoSolicitud" method="POST" data-parsley-validate="true">	
 				<div class="form-group m-r-10">
 					<div class="input-group date" id="datepicker-autoClose" data-date-format="dd-mm-yyyy" >
 						<input id="inputFechaOrden" name="inputFechaOrden" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
@@ -88,7 +88,7 @@
 		FormPlugins.init();
 		//cambio el item activo en el sidebar
 		$("#ULsidebar > li").removeClass("active");
-		$("#LImantenimiento").addClass("active");
+		$("#LIinsumos").addClass("active");
 		
 		
 		$("#mas").click(function(){			
@@ -96,7 +96,7 @@
 		});
 
 		$('#volver').click(function () {
-	        location.href = '<?= base_url(); ?>mantenimiento';	        
+	        location.href = '<?= base_url(); ?>insumos';	        
 	    });
 	});
 </script>

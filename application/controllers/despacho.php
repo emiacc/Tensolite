@@ -76,7 +76,9 @@ class Despacho extends CI_Controller {
         redirect('despacho/index/1');
 	}
 
-	public function ingresoNuevo() {		
+	public function ingresoNuevo() {
+
+			$bandera = true;		
 		$fecha = $this->input->post('inputFechaDespacho');
 		$medida = $this->input->post('selectMedida');
         $cantidad = $this->input->post('inputCantidad');
@@ -99,6 +101,8 @@ class Despacho extends CI_Controller {
 		$oppinza = $this->input->post("oppinza");
 		$opcamion = $this->input->post("opcamion");
 		$observaciones = $this->input->post("observaciones");
+
+		$this->db->trans_begin();
 
         $this->model_produccion->ingreso_despacho_orden($fecha, $medida, $cantidad, $filas, $ordendecarga, $cliente, $transporte, $entro, $salio, $puentista, $oppinza, $opcamion, $observaciones, $this->data['data']['id_usuario']);
 
@@ -131,10 +135,30 @@ class Despacho extends CI_Controller {
 					$lugar = 128+(($fila-1)*12)+$columna+3;
 			}
 
-        	$this->model_deposito->ingreso($lugar, $cantidad[$key], 0, $this->data['data']['id_usuario']);
+			if( ( $this->model_deposito->hayDisponibles($lugar) - $cantidad[$key]  ) < 0 )
+			{
+				$bandera = false;
+				//redirect('despacho/index/2');	
+				//return;
+			}
+			else
+			{
+
+        		$this->model_deposito->ingreso($lugar, $cantidad[$key], 0, $this->data['data']['id_usuario']);
+			}
        	}
+       	
+        if($bandera == true)
+        {
+        	$this->db->trans_commit();
+        	redirect('despacho/index/1');
+        }
+        else{
+
+        	$this->db->trans_rollback();
+			redirect('despacho/index/2');	
+        }
         
-        redirect('despacho/index/1');
 	}
 
 
@@ -178,6 +202,12 @@ class Despacho extends CI_Controller {
         $this->data['detalles'] = $this->model_produccion->getDetallesDespachoId($id);
 
 		$this->load->view('impresion/despacho_print_view', $this->data);
+	}
+
+	public function hayDisponibles($id_lugar)
+	{
+		$this->load->model('model_deposito');
+		echo $this->model_deposito->hayDisponibles($id_lugar);
 	}
 }
 ?>

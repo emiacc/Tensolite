@@ -182,7 +182,7 @@
 				<div class="stats-icon"><i class="fa fa-refresh"></i></div>
 				<div class="stats-info">
 					<h4>Recuperación</h4>
-					<p><?=$widgetRecuperacion?></p>	
+					<p><?=$widgetRecuperacion?>m</p>	
 				</div>
 				<div class="stats-link"><a href="#">&nbsp;</a>
 				</div>

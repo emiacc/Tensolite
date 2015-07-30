@@ -52,7 +52,7 @@
 							<div class="stats-info">
 								<h4>AS</h4>
 								<p><?=number_format($aster,1)?>%</p>	
-								<h4>15648</h4>	
+								<h4>Cap. total: 15648</h4>	
 							</div>
 						</div>
 					</div>
@@ -62,7 +62,7 @@
 							<div class="stats-info">
 								<h4>A1</h4>
 								<p><?=number_format($a1,1)?>%</p>	
-								<h4>9408</h4>		
+								<h4>Cap. total: 9408</h4>		
 							</div>
 						</div>
 					</div>
@@ -72,7 +72,7 @@
 							<div class="stats-info">
 								<h4>A2</h4>
 								<p><?=number_format($a2,1)?>%</p>	
-								<h4>7056</h4>		
+								<h4>Cap. total: 7056</h4>		
 							</div>
 						</div>
 					</div>
@@ -82,7 +82,7 @@
 							<div class="stats-info">
 								<h4>B1</h4>
 								<p><?=number_format($b1,1)?>%</p>	
-								<h4>7056</h4>		
+								<h4>Cap. total: 7056</h4>		
 							</div>
 						</div>
 					</div>
@@ -94,7 +94,7 @@
 							<div class="stats-info">
 								<h4>B2</h4>
 								<p><?=number_format($b2,1)?>%</p>	
-								<h4>5880</h4>		
+								<h4>Cap. total: 5880</h4>		
 							</div>
 						</div>
 					</div>
@@ -104,7 +104,7 @@
 							<div class="stats-info">
 								<h4>C</h4>
 								<p><?=number_format($c,1)?>%</p>	
-								<h4>8232</h4>		
+								<h4>Cap. total: 8232</h4>		
 							</div>
 						</div>
 					</div>
@@ -114,7 +114,7 @@
 							<div class="stats-info">
 								<h4>D</h4>
 								<p><?=number_format($d,1)?>%</p>	
-								<h4>7776</h4>		
+								<h4>Cap. total: 7776</h4>		
 							</div>
 						</div>
 					</div>
@@ -124,7 +124,7 @@
 							<div class="stats-info">
 								<h4>E</h4>
 								<p><?=number_format($e,1)?>%</p>	
-								<h4>3960</h4>		
+								<h4>Cap. total: 3960</h4>		
 							</div>
 						</div>
 					</div>

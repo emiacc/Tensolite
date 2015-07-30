@@ -6,28 +6,28 @@ class Model_resumen extends CI_Model {
    	}
 
 	public function resumenProduccion($mesDesde, $anioDesde, $mesHasta, $anioHasta){
-   	$query = $this->db->query("SELECT SUM(cantidad) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
+   	$query = $this->db->query("SELECT SUM(cantidad*medida/10) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
    								FROM producciones 
 									WHERE YEAR(fecha) BETWEEN $anioDesde AND $anioHasta AND MONTH(fecha) BETWEEN $mesDesde AND $mesHasta GROUP BY diaY ORDER BY fecha");
 	   return $query->result();
    }
 
    public function resumenDespacho($mesDesde, $anioDesde, $mesHasta, $anioHasta){
-   	$query = $this->db->query("SELECT SUM(cantidad) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
+   	$query = $this->db->query("SELECT SUM(cantidad*medida/10) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
    									FROM despachos 
 									WHERE YEAR(fecha) BETWEEN $anioDesde AND $anioHasta AND MONTH(fecha) BETWEEN $mesDesde AND $mesHasta GROUP BY diaY ORDER BY fecha");
 	    return $query->result();
    	}
 
    	public function produccionProd($mesDesde, $anioDesde, $mesHasta, $anioHasta){
-   		$query = $this->db->query("SELECT SUM(cantidad) as cant, DATE_FORMAT(fecha, '%V') as semana
+   		$query = $this->db->query("SELECT SUM(cantidad*medida/10) as cant, DATE_FORMAT(fecha, '%V') as semana
    									FROM producciones 
 									WHERE YEAR(fecha) BETWEEN $anioDesde AND $anioHasta AND MONTH(fecha) BETWEEN $mesDesde AND $mesHasta
 									GROUP BY semana ORDER BY fecha");
    		return $query->result();
    	}
    	public function produccionRecu($mesDesde, $anioDesde, $mesHasta, $anioHasta){
-   		$query = $this->db->query("SELECT SUM(cantidad) as cant, DATE_FORMAT(fecha, '%V') as semana
+   		$query = $this->db->query("SELECT SUM(cantidad*medida/10) as cant, DATE_FORMAT(fecha, '%V') as semana
    									FROM recuperaciones 
 									WHERE YEAR(fecha) BETWEEN $anioDesde AND $anioHasta AND MONTH(fecha) BETWEEN $mesDesde AND $mesHasta
 									GROUP BY semana ORDER BY fecha");
@@ -152,28 +152,28 @@ class Model_resumen extends CI_Model {
    }
 
    public function getProduccionWidget($mesDesde, $anioDesde, $mesHasta, $anioHasta) {
-      $query = $this->db->query("SELECT SUM(cantidad) as cant FROM producciones
+      $query = $this->db->query("SELECT TRUNCATE(SUM(cantidad*medida/10),2) as cant FROM producciones
                               WHERE YEAR(fecha) BETWEEN $anioDesde AND $anioHasta AND MONTH(fecha) BETWEEN $mesDesde AND $mesHasta");
       $res = $query->row()->cant;
       if($res == '') $res = 0;
       return $res;
    }
    public function getDespachoWidget($mesDesde, $anioDesde, $mesHasta, $anioHasta) {
-      $query = $this->db->query("SELECT SUM(cantidad) as cant FROM despachos
+      $query = $this->db->query("SELECT TRUNCATE(SUM(cantidad*medida/10),2) as cant FROM despachos
                               WHERE YEAR(fecha) BETWEEN $anioDesde AND $anioHasta AND MONTH(fecha) BETWEEN $mesDesde AND $mesHasta");
       $res = $query->row()->cant;
       if($res == '') $res = 0;
       return $res;
    }
    public function getPerdidaWidget($mesDesde, $anioDesde, $mesHasta, $anioHasta, $tipoPerdida) {
-      $query = $this->db->query("SELECT SUM(cantidad) as cant FROM perdidas
+      $query = $this->db->query("SELECT TRUNCATE(SUM(cantidad*medida/10),2) as cant FROM perdidas
                               WHERE en_playa = $tipoPerdida AND YEAR(fecha) BETWEEN $anioDesde AND $anioHasta AND MONTH(fecha) BETWEEN $mesDesde AND $mesHasta");
       $res = $query->row()->cant;
       if($res == '') $res = 0;
       return $res;
    }
    public function getRecuperacionWidget($mesDesde, $anioDesde, $mesHasta, $anioHasta) {
-      $query = $this->db->query("SELECT SUM(cantidad) as cant FROM recuperaciones
+      $query = $this->db->query("SELECT TRUNCATE(SUM(cantidad*medida/10),2) as cant FROM recuperaciones
                               WHERE YEAR(fecha) BETWEEN $anioDesde AND $anioHasta AND MONTH(fecha) BETWEEN $mesDesde AND $mesHasta");
       $res = $query->row()->cant;
       if($res == '') $res = 0;

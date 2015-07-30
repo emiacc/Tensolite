@@ -178,4 +178,13 @@ class Model_deposito extends CI_Model {
     return $suma*100/3960;  
   }
 
+  public function hayDisponibles($id_lugar)
+  {
+    $query = $this->db->query("SELECT l.id_lugar, 
+      ( IFNULL( (SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 1 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) - 
+        IFNULL( (SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 0 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) ) 
+      as cant FROM lugares l Where l.id_lugar = $id_lugar")->row();
+    return $query->cant;
+  }
+
 }

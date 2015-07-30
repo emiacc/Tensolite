@@ -200,13 +200,13 @@ class Model_produccion extends CI_Model {
 
 	//grafico perdidas
 	public function resumenPerdida($mes, $anio, $tipoPerdida){
-   	$query = $this->db->query("SELECT SUM(cantidad) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
+   	$query = $this->db->query("SELECT SUM(cantidad*medida/10) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
    								FROM perdidas 
 									WHERE YEAR(fecha) = $anio AND MONTH(fecha) = $mes AND en_playa = $tipoPerdida GROUP BY diaY ORDER BY fecha");
 	   return $query->result();
    }
    public function getPerdidaWidget($mes, $anio, $tipoPerdida) {
-      $query = $this->db->query("SELECT SUM(cantidad) as cant FROM perdidas
+      $query = $this->db->query("SELECT TRUNCATE(SUM(cantidad*medida/10),2) as cant FROM perdidas
                               WHERE en_playa = $tipoPerdida AND YEAR(fecha) = $anio AND MONTH(fecha) = $mes");
       $res = $query->row()->cant;
       if($res == '') $res = 0;
@@ -215,13 +215,13 @@ class Model_produccion extends CI_Model {
 
    //grafico perdida recuperacion
 	public function resumenRecuperacion($mes, $anio){
-   	$query = $this->db->query("SELECT SUM(cantidad) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
+   	$query = $this->db->query("SELECT SUM(cantidad*medida/10) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
    								FROM recuperaciones 
 									WHERE YEAR(fecha) = $anio AND MONTH(fecha) = $mes GROUP BY diaY ORDER BY fecha");
 	   return $query->result();
    }
    public function getRecuperacionWidget($mes, $anio) {
-      $query = $this->db->query("SELECT SUM(cantidad) as cant FROM recuperaciones
+      $query = $this->db->query("SELECT TRUNCATE(SUM(cantidad*medida/10),2) as cant FROM recuperaciones
                               WHERE YEAR(fecha) = $anio AND MONTH(fecha) = $mes");
       $res = $query->row()->cant;
       if($res == '') $res = 0;
@@ -230,13 +230,13 @@ class Model_produccion extends CI_Model {
 
    //grafico perdida despacho
 	public function resumenDespacho($mes, $anio){
-   	$query = $this->db->query("SELECT SUM(cantidad) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
+   	$query = $this->db->query("SELECT SUM(cantidad*medida/10) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
    								FROM despachos 
 									WHERE YEAR(fecha) = $anio AND MONTH(fecha) = $mes GROUP BY diaY ORDER BY fecha");
 	   return $query->result();
    }
    public function getDespachoWidget($mes, $anio) {
-      $query = $this->db->query("SELECT SUM(cantidad) as cant FROM despachos
+      $query = $this->db->query("SELECT TRUNCATE(SUM(cantidad*medida/10),2) as cant FROM despachos
                               WHERE YEAR(fecha) = $anio AND MONTH(fecha) = $mes");
       $res = $query->row()->cant;
       if($res == '') $res = 0;

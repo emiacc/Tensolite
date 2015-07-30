@@ -203,7 +203,7 @@
 				<div class="stats-icon"><i class="fa fa-toggle-down"></i></div>
 				<div class="stats-info">
 					<h4>Pérdida Producción</h4>
-					<p><?=$widgetPerdida?></p>	
+					<p><?=$widgetPerdida?>m</p>	
 				</div>
 				<div class="stats-link"><a href="#">&nbsp;</a>
 				</div>

@@ -310,7 +310,7 @@
 				<div class="stats-icon"><i class="fa fa-cogs"></i></div>
 				<div class="stats-info">
 					<h4>Producción</h4>
-					<p><?=$produccionWidget;?></p>	
+					<p><?=$produccionWidget;?>m</p>	
 				</div>
 				<div class="stats-link">
 					<a class="no-print" href="<?= base_url(); ?>produccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -322,7 +322,7 @@
 				<div class="stats-icon"><i class="fa fa-truck"></i></div>
 				<div class="stats-info">
 					<h4>Despacho</h4>
-					<p><?=$despachoWidget;?></p>	
+					<p><?=$despachoWidget;?>m</p>	
 				</div>
 				<div class="stats-link">
 					<a class="no-print" href="<?= base_url(); ?>despacho">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -334,7 +334,7 @@
 				<div class="stats-icon"><i class="fa fa-toggle-down"></i></div>
 				<div class="stats-info">
 					<h4>Pérdida Playa</h4>
-					<p><?=$perdidaPlayaWidget;?></p>	
+					<p><?=$perdidaPlayaWidget;?>m</p>	
 				</div>
 				<div class="stats-link">
 					<a class="no-print" href="<?= base_url(); ?>perdidaPlaya">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -346,7 +346,7 @@
 				<div class="stats-icon"><i class="fa fa-toggle-down"></i></div>
 				<div class="stats-info">
 					<h4>Pérdida Producción</h4>
-					<p><?=$perdidaProdWidget;?></p>	
+					<p><?=$perdidaProdWidget;?>m</p>	
 				</div>
 				<div class="stats-link">
 					<a class="no-print" href="<?= base_url(); ?>perdidaProduccion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -358,7 +358,7 @@
 				<div class="stats-icon"><i class="fa fa-refresh"></i></div>
 				<div class="stats-info">
 					<h4>Recupero</h4>
-					<p><?=$recuperacionWidget;?></p>	
+					<p><?=$recuperacionWidget;?>m</p>	
 				</div>
 				<div class="stats-link">
 					<a class="no-print" href="<?= base_url(); ?>recuperacion">Detalle <i class="fa fa-arrow-circle-o-right"></i></a>

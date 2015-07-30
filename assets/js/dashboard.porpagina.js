@@ -98,7 +98,7 @@ var perdida = function() {
                     i = r.dataIndex;
                     $("#tooltip").remove();
                     var s = r.datapoint[1].toFixed(2);
-                    var o = r.series.label + " " + s;
+                    var o = r.series.label + " " + s + "m";
                     e(r.pageX, r.pageY, o)
                 }
             } else {

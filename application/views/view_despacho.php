@@ -84,9 +84,9 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Enrtó</label>
+							<label class="col-md-3 control-label ui-sortable">Entró</label>
 							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Enrtó" class="form-control" name="entro" id="entro" />			
+								<input type="text" placeholder="Entró" class="form-control" name="entro" id="entro" />			
 							</div>
 						</div>
 
@@ -427,7 +427,7 @@
 				<div class="stats-icon"><i class="fa fa-truck"></i></div>
 				<div class="stats-info">
 					<h4>Despacho</h4>
-					<p><?=$widgetDespacho?></p>	
+					<p><?=$widgetDespacho?>m</p>	
 				</div>
 				<div class="stats-link"><a href="#">&nbsp;</a>
 				</div>
@@ -590,14 +590,24 @@
 		$('#selectMes').attr("value",d.getMonth()+1);		
 
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
+		if(<?=$mensaje;?>== 2) alert('Error no hay suficiente stock en el lugar');
 
 		$("#mas").click(function(){			
-			$("#items").append($("#item").html());
+			$("#items").append($("#item").html());			
 		});
 
 		$('#data-table tbody').on('click', 'tr', function () {
 	        location.href = '<?= base_url(); ?>despacho/imprimir/'+$(this).attr('id');	        
 	    });
+		/*
+	    $(window).on('beforeunload', function(event){
+	    	if($('#modal-ingreso').data('bs.modal').isShown == true)
+	    	{	
+	    		$("#modal-ingreso").modal('hide');
+				return "Desea abandonar la pagina";
+			}
+		});
+*/
 	});
 </script>	
 </body>
