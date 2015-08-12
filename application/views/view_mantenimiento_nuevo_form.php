@@ -57,8 +57,9 @@
 						</div>
 						<br>
 					</div>
-				</div>				
-				<div id="mas" style="cursor:pointer;"><i class="fa fa-2x fa-plus-square"></i></div>	
+				</div>	
+				<br>			
+				<div id="mas" style="cursor:pointer;"><i class="fa fa-2x fa-plus-square"></i> Agregar Tarea</div>	
 				<br>
 				<button type="submit" class="btn btn-sm btn-primary m-r-5">Generar</button>			
 				<button id="volver" type="button" class="btn btn-sm btn-primary m-l-10">Volver</button>		

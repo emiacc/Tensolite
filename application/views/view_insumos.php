@@ -19,7 +19,7 @@
 <!-- begin #content -->
 <div id="content" class="content">
 
-	<?php if($data['rol'] == 1){ ?>	
+	<?php if($data['rol'] <= 3){ ?>	
 	<!-- <div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">

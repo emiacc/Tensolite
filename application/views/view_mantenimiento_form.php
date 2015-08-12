@@ -43,16 +43,16 @@
 				<input type="hidden" name="id_solicitud" value="<?=$id_solicitud?>">
 
 				<div class="form-group">
-					<label class="col-md-4 control-label ui-sortable">Nº Solicitud</label>
-					<div class="col-md-8 ui-sortable">
+					<label class="col-md-2 control-label ui-sortable">Nº Solicitud</label>
+					<div class="col-md-6 ui-sortable">
 						<h3 style="margin-top:0;"><?=$id_solicitud?></h3>
 					</div>
 				</div>
 
 
 				<div class="form-group">
-					<label class="col-md-4 control-label ui-sortable">Detalle</label>
-					<div class="col-md-8 ui-sortable">
+					<label class="col-md-2 control-label ui-sortable">Detalle</label>
+					<div class="col-md-6 ui-sortable">
 
 					<?php foreach ($detalles as $detalle): 
 						
@@ -101,8 +101,8 @@
 				
 
 				<div class="form-group no-print">
-					<label class="col-md-4 control-label ui-sortable"></label>
-					<div class="col-md-8 ui-sortable">
+					<label class="col-md-2 control-label ui-sortable"></label>
+					<div class="col-md-6 ui-sortable">
 						<button type="submit" id="btnGuardar" class="btn btn-sm btn-primary m-r-5">Guardar</button>								
 						<button type="button" class="btn btn-sm btn-primary m-l-10 volver">Volver</button>				
 						<button type="button" id="btnCerrar" class="btn btn-sm btn-default m-l-10">Cerrar</button>				
@@ -170,21 +170,24 @@
 	    }
 
 	    $("#btnCerrar").click(function(){
+	    	var r = confirm("¿Está seguro que desea cerrar esta orden?");
+	    	if (r == false) return; 
 	    	$("#cerrarF").prop('checked', true);
 	    	var enviar = true;
-	    	
-	    	/*$("textarea").each(function(){
-        		if(this.value=='')
+
+	    	$("input:checkbox").each(function(){
+	    		if($(this).attr('checked')!='checked')
         		{
-        			alert("Debe completar todos los campos");
         			enviar = false;
         		}        		
-    		});*/
+    		});
 
     		if(enviar == true)
         	{
         		$("form").submit();
         	}
+        	else
+        		alert("Faltan tareas por realizar");
 	    });
 	});
 </script>

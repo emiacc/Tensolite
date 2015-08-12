@@ -278,7 +278,10 @@
 										$band = FALSE;
 										for ($k=0; $k < sizeof($tabla); $k++) { 
 											if($tabla[$k]->nro_banco == $i && $tabla[$k]->medida == $j) {
-												$s = $s."<td>".$tabla[$k]->cant."</td>";
+												if($tabla[$k]->cant == 0)
+													$s = $s."<td>".$tabla[$k]->cant."</td>";
+												else
+													$s = $s."<td class='bred'>".$tabla[$k]->cant."</td>";
 												$band = TRUE;
 											}											
 										}
