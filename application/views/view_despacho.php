@@ -4,6 +4,12 @@
 <link href="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
 <style type="text/css">
 	@media screen and (max-width:2500px){.table-responsive{width:100%;margin-bottom:15px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;-ms-overflow-style:-ms-autohiding-scrollbar;border:1px solid #ddd}.table-responsive>.table{margin-bottom:0}.table-responsive>.table>thead>tr>th,.table-responsive>.table>tbody>tr>th,.table-responsive>.table>tfoot>tr>th,.table-responsive>.table>thead>tr>td,.table-responsive>.table>tbody>tr>td,.table-responsive>.table>tfoot>tr>td{white-space:nowrap}.table-responsive>.table-bordered{border:0}.table-responsive>.table-bordered>thead>tr>th:first-child,.table-responsive>.table-bordered>tbody>tr>th:first-child,.table-responsive>.table-bordered>tfoot>tr>th:first-child,.table-responsive>.table-bordered>thead>tr>td:first-child,.table-responsive>.table-bordered>tbody>tr>td:first-child,.table-responsive>.table-bordered>tfoot>tr>td:first-child{border-left:0}.table-responsive>.table-bordered>thead>tr>th:last-child,.table-responsive>.table-bordered>tbody>tr>th:last-child,.table-responsive>.table-bordered>tfoot>tr>th:last-child,.table-responsive>.table-bordered>thead>tr>td:last-child,.table-responsive>.table-bordered>tbody>tr>td:last-child,.table-responsive>.table-bordered>tfoot>tr>td:last-child{border-right:0}.table-responsive>.table-bordered>tbody>tr:last-child>th,.table-responsive>.table-bordered>tfoot>tr:last-child>th,.table-responsive>.table-bordered>tbody>tr:last-child>td,.table-responsive>.table-bordered>tfoot>tr:last-child>td{border-bottom:0}}
+	@media (min-width:992px){.modal-lg{width: 1050px;}}
+	.exis{cursor: pointer;}
+	.no-padd > div.col-md-4{
+		padding-left: 8px;
+		padding-right: 0px;
+	}
 </style><?php 
 	$max = 0;
 	$min = 9999999;
@@ -46,7 +52,7 @@
 <!-- modal ingreso -->
 	<?php if($data['rol'] < 3 ){ ?>	
 	<div class="modal fade" id="modal-ingreso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -54,183 +60,179 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" action="<?= base_url(); ?>despacho/ingresoNuevo" method="POST" data-parsley-validate="true">	
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Fecha</label>
-							<div class="col-md-9 ui-sortable">
-								<div class="input-group date" id="datepicker-autoClose" data-date-format="dd-mm-yyyy" >
-									<input id="inputFechaDespacho" name="inputFechaDespacho" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
-									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-								</div>
-							</div>
-						</div>	
-
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Orden de carga p/</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Orden de carga p/" class="form-control" name="ordendecarga" id="ordendecarga" />			
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Cliente</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Cliente" class="form-control" name="cliente" id="cliente" />			
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Transporte</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Transporte" class="form-control" name="transporte" id="transporte" />			
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Entró</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Entró" class="form-control" name="entro" id="entro" />			
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Salió</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Salió" class="form-control" name="salio" id="salio" />			
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Puentista</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Puentista" class="form-control" name="puentista" id="puentista" />			
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Op pinza</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Op pinza" class="form-control" name="oppinza" id="oppinza" />			
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Op camción</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Op camción" class="form-control" name="opcamion" id="opcamion" />			
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 control-label ui-sortable">Observaciones</label>
-							<div class="col-md-9 ui-sortable">			
-								<input type="text" placeholder="Observaciones" class="form-control" name="observaciones" id="observaciones" />			
-							</div>
-						</div>
-
-						<div id="items">
-							<div id="item">
-								<div class="form-group">
-									<label class="col-md-3 control-label ui-sortable">Medida</label>
-									<div class="col-md-9 ui-sortable">
-										<select class="form-control" name="selectMedida[]" id="selectMedida" data-parsley-required="true">
-											<option value="">Medida...</option>
-											<option value="10">1.0</option>
-											<option value="12">1.2</option>
-											<option value="14">1.4</option>
-											<option value="15">1.5</option>
-											<option value="16">1.6</option>
-											<option value="18">1.8</option>
-											<option value="20">2.0</option>
-											<option value="22">2.2</option>
-											<option value="24">2.4</option>
-											<option value="25">2.5</option>
-											<option value="26">2.6</option>
-											<option value="28">2.8</option>
-											<option value="30">3.0</option>
-											<option value="32">3.2</option>
-											<option value="34">3.4</option>
-											<option value="35">3.5</option>
-											<option value="36">3.6</option>
-											<option value="38">3.8</option>
-											<option value="40">4.0</option>
-											<option value="42">4.2</option>
-											<option value="44">4.4</option>
-											<option value="45">4.5</option>
-											<option value="46">4.6</option>
-											<option value="48">4.8</option>
-											<option value="50">5.0</option>
-											<option value="52">5.2</option>
-											<option value="54">5.4</option>
-											<option value="55">5.5</option>
-											<option value="56">5.6</option>
-											<option value="58">5.8</option>
-											<option value="60">6.0</option>
-											<option value="62">6.2</option>
-											<option value="64">6.4</option>
-											<option value="65">6.5</option>
-											<option value="66">6.6</option>
-											<option value="68">6.8</option>
-											<option value="70">7.0</option>
-											<option value="72">7.2</option>
-										</select>
-									</div>			
-								</div>			
-								<div class="form-group">
-									<label class="col-md-3 control-label ui-sortable">Cantidad</label>
-									<div class="col-md-9 ui-sortable">			
-										<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad[]" id="inputCantidad" data-parsley-required="true" data-parsley-type="number"/>			
+						<div class="col-md-8" style="border-right: 1px solid #E2E2E2;">
+							
+							<div class="form-group">
+								<label class="col-md-1 control-label ui-sortable">Fecha</label>
+								<div class="col-md-3 ui-sortable">
+									<div class="input-group date" id="datepicker-autoClose" data-date-format="dd-mm-yyyy" >
+										<input id="inputFechaDespacho" name="inputFechaDespacho" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
+										<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label ui-sortable">Sector</label>
-									<div class="col-md-9 ui-sortable">
-										<select class="form-control" name="selectSector[]" id="selectSector" data-parsley-required="true">
-											<option value="">Sector...</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>									
-										</select>
-									</div>			
+							
+								<label class="col-md-3 control-label ui-sortable">Orden de carga p/</label>
+								<div class="col-md-5 ui-sortable">			
+									<input type="text" placeholder="Orden de carga p/" class="form-control" name="ordendecarga" id="ordendecarga" />			
 								</div>
-								<div class="form-group">
-									<label class="col-md-3 control-label ui-sortable">Fila</label>
-									<div class="col-md-9 ui-sortable">
-										<select class="form-control" name="selectFila[]" id="selectFila" data-parsley-required="true">
-											<option value="">Fila...</option>
-											<option value="1">A</option>
-											<option value="2">B</option>
-											<option value="3">C</option>									
-											<option value="4">D</option>									
-											<option value="5">E</option>									
-											<option value="6">F</option>									
-											<option value="7">G</option>									
-											<option value="8">H</option>									
-										</select>
-									</div>			
-								</div>	
-								<div class="form-group">
-									<label class="col-md-3 control-label ui-sortable">Columna</label>
-									<div class="col-md-9 ui-sortable">
-										<select class="form-control" name="selectColumna[]" id="selectColumna" data-parsley-required="true">
-											<option value="">Columna...</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>									
-											<option value="4">4</option>									
-											<option value="5">5</option>									
-											<option value="6">6</option>									
-											<option value="7">7</option>									
-											<option value="8">8</option>									
-											<option value="9">9</option>									
-											<option value="10">10</option>									
-											<option value="11">11</option>									
-											<option value="12">12</option>									
-											<option value="13">13</option>									
-										</select>
-									</div>			
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-2 control-label ui-sortable">Cliente</label>
+								<div class="col-md-4 ui-sortable">			
+									<input type="text" placeholder="Cliente" class="form-control" name="cliente" id="cliente" />			
 								</div>
-								<br><br>
+							
+								<label class="col-md-2 control-label ui-sortable">Transporte</label>
+								<div class="col-md-4 ui-sortable">			
+									<input type="text" placeholder="Transporte" class="form-control" name="transporte" id="transporte" />			
+								</div>
+							</div>
+
+							<hr>
+
+							<div class="form-group">
+								<label class="col-md-2 control-label ui-sortable">Entró</label>
+								<div class="col-md-4 ui-sortable">			
+									<input type="text" placeholder="Entró" class="form-control" name="entro" id="entro" />			
+								</div>
+							
+								<label class="col-md-2 control-label ui-sortable">Salió</label>
+								<div class="col-md-4 ui-sortable">			
+									<input type="text" placeholder="Salió" class="form-control" name="salio" id="salio" />			
+								</div>
+							</div>
+
+							<hr> 
+
+							<div class="form-group">
+								<label class="col-md-2 control-label ui-sortable">Puentista</label>
+								<div class="col-md-4 ui-sortable">			
+									<input type="text" placeholder="Puentista" class="form-control" name="puentista" id="puentista" />			
+								</div>
+							
+								<label class="col-md-2 control-label ui-sortable">Op pinza</label>
+								<div class="col-md-4 ui-sortable">			
+									<input type="text" placeholder="Op pinza" class="form-control" name="oppinza" id="oppinza" />			
+								</div>
+							
+								<label class="col-md-2 control-label ui-sortable">Op camción</label>
+								<div class="col-md-4 ui-sortable">			
+									<input type="text" placeholder="Op camción" class="form-control" name="opcamion" id="opcamion" />			
+								</div>
+							</div>
+							<hr>
+
+							<div class="form-group">
+								<label class="col-md-2 control-label ui-sortable">Observaciones</label>
+								<div class="col-md-10 ui-sortable">			
+									<input type="text" placeholder="Observaciones" class="form-control" name="observaciones" id="observaciones" />			
+								</div>
 							</div>
 						</div>
-						<div id="mas" style="cursor:pointer;"><i class="fa fa-2x fa-plus-square"></i> Agregar Medida</div>	
+
+						<div class="col-md-4">
+							<h4 class="text-center">Medidas</h4><hr>
+							<div id="items">
+								<div id="item">
+									<div class="form-group">
+										<label class="col-md-3 control-label ui-sortable">Medida</label>
+										<div class="col-md-9 ui-sortable">
+											<select class="form-control" id="selectMedidaMaster">
+												<option value="">Medida...</option>
+												<option value="10">1.0</option>
+												<option value="12">1.2</option>
+												<option value="14">1.4</option>
+												<option value="15">1.5</option>
+												<option value="16">1.6</option>
+												<option value="18">1.8</option>
+												<option value="20">2.0</option>
+												<option value="22">2.2</option>
+												<option value="24">2.4</option>
+												<option value="25">2.5</option>
+												<option value="26">2.6</option>
+												<option value="28">2.8</option>
+												<option value="30">3.0</option>
+												<option value="32">3.2</option>
+												<option value="34">3.4</option>
+												<option value="35">3.5</option>
+												<option value="36">3.6</option>
+												<option value="38">3.8</option>
+												<option value="40">4.0</option>
+												<option value="42">4.2</option>
+												<option value="44">4.4</option>
+												<option value="45">4.5</option>
+												<option value="46">4.6</option>
+												<option value="48">4.8</option>
+												<option value="50">5.0</option>
+												<option value="52">5.2</option>
+												<option value="54">5.4</option>
+												<option value="55">5.5</option>
+												<option value="56">5.6</option>
+												<option value="58">5.8</option>
+												<option value="60">6.0</option>
+												<option value="62">6.2</option>
+												<option value="64">6.4</option>
+												<option value="65">6.5</option>
+												<option value="66">6.6</option>
+												<option value="68">6.8</option>
+												<option value="70">7.0</option>
+												<option value="72">7.2</option>
+											</select>
+										</div>			
+									</div>			
+									<div class="form-group">
+										<label class="col-md-3 control-label ui-sortable">Cantidad</label>
+										<div class="col-md-9 ui-sortable">			
+											<input type="text" placeholder="Cantidad" class="form-control" id="inputCantidadMaster" />			
+										</div>
+									</div>
+									<div class="form-group no-padd">
+										<div class="col-md-4 ui-sortable">
+											<select class="form-control" id="selectSectorMaster" >
+												<option value="">Sector...</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>									
+											</select>
+										</div>			
+										<div class="col-md-4 ui-sortable">
+											<select class="form-control" id="selectFilaMaster" >
+												<option value="">Fila...</option>
+												<option value="1">A</option>
+												<option value="2">B</option>
+												<option value="3">C</option>									
+												<option value="4">D</option>									
+												<option value="5">E</option>									
+												<option value="6">F</option>									
+												<option value="7">G</option>									
+												<option value="8">H</option>									
+											</select>
+										</div>			
+										<div class="col-md-4 ui-sortable">
+											<select class="form-control" id="selectColumnaMaster" >
+												<option value="">Columna...</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>									
+												<option value="4">4</option>									
+												<option value="5">5</option>									
+												<option value="6">6</option>									
+												<option value="7">7</option>									
+												<option value="8">8</option>									
+												<option value="9">9</option>									
+												<option value="10">10</option>									
+												<option value="11">11</option>									
+												<option value="12">12</option>									
+												<option value="13">13</option>									
+											</select>
+										</div>			
+									</div>
+									<br><br>
+								</div>
+							</div>
+							<div id="mas" style="cursor:pointer;"><i class="fa fa-2x fa-plus-square"></i> Agregar Medida</div>	
+						</div>
 						<div class="form-group">
 							<div class="col-md-9 col-md-offset-3 ui-sortable">
 								<button type="submit" class="btn btn-sm btn-primary">Registrar</button>
@@ -596,8 +598,28 @@
 		if(<?=$mensaje;?>== 2) alert('Error no hay suficiente stock en el lugar');
 
 		$("#mas").click(function(){			
-			$("#items").append($("#item").html());			
+			//$("#items").append($("#item").html());	
+			if (	$('#selectMedidaMaster').val() != '' &&
+               		$('#inputCantidadMaster').val() != '' &&
+               		$('#selectSectorMaster').val() != '' &&
+               		$('#selectFilaMaster').val() != '' &&
+               		$('#selectColumnaMaster').val() != '' &&
+               		isNaturalNumber($('#inputCantidadMaster').val()) 
+               )
+			{
+				$("#items").append("<div class='form-group'><div class='col-md-4'><input type='text' class='form-control' name='selectMedida[]' id='selectMedida' value='"+$('#selectMedidaMaster').val()+"'></div><div class='col-md-4'><input type='text' class='form-control' name='inputCantidad[]' id='inputCantidad' value='"+$('#inputCantidadMaster').val()+"'></div><input type='hidden' name='selectSector[]' id='selectSector' value='"+$('#selectSectorMaster').val()+"'><input type='hidden' name='selectFila[]' id='selectFila' value='"+$('#selectFilaMaster').val()+"'><input type='hidden' name='selectColumna[]' id='selectColumna' value='"+$('#selectColumnaMaster').val()+"'><div class='exis'>X</div></div>");			
+				
+				$('.exis').click(function(){
+					$(this).parent().html('');
+				});
+			}
+			else
+			{
+				alert("Complete los campos");
+			}		
+
 		});
+
 
 		$('#data-table tbody').on('click', 'tr', function () {
 	        location.href = '<?= base_url(); ?>despacho/imprimir/'+$(this).attr('id');	        
@@ -612,6 +634,15 @@
 		});
 */
 	});
+
+	function isNaturalNumber(n) {
+	    n = n.toString(); // force the value incase it is not
+	    var n1 = Math.abs(n),
+	        n2 = parseInt(n, 10);
+	    return !isNaN(n1) && n2 === n1 && n1.toString() === n;
+	}
+
 </script>	
 </body>
 </html>
+
