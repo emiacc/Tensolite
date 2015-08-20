@@ -30,7 +30,7 @@
 	<div class="row no-print">
 		<div class="panel panel-inverse">				
 			<div class="panel-body">
-				<div class="pull-left"><h2 id="mes-filtro" style="margin:0;"><?=$dia." de ".$mes." ".$anio;?></h2></div>
+				<div class="pull-left"><h2 id="mes-filtro" style="margin:0;"><?=$mes." ".$anio;?></h2></div>
 				<ul class="list-inline pull-right" style="margin:0;">
 					<?php if($data['rol'] == 1 || $data['rol'] == 3){ ?>	
 					<li><button id="ingreso-modal" type="button" class="btn btn-warning bg-orange" data-toggle="modal" data-target="#modal-ingreso">Ingreso de Pérdida</button></li>
@@ -153,7 +153,7 @@
 					<h4 class="modal-title">Filtro</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" action="<?= base_url(); ?>perdidaProduccion" method="POST" data-parsley-validate="true">
+					<form class="form-horizontal" id="fil" action="<?= base_url(); ?>perdidaProduccion" method="POST" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="col-md-3 control-label ui-sortable">Día</label>
 							<div class="col-md-9 ui-sortable">
@@ -233,7 +233,7 @@
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
 				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>				
 			</div>
-			<h4 class="panel-title">Pérdida en Producción Diaria</h4>
+			<h4 class="panel-title">Pérdida en Producción Diaria <b><?=$dia." de ".$mes." ".$anio;?></b></h4>
 		</div>
 		<div class="panel-body">
 			<div class="table-responsive">
@@ -323,7 +323,18 @@
 		$('#inputDia').attr("value",d.getDate());
 
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
+
 	});
+
+	function dateFromDay(day){
+	  var date = new Date(<?=$anio?>, 0); // initialize a date in `year-01-01`
+	  date = new Date(date.setDate(day)); // add the number of days
+	  
+	  $("#inputDia").val( date.getDate() );
+	  $("#selectMes").val( date.getMonth()+1 );
+	  $("#inputAnio").val( <?=$anio?> );
+	  $("#fil").submit();
+	}
 </script>	
 </body>
 </html>

@@ -106,8 +106,18 @@ var perdida = function() {
                 i = null
             }
             t.preventDefault()
-        })
+        });
+
+        $("#interactive-chart").bind("plotclick", function (event, pos, item) {
+            if (item) { 
+                dateFromDay(item.datapoint[0]);
+            }
+        });
+        
     }
+
+
+    
 };
 
 
