@@ -126,6 +126,14 @@ class Model_mantenimiento extends CI_Model {
 		return $estados;
 	}
 
+	public function getNombre()
+	{
+		$this->db->select('*');
+		$this->db->from('usuarios');
+		$this->db->where('id_usuario', $this->session->userdata['user_data']['id_usuario']);
+		$res = $this->db->get()->row();
+		return $res->nombre.", ".$res->apellido;
+	}
 
 
 

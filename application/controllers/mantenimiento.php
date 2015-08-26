@@ -59,8 +59,8 @@ class Mantenimiento extends CI_Controller {
 	{
 		$this->data['solicitud'] = $this->model_mantenimiento->getSolicitudesId($id);
         $this->data['detalles'] = $this->model_mantenimiento->getDetallesId($id);
-
-		$this->load->view('impresion/mantenimiento_print_view', $this->data);
+       	$this->data['appellidoNombre'] = $this->model_mantenimiento->getNombre();
+		$this->load->view('impresion/mantenimiento_print_view', $this->data);		
 	}
 
 	public function nuevaSolicitud()

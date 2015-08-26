@@ -71,6 +71,9 @@ var perdida = function() {
                 tickColor: "#ddd"
             },
             yaxis: {
+                tickFormatter: function(value, axis) {
+                    return value.toFixed(1) + "m";
+                },
                 ticks: 10,
                 tickColor: "#ddd"
             },

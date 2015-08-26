@@ -167,7 +167,7 @@
                 <tbody>
                     <tr>
                         <td>Solicita Supervisor</td>
-                        <td><div class="firma1"> <p>Ing. Cristián di Giola</p> </div></td>
+                        <td><div class="firma1"> <p><?=$appellidoNombre?></p> </div></td>
                         <td>Autoriza Jefe de planta</td>
                         <td><div class="firma1"> <p>Ing. Sebastian Barnes</p> </div></td>
                         <td>Recepta Mantenimiento</td>
@@ -242,8 +242,6 @@
 
             <div class="firma"> <p>Elaboró:</p> </div>
         </section>  
-
-
     </div>
     <script type="text/javascript">
         function imprimir()
