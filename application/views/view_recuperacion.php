@@ -107,6 +107,11 @@
 									<option value="68">6.8</option>
 									<option value="70">7.0</option>
 									<option value="72">7.2</option>
+									<option value="74">7.4</option>											
+									<option value="76">7.6</option>											
+									<option value="78">7.8</option>											
+									<option value="80">8.0</option>											
+									<option value="82">8.2</option>									
 								</select>
 							</div>			
 						</div>			
@@ -221,7 +226,7 @@
 						<tr>
 							<th>Día</th>
 							<?php
-								for ($j = 10; $j < 73; $j++) {
+								for ($j = 10; $j < 83; $j++) {
 									if($j % 2 == 0 || $j % 5 == 0){
 										echo "<th>".number_format(($j/10),1)."</th>";
 									}
@@ -234,7 +239,7 @@
 							for ($i = 1; $i < $diasmes; $i++) {
 								$s = "";
 								$s = $s."<tr><td>".$i."</td>";
-								for ($j = 10; $j < 73; $j++) {
+								for ($j = 10; $j < 83; $j++) {
 									if($j % 2 == 0 || $j % 5 == 0){
 										$band = FALSE;
 										for ($k=0; $k < sizeof($tabla); $k++) { 
