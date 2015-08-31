@@ -40,6 +40,21 @@ class Produccion extends CI_Controller {
 		$this->load->view('view_produccion', $this->data);
 	}
 
+    public function indexOrden($id_orden = 0)
+    {
+        $this->data['producciones'] = $this->model_produccion->getProduccion($id_orden);
+
+        $this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+        $this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
+        
+
+        $this->data['silos'] = $this->model_materia->getSilos();
+
+        $this->load->view('view_header', $this->data);
+        $this->load->view('view_produccion_orden', $this->data);
+
+    }
+
     public function ingresoOrden() {
         $fecha = $this->input->post('inputFechaOrden');
         $banco = $this->input->post('selectBanco');
@@ -130,6 +145,7 @@ class Produccion extends CI_Controller {
         elseif ($medida <= 54) $consumo = 7252.88+10879.32;
         elseif ($medida <= 62) $consumo = 1693.38+8675.32;
         elseif ($medida <= 72) $consumo = 750.30+1125.45+4003.99;
+        elseif ($medida <= 82) $consumo = 750.30+1125.45+4003.99;
         else $consumo = 0;
 
         $this->model_materia->egreso($fecha, $consumo, $this->data['data']['id_usuario'], 10);

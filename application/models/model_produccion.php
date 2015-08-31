@@ -142,6 +142,9 @@ class Model_produccion extends CI_Model {
 	public function getProducciones() {
 		return $this->db->get_where('producciones', array('solicitud' => 0))->result();
 	}
+	public function getProduccion($id_orden) {
+		return $this->db->get_where('producciones', array('solicitud' => 0, 'id_orden' => $id_orden))->result();
+	}
 
 	public function update_produccion($id, $produ, $cantidad, $usuario, $turno){
 		$data = array(
