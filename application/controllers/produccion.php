@@ -80,6 +80,7 @@ class Produccion extends CI_Controller {
         $cantidad = $this->input->post('inputCantidad');
         $turno = $this->input->post('selectTurno');
         
+        
         $this->model_produccion->update_produccion($id, $produ, $cantidad, $this->data['data']['id_usuario'],$turno);
         $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Producción ".$cantidad." Nº orden: ".$id);
 
@@ -149,7 +150,10 @@ class Produccion extends CI_Controller {
         else $consumo = 0;
 
         $this->model_materia->egreso($fecha, $consumo, $this->data['data']['id_usuario'], 10);
-
+        
+        $medidas = $this->input->post('inputMedida');
+        $this->load->model('model_deposito');
+        $this->model_deposito->new_ingreso($cantidad, $medidas, $this->data['data']['id_usuario']);
         redirect('produccion/index/1');
     }
 

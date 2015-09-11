@@ -59,7 +59,7 @@
 					<h4 class="modal-title" id="myModalLabel">Ingreso Despacho</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" action="<?= base_url(); ?>despacho/ingresoNuevo" method="POST" data-parsley-validate="true">	
+					<form class="form-horizontal" action="<?= base_url(); ?>despacho/ingresoNuevo2" method="POST" data-parsley-validate="true">	
 						<div class="col-md-8" style="border-right: 1px solid #E2E2E2;">
 							
 							<div class="form-group">
@@ -191,49 +191,8 @@
 										<div class="col-md-9 ui-sortable">			
 											<input type="text" placeholder="Cantidad" class="form-control" id="inputCantidadMaster" />			
 										</div>
-									</div>
-									<div class="form-group no-padd">
-										<div class="col-md-4 ui-sortable">
-											<select class="form-control" id="selectSectorMaster" >
-												<option value="">Sector...</option>
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>									
-											</select>
-										</div>			
-										<div class="col-md-4 ui-sortable">
-											<select class="form-control" id="selectFilaMaster" >
-												<option value="">Fila...</option>
-												<option value="1">A</option>
-												<option value="2">B</option>
-												<option value="3">C</option>									
-												<option value="4">D</option>									
-												<option value="5">E</option>									
-												<option value="6">F</option>									
-												<option value="7">G</option>									
-												<option value="8">H</option>									
-											</select>
-										</div>			
-										<div class="col-md-4 ui-sortable">
-											<select class="form-control" id="selectColumnaMaster" >
-												<option value="">Columna...</option>
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>									
-												<option value="4">4</option>									
-												<option value="5">5</option>									
-												<option value="6">6</option>									
-												<option value="7">7</option>									
-												<option value="8">8</option>									
-												<option value="9">9</option>									
-												<option value="10">10</option>									
-												<option value="11">11</option>									
-												<option value="12">12</option>									
-												<option value="13">13</option>									
-											</select>
-										</div>			
-									</div>
-									<br><br>
+									</div>									
+									<br>
 								</div>
 							</div>
 							<div id="mas" style="cursor:pointer;"><i class="fa fa-2x fa-plus-square"></i> Agregar Medida</div>	
@@ -617,10 +576,10 @@
                		isNaturalNumber($('#inputCantidadMaster').val()) 
                )
 			{
-				$("#items").append("<div class='form-group'><div class='col-md-4'><input type='text' class='form-control' name='selectMedida[]' id='selectMedida' value='"+$('#selectMedidaMaster').val()+"'></div><div class='col-md-4'><input type='text' class='form-control' name='inputCantidad[]' id='inputCantidad' value='"+$('#inputCantidadMaster').val()+"'></div><input type='hidden' name='selectSector[]' id='selectSector' value='"+$('#selectSectorMaster').val()+"'><input type='hidden' name='selectFila[]' id='selectFila' value='"+$('#selectFilaMaster').val()+"'><input type='hidden' name='selectColumna[]' id='selectColumna' value='"+$('#selectColumnaMaster').val()+"'><div class='exis'>X</div></div>");			
+				$("#items").append("<div class='form-group'><div class='col-md-4'><input type='text' class='form-control' name='selectMedida[]' id='selectMedida' value='"+$('#selectMedidaMaster').val()+"'></div><div class='col-md-4'><input type='text' class='form-control' name='inputCantidad[]' id='inputCantidad' value='"+$('#inputCantidadMaster').val()+"'></div><div class='exis'>X</div></div>");			
 				
 				$('.exis').click(function(){
-					$(this).parent().html('');
+					$(this).parent().remove();
 				});
 			}
 			else

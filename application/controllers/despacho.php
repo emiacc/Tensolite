@@ -78,7 +78,7 @@ class Despacho extends CI_Controller {
 
 	public function ingresoNuevo() {
 
-			$bandera = true;		
+		$bandera = true;		
 		$fecha = $this->input->post('inputFechaDespacho');
 		$medida = $this->input->post('selectMedida');
         $cantidad = $this->input->post('inputCantidad');
@@ -150,6 +150,59 @@ class Despacho extends CI_Controller {
        	
         if($bandera == true)
         {
+        	$this->db->trans_commit();
+        	redirect('despacho/index/1');
+        }
+        else{
+
+        	$this->db->trans_rollback();
+			redirect('despacho/index/2');	
+        }
+        
+	}
+
+	public function ingresoNuevo2() {
+
+		$bandera = true;		
+		$fecha = $this->input->post('inputFechaDespacho');
+		$medida = $this->input->post('selectMedida');
+        $cantidad = $this->input->post('inputCantidad');
+		$filas = $this->input->post('selectFila');
+   
+        $fecha = date('Y-m-d',strtotime($fecha));
+
+		$ordendecarga = $this->input->post("ordendecarga");
+		$cliente = $this->input->post("cliente");
+		$transporte = $this->input->post("transporte");
+		$entro = $this->input->post("entro");
+		$salio = $this->input->post("salio");
+		$puentista = $this->input->post("puentista");
+		$oppinza = $this->input->post("oppinza");
+		$opcamion = $this->input->post("opcamion");
+		$observaciones = $this->input->post("observaciones");
+
+		$this->db->trans_begin();
+
+        $this->model_produccion->ingreso_despacho_orden($fecha, $medida, $cantidad, $filas, $ordendecarga, $cliente, $transporte, $entro, $salio, $puentista, $oppinza, $opcamion, $observaciones, $this->data['data']['id_usuario']);
+
+
+        $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Despacho el ".$fecha);
+
+        
+        //resto en deposito
+		$this->load->model('model_deposito');
+        $medidas = $this->input->post('selectMedida');
+		$cantidades = $this->input->post('inputCantidad');
+		
+		foreach($medidas as $key=>$medida) 
+		{
+			if( ( $this->model_deposito->get_stock_x_medida($medida) - $cantidades[$key]  ) < 0 )
+				$bandera = false;
+       	}
+       	
+        if($bandera == true)
+        {
+        	$this->model_deposito->new_egreso($cantidades, $medidas, $this->data['data']['id_usuario']);
         	$this->db->trans_commit();
         	redirect('despacho/index/1');
         }

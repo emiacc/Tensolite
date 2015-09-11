@@ -31,153 +31,9 @@
 	position: absolute;
 	width: 10px;
 }
-
-
-.widget-stats .stats-info h5 {
-    font-size: 10px;
-    margin: 5px 0 0 0;
-    color: #fff;
-}
-.widget-stats .stats-info h4 {
-    text-align: center;
-    font-weight: bold;
-}
-
-
 </style>
 <!-- begin #content -->
 <div id="content" class="content">
-
-
-
-	<div class="row" id="wid">
-
-		
-		<div class="row">
-		<?php foreach ($medidas_aster as $key=>$medida): ?>			
-			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
-				<div class="widget widget-stats bg-green">
-					<div class="stats-info">
-						<h4><?=$medida?></h4>
-						<p><?=$cantidades_aster[$key]?>u</p>
-						<p><?=($cantidades_aster[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>AS</h5>
-					</div>				
-				</div>
-			</div>
-		<?php endforeach; ?>
-		</div>
-
-		<div class="row">
-		<?php foreach ($medidas_a1 as $key=>$medida): ?>	
-			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
-				<div class="widget widget-stats bg-blue">
-					<div class="stats-info">
-						<h4><?=$medida?></h4>
-						<p><?=$cantidades_a1[$key]?>u</p>
-						<p><?=($cantidades_a1[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>A1</h5>
-					</div>		
-				</div>
-			</div>				
-		<?php endforeach; ?>
-
-		<?php foreach ($medidas_a2 as $key=>$medida): ?>	
-			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
-				<div class="widget widget-stats bg-purple">
-					<div class="stats-info">
-						<h4><?=$medida?></h4>
-						<p><?=$cantidades_a2[$key]?>u</p>
-						<p><?=($cantidades_a2[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>A2</h5>
-					</div>		
-				</div>
-			</div>				
-		<?php endforeach; ?>
-		</div>
-
-		<div class="row">
-		<?php foreach ($medidas_b1 as $key=>$medida): ?>	
-			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
-				<div class="widget widget-stats bg-red">
-					<div class="stats-info">
-						<h4><?=$medida?></h4>
-						<p><?=$cantidades_b1[$key]?>u</p>
-						<p><?=($cantidades_b1[$key]*$medida)?>m</p>
-						<p>%</p>
-						<h5>B1</h5>
-					</div>		
-				</div>
-			</div>				
-		<?php endforeach; ?>
-
-		<?php foreach ($medidas_b2 as $key=>$medida): ?>	
-			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
-				<div class="widget widget-stats bg-orange">
-					<div class="stats-info">
-						<h4><?=$medida?></h4>
-						<p><?=$cantidades_b2[$key]?>u</p>
-						<p><?=($cantidades_b2[$key]*$medida)?>m</p>
-						<p>%</p>
-						<h5>B2</h5>
-					</div>		
-				</div>
-			</div>				
-		<?php endforeach; ?>
-		</div>
-		
-		<div class="row">
-		<?php foreach ($medidas_c as $key=>$medida): ?>	
-			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
-				<div class="widget widget-stats bg-grey">
-					<div class="stats-info">
-						<h4><?=$medida?></h4>
-						<p><?=$cantidades_c[$key]?>u</p>
-						<p><?=($cantidades_c[$key]*$medida)?>m</p>
-						<p>%</p>
-						<h5>C</h5>
-					</div>		
-				</div>
-			</div>				
-		<?php endforeach; ?>
-
-		<?php foreach ($medidas_d as $key=>$medida): ?>	
-			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
-				<div class="widget widget-stats bg-aqua">
-					<div class="stats-info">
-						<h4><?=$medida?></h4>
-						<p><?=$cantidades_d[$key]?>u</p>
-						<p><?=($cantidades_d[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>D</h5>
-					</div>		
-				</div>
-			</div>				
-		<?php endforeach; ?>
-		</div>				
-
-		<div class="row">
-		<?php foreach ($medidas_e as $key=>$medida): ?>	
-			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
-				<div class="widget widget-stats bg-black">
-					<div class="stats-icon"></div>
-					<div class="stats-info">
-						<h4><?=$medida?></h4>
-						<p><?=$cantidades_e[$key]?>u</p>
-						<p><?=($cantidades_e[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>E</h5>
-					</div>		
-				</div>
-			</div>				
-		<?php endforeach; ?>
-		</div>				
-	</div>
-
-	<!--
 	<div class="panel panel-inverse">
 		<div class="panel-heading">
 			<div class="panel-heading-btn">
@@ -359,15 +215,15 @@
 				</div>
 			</div>
 		</div>	
-	</div>-->				
+	</div>				
 </div>
-<?php /*
+<?php 
 	foreach ($despachos as $despacho) {
 		echo '<div class="alert alert-warning fade in m-b-15"><strong>Alerta!</strong> Se han depachado '.$despacho->cantidad.' unidades de '.number_format((($despacho->medida)/10),2).' el día '.date_format(date_create($despacho->fecha),"d/m/Y").'<span class="close" data-dismiss="alert">×</span></div>';
 	}
 	foreach ($producciones as $produccion) {
 		echo '<div class="alert alert-info fade in m-b-15"><strong>Alerta!</strong> Se han prducido '.$produccion->cantidad.' unidades de '.number_format((($produccion->medida)/10),2).' el día '.date_format(date_create($produccion->fecha),"d/m/Y").'<span class="close" data-dismiss="alert">×</span></div>';
-	}*/
+	}
 ?>	
 <!-- end #content -->
 
@@ -397,7 +253,7 @@
 		$("#ULsidebar > li").removeClass("active");
 		$("#LIdeposito").addClass("active");$("#LIenplaya").addClass("active");		
 
-		/*$('div.lugar').popover({ 
+		$('div.lugar').popover({ 
 			html : true,
 			placement: "top",
 			content: function() {
@@ -405,10 +261,10 @@
 			}
 		});	
 		$('div.lugar').tooltip({placement: "top"});	
-		*/
+
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');		
 		if(<?=$mensaje;?>== 2) alert('Número incorrecto');		
-		/*
+
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(1)').prepend('<div class="naval">A</div>')});
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(2)').prepend('<div class="naval">B</div>')});
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(3)').prepend('<div class="naval">C</div>')});
@@ -418,19 +274,19 @@
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(7)').prepend('<div class="naval">G</div>')});
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(8)').prepend('<div class="naval">H</div>')});
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(5)').prepend('<br><br><h5 class="text-center">Nave 2</h5>')});
-		*/
+		
 
 		
 	});
 
-	/*$('body').on('click', function (e) {
+	$('body').on('click', function (e) {
 		$('div.lugar').tooltip('hide');
 		$("div.lugar").each(function () {
 			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
 				$(this).popover('hide');
 			}
 		});
-	});*/
+	});
 </script>	
 </body>
 </html>

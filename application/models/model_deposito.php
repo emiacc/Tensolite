@@ -166,7 +166,7 @@ class Model_deposito extends CI_Model {
       (IFNULL((SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 1 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) 
       - IFNULL((SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 0 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0)) as cant 
       FROM lugares l
-      WHERE l.medida > 62 AND l.medida <= 72");
+      WHERE l.medida > 62 AND l.medida <= 82");
     $resultado = $query->result();
     $suma = 0;
     foreach ($resultado as $value) {
@@ -184,6 +184,45 @@ class Model_deposito extends CI_Model {
       ( IFNULL( (SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 1 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) - 
         IFNULL( (SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 0 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) ) 
       as cant FROM lugares l Where l.id_lugar = $id_lugar")->row();
+    return $query->cant;
+  }
+
+
+
+
+
+  public function new_ingreso($cantidades, $medidas, $id_usuario)
+  {
+    foreach($cantidades as $key=>$cantidad) {            
+      $data = array(
+                 'cantidad' => $cantidad,
+                 'medida' => $medidas[$key],
+                 'ingreso' => 1,
+                 'id_usuario' => $id_usuario
+              );
+      $this->db->insert('deposito_new', $data); 
+    }
+  }
+
+  public function new_egreso($cantidades, $medidas, $id_usuario)
+  {
+    foreach($cantidades as $key=>$cantidad) {            
+      $data = array(
+                 'cantidad' => $cantidad,
+                 'medida' => $medidas[$key],
+                 'ingreso' => 0,
+                 'id_usuario' => $id_usuario
+              );
+      $this->db->insert('deposito_new', $data); 
+    }
+  }
+
+  public function get_stock_x_medida($medida)
+  {
+    $query = $this->db->query("SELECT
+      ( IFNULL( (SELECT SUM(cantidad) FROM deposito_new WHERE ingreso = 1 and medida=$medida) , 0 ) -
+        IFNULL( (SELECT SUM(cantidad) FROM deposito_new WHERE ingreso = 0 and medida=$medida) , 0 ) ) as cant 
+       ")->row();
     return $query->cant;
   }
 

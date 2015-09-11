@@ -32,6 +32,7 @@
 									<input name="id_produccion[]" type="hidden" id="id_produccion" value="<?= $produccion->id_produccion ?>">
 									- Cortes: <?=$produccion->cortes?>, Medida: <?= number_format((($produccion->medida)/10),2); ?>: 
 									<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad[]" id="inputCantidad" requied data-parsley-type="digits"/>
+									<input type="hidden" name="inputMedida[]" id="inputMedida" value="<?=$produccion->medida?>" />
 								</div><br>
 								<?php endforeach; ?>
 							</div>
