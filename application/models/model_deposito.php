@@ -226,4 +226,27 @@ class Model_deposito extends CI_Model {
     return $query->cant;
   }
 
+  public function get_percent_x_medida($medida)
+  {
+    $cant = $this->get_stock_x_medida($medida);
+    $this->db->select('maximo');
+    $this->db->from('medidas');
+    $this->db->where('medida', $medida);
+    $maximo = $this->db->get()->row()->maximo;
+    if($maximo > 0)
+      return number_format( $cant * 100 / $maximo , 0);
+    return "";
+  }
+
+
+  public function update_percents($medida, $maximo)
+  {
+    $this->db->query("UPDATE medidas SET maximo = $maximo WHERE medida = $medida");
+  }
+
+  public function get_maximos()
+  {
+    return $this->db->get('medidas')->result();
+  }
+
 }

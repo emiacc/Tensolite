@@ -43,12 +43,37 @@
     font-weight: bold;
 }
 
+#modal-percents input {
+ width: 85px;
+}
 
+.stats-link h5 {
+	display: block;
+    margin: 15px -15px -15px;
+    padding: 7px 15px;
+    background: rgba(0,0,0,0);
+    text-align: right;
+    color: #FFF;
+    font-weight: 300;
+    text-decoration: none;
+}
 </style>
 <!-- begin #content -->
 <div id="content" class="content">
 
-
+	<!-- periodo y filtros -->
+	<div class="row no-print">
+		<div class="panel panel-inverse">				
+			<div class="panel-body">
+				<div class="pull-left"><h2 style="margin:0;">Depósito</h2></div>
+				<ul class="list-inline pull-right" style="margin:0;">
+					<?php if($data['rol'] < 3 ){ ?>	
+					<li><a href="#modal-percents" data-toggle="modal"><i class="fa fa-cog fa-spin fa-3x"></i></a></li>
+					<?php } ?>						
+				</ul>
+			</div>
+		</div>
+	</div>
 
 	<div class="row" id="wid">
 
@@ -58,12 +83,13 @@
 			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
 				<div class="widget widget-stats bg-green">
 					<div class="stats-info">
-						<h4><?=$medida?></h4>
+						<h4>AS - <?=$medida?></h4>
 						<p><?=$cantidades_aster[$key]?>u</p>
 						<p><?=($cantidades_aster[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>AS</h5>
-					</div>				
+					</div>
+					<div class="stats-link">	
+						<h5><?=$porcentajes_aster[$key]?>%</h5>	
+					</div>			
 				</div>
 			</div>
 		<?php endforeach; ?>
@@ -74,11 +100,12 @@
 			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
 				<div class="widget widget-stats bg-blue">
 					<div class="stats-info">
-						<h4><?=$medida?></h4>
+						<h4>A1 - <?=$medida?></h4>
 						<p><?=$cantidades_a1[$key]?>u</p>
 						<p><?=($cantidades_a1[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>A1</h5>
+					</div>
+					<div class="stats-link">	
+						<h5><?=$porcentajes_a1[$key]?>%</h5>		
 					</div>		
 				</div>
 			</div>				
@@ -88,28 +115,29 @@
 			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
 				<div class="widget widget-stats bg-purple">
 					<div class="stats-info">
-						<h4><?=$medida?></h4>
+						<h4>A2 - <?=$medida?></h4>
 						<p><?=$cantidades_a2[$key]?>u</p>
 						<p><?=($cantidades_a2[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>A2</h5>
-					</div>		
+					</div>
+					<div class="stats-link">	
+						<h5><?=$porcentajes_a2[$key]?>%</h5>	
+					</div>	
 				</div>
 			</div>				
 		<?php endforeach; ?>
-		</div>
+		
 
-		<div class="row">
 		<?php foreach ($medidas_b1 as $key=>$medida): ?>	
 			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
 				<div class="widget widget-stats bg-red">
 					<div class="stats-info">
-						<h4><?=$medida?></h4>
+						<h4>B1 - <?=$medida?></h4>
 						<p><?=$cantidades_b1[$key]?>u</p>
 						<p><?=($cantidades_b1[$key]*$medida)?>m</p>
-						<p>%</p>
-						<h5>B1</h5>
-					</div>		
+					</div>
+					<div class="stats-link">	
+						<h5><?=$porcentajes_b1[$key]?>%</h5>
+					</div>	
 				</div>
 			</div>				
 		<?php endforeach; ?>
@@ -118,12 +146,13 @@
 			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
 				<div class="widget widget-stats bg-orange">
 					<div class="stats-info">
-						<h4><?=$medida?></h4>
+						<h4>B2 - <?=$medida?></h4>
 						<p><?=$cantidades_b2[$key]?>u</p>
 						<p><?=($cantidades_b2[$key]*$medida)?>m</p>
-						<p>%</p>
-						<h5>B2</h5>
-					</div>		
+					</div>
+					<div class="stats-link">	
+						<h5><?=$porcentajes_b2[$key]?>%</h5>
+					</div>	
 				</div>
 			</div>				
 		<?php endforeach; ?>
@@ -134,11 +163,12 @@
 			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
 				<div class="widget widget-stats bg-grey">
 					<div class="stats-info">
-						<h4><?=$medida?></h4>
+						<h4>C - <?=$medida?></h4>
 						<p><?=$cantidades_c[$key]?>u</p>
 						<p><?=($cantidades_c[$key]*$medida)?>m</p>
-						<p>%</p>
-						<h5>C</h5>
+					</div>
+					<div class="stats-link">	
+						<h5><?=$porcentajes_c[$key]?>%</h5>	
 					</div>		
 				</div>
 			</div>				
@@ -148,12 +178,13 @@
 			<div class="col-lg-1 col-md-2 col-xs-3 ui-sortable">
 				<div class="widget widget-stats bg-aqua">
 					<div class="stats-info">
-						<h4><?=$medida?></h4>
+						<h4>D - <?=$medida?></h4>
 						<p><?=$cantidades_d[$key]?>u</p>
-						<p><?=($cantidades_d[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>D</h5>
+						<p><?=($cantidades_d[$key]*$medida)?>m</p>							
 					</div>		
+					<div class="stats-link">	
+						<h5><?=$porcentajes_d[$key]?>%</h5>	
+					</div>
 				</div>
 			</div>				
 		<?php endforeach; ?>
@@ -165,217 +196,218 @@
 				<div class="widget widget-stats bg-black">
 					<div class="stats-icon"></div>
 					<div class="stats-info">
-						<h4><?=$medida?></h4>
+						<h4>E - <?=$medida?></h4>
 						<p><?=$cantidades_e[$key]?>u</p>
 						<p><?=($cantidades_e[$key]*$medida)?>m</p>
-						<p>%</p>	
-						<h5>E</h5>
+					</div>		
+					<div class="stats-link">	
+						<h5><?=$porcentajes_e[$key]?>%</h5>	
 					</div>		
 				</div>
 			</div>				
 		<?php endforeach; ?>
 		</div>				
-	</div>
-
-	<!--
-	<div class="panel panel-inverse">
-		<div class="panel-heading">
-			<div class="panel-heading-btn">
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-			</div>
-			<h4 class="panel-title">Depósito</h4>
-		</div>
-		<div class="panel-body" style="background:#c1ccd1;">
-			<div class="row">
-				<div class="col-xs-6 nopadding">
-					<div class="col-sm-3 col-xs-6 ui-sortable">
-						<div class="widget widget-stats bg-green">
-							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
-							<div class="stats-info">
-								<h4>AS</h4>
-								<p><?=number_format($aster,1)?>%</p>	
-								<h4>Cap. total: 15648</h4>	
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3 col-xs-6 ui-sortable">
-						<div class="widget widget-stats bg-green">
-							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
-							<div class="stats-info">
-								<h4>A1</h4>
-								<p><?=number_format($a1,1)?>%</p>	
-								<h4>Cap. total: 9408</h4>		
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3 col-xs-6 ui-sortable">
-						<div class="widget widget-stats bg-green">
-							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
-							<div class="stats-info">
-								<h4>A2</h4>
-								<p><?=number_format($a2,1)?>%</p>	
-								<h4>Cap. total: 7056</h4>		
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3 col-xs-6 ui-sortable">
-						<div class="widget widget-stats bg-green">
-							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
-							<div class="stats-info">
-								<h4>B1</h4>
-								<p><?=number_format($b1,1)?>%</p>	
-								<h4>Cap. total: 7056</h4>		
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 nopadding">
-					<div class="col-sm-3 col-xs-6 ui-sortable">
-						<div class="widget widget-stats bg-green">
-							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
-							<div class="stats-info">
-								<h4>B2</h4>
-								<p><?=number_format($b2,1)?>%</p>	
-								<h4>Cap. total: 5880</h4>		
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3 col-xs-6 ui-sortable">
-						<div class="widget widget-stats bg-green">
-							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
-							<div class="stats-info">
-								<h4>C</h4>
-								<p><?=number_format($c,1)?>%</p>	
-								<h4>Cap. total: 8232</h4>		
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3 col-xs-6 ui-sortable">
-						<div class="widget widget-stats bg-green">
-							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
-							<div class="stats-info">
-								<h4>D</h4>
-								<p><?=number_format($d,1)?>%</p>	
-								<h4>Cap. total: 7776</h4>		
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3 col-xs-6 ui-sortable">
-						<div class="widget widget-stats bg-green">
-							<div class="stats-icon"><i class="fa fa-cubes"></i></div>
-							<div class="stats-info">
-								<h4>E</h4>
-								<p><?=number_format($e,1)?>%</p>	
-								<h4>Cap. total: 3960</h4>		
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">			    
-				<ul class="nav nav-tabs">
-					<li class="<?php if($sector==1) echo 'active'; ?>"><a href="#tab-sector-1" data-toggle="tab">Sector 1</a></li>
-					<li class="<?php if($sector==2) echo 'active'; ?>"><a href="#tab-sector-2" data-toggle="tab">Sector 2</a></li>
-					<li class="<?php if($sector==3) echo 'active'; ?>"><a href="#tab-sector-3" data-toggle="tab">Sector 3</a></li>
-				</ul>
-				<div class="tab-content">
-					<?php 
-						foreach ($lugares as $lugar) {
-
-							if($lugar->id_lugar == 1) {
-								if($sector==1) echo '<div class="tab-pane fade active in" id="tab-sector-1">';
-								else echo '<div class="tab-pane fade" id="tab-sector-1">';
-								echo '<h3 class="text-center">Sector 1</h3>';
-								echo '<h5 class="text-center">Nave 1</h5>';
-								echo '<div class="row">
-										<div class="col-xs-2 cuadrilla">1</div>
-										<div class="col-xs-2 cuadrilla">2</div>
-										<div class="col-xs-2 cuadrilla">3</div>
-										<div class="col-xs-2 cuadrilla">4</div>
-										<div class="col-xs-2 cuadrilla">5</div>
-									  </div>';
-								$col = 'col-xs-2';
-							}
-							elseif($lugar->id_lugar == 41) {
-								if($sector==2) echo '</div></div><div class="tab-pane fade active in" id="tab-sector-2">';
-								else echo '</div></div><div class="tab-pane fade" id="tab-sector-2">';
-								echo '<h3 class="text-center">Sector 2</h3>';
-								echo '<h5 class="text-center">Nave 1</h5>';
-								echo '<div class="row">
-										<div class="col-xs-1 cuadrilla">1</div>
-										<div class="col-xs-1 cuadrilla">2</div>
-										<div class="col-xs-1 cuadrilla">3</div>
-										<div class="col-xs-1 cuadrilla">4</div>
-										<div class="col-xs-1 cuadrilla">5</div>
-										<div class="col-xs-1 cuadrilla">6</div>
-										<div class="col-xs-1 cuadrilla">7</div>
-										<div class="col-xs-1 cuadrilla">8</div>
-										<div class="col-xs-1 cuadrilla">9</div>
-										<div class="col-xs-1 cuadrilla">10</div>
-										<div class="col-xs-1 cuadrilla">11</div>
-									  </div>';
-								$col = 'col-xs-1';
-							}
-							elseif ($lugar->id_lugar == 129) {
-								if($sector==3) echo '</div></div><div class="tab-pane fade active in" id="tab-sector-3">';
-								else echo '</div></div><div class="tab-pane fade" id="tab-sector-3">';
-								echo '<h3 class="text-center">Sector 3</h3>';
-								echo '<h5 class="text-center">Nave 1</h5>';
-								echo '<div class="row">
-										<div class="col-xs-1 cuadrilla">1</div>
-										<div class="col-xs-1 cuadrilla">2</div>
-										<div class="col-xs-1 cuadrilla">3</div>
-										<div class="col-xs-1 cuadrilla">4</div>
-										<div class="col-xs-1 cuadrilla">5</div>
-										<div class="col-xs-1 cuadrilla">6</div>
-										<div class="col-xs-1 cuadrilla">7</div>
-										<div class="col-xs-1 cuadrilla">8</div>
-										<div class="col-xs-1 cuadrilla">9</div>
-										<div class="col-xs-1 cuadrilla">10</div>
-										<div class="col-xs-1 cuadrilla">11</div>
-										<div class="col-xs-1 cuadrilla">12</div>
-										<div class="col-xs-1 cuadrilla">13</div>
-									  </div>';
-							}
-							if($lugar->columna == 1 && $lugar->fila == 1){
-								echo '<div class="row">';
-							}
-							elseif ($lugar->columna == 1 && $lugar->fila != 1){
-								echo '</div><div class="row">';
-							}
-							if($lugar->paquetes == 0) $lug = 'lugar-gris';
-							else{
-								if($lugar->cant>=$lugar->cantidad) $lug = 'lugar-verde';
-								else $lug = 'lugar-rojo';
-							}
-							echo '<div class="'.$col.' lugar '.$lug.'" id="'.$lugar->id_lugar.'" max="'.$lugar->cantidad.'" min="'.$lugar->cant.'" title="'.$lugar->cant.'/'.$lugar->cantidad.'">'.number_format(($lugar->medida/10),2).'</div>';
-								
-						}
-						echo '</div>';
-					?>
-					
-				</div>
-			</div>
-		</div>	
-	</div>-->				
+	</div>					
 </div>
-<?php /*
-	foreach ($despachos as $despacho) {
-		echo '<div class="alert alert-warning fade in m-b-15"><strong>Alerta!</strong> Se han depachado '.$despacho->cantidad.' unidades de '.number_format((($despacho->medida)/10),2).' el día '.date_format(date_create($despacho->fecha),"d/m/Y").'<span class="close" data-dismiss="alert">×</span></div>';
-	}
-	foreach ($producciones as $produccion) {
-		echo '<div class="alert alert-info fade in m-b-15"><strong>Alerta!</strong> Se han prducido '.$produccion->cantidad.' unidades de '.number_format((($produccion->medida)/10),2).' el día '.date_format(date_create($produccion->fecha),"d/m/Y").'<span class="close" data-dismiss="alert">×</span></div>';
-	}*/
-?>	
 <!-- end #content -->
 
 <div id="popover-content" class="hide">
 
 </div>
 
+<!-- #modal-percents -->
+	<div class="modal fade" id="modal-percents">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Configuración de stock ideal</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline" action="<?= base_url(); ?>deposito/update_percents" method="POST" data-parsley-validate="true">
+								<h4>Serie AS</h4>
+								<div class="form-group m-r-20">
+									<label>2.00</label>
+									<input type="number" min="0" value="<?php $em=0; if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m20" name="20">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>2.20</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m22" name="22">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>2.40</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m22" name="22">							
+								</div>
+								
+								<div class="form-group m-r-20">
+									<label>2.60</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m26" name="26">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>2.80</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m28" name="28">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>3.00</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m30" name="30">							
+								</div>
 
+								<br><br>
+
+								<div class="row"><h4 class="col-xs-4">Serie A1</h4><h4 class="col-xs-8">Serie A2</h4></div>
+								<div class="form-group m-r-20">
+									<label>3.20</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m32" name="32">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>3.40</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m34" name="34">							
+								</div>
+
+								<div class="form-group m-r-20">
+									<label> </label>						
+								</div>
+								
+								<div class="form-group m-r-20">
+									<label>3.50</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m35" name="35">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>3.60</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m36" name="36">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>3.80</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m38" name="38">							
+								</div>
+
+								<br><br>
+
+								<div class="row"><h4 class="col-xs-4">Serie B1</h4><h4 class="col-xs-8">Serie B2</h4></div>
+								
+								<div class="form-group m-r-20">
+									<label>4.00</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m40" name="40">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>4.20</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m42" name="42">							
+								</div>
+								
+								<div class="form-group m-r-20">
+									<label> </label>						
+								</div>
+
+								<div class="form-group m-r-20">
+									<label>4.40</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m44" name="44">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>4.50</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m45" name="45">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>4.60</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m46" name="46">							
+								</div>
+
+								<br><br>
+
+								<h4>Serie C</h4>
+								<div class="form-group m-r-20">
+									<label>4.80</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m48" name="48">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>5.00</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m50" name="50">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>5.20</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m52" name="52">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>5.40</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m54" name="54">							
+								</div>
+
+								<br><br>
+
+								<h4>Serie D</h4>
+								<div class="form-group m-r-20">
+									<label>5.60</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m56" name="56">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>5.80</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m58" name="58">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>6.00</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m60" name="60">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>6.20</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m62" name="62">							
+								</div>
+
+								<br><br>
+
+								<h4>Serie E</h4>
+								<div class="form-group m-r-20">
+									<label>6.40</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m64" name="64">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>6.60</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m66" name="66">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>6.80</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m68" name="68">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>7.00</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m70" name="70">							
+								</div>
+
+								<div class="form-group m-r-20">
+									<label>7.20</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m72" name="72">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>7.40</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m74" name="74">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>7.60</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m76" name="76">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>7.80</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m78" name="78">							
+								</div>
+
+								<div class="form-group m-r-20">
+									<label>8.00</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m80" name="80">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>8.20</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m82" name="82">							
+								</div>
+
+								<br><br><br>
+								<div class="form-group m-l-20 m-r-20">
+									<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>			
+								</div>		
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- end modal-percents -->
 <?php $this->load->view('view_scripts') ?>
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
@@ -401,7 +433,7 @@
 			html : true,
 			placement: "top",
 			content: function() {
-				return '<form  action="<?= base_url(); ?>deposito/ingreso" method="POST">Ingreso: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" value='+$(this).attr("id") +' name="lugar"><input style="width:50px;" type="number" name="cant" min="1" max='+($(this).attr("max")-$(this).attr("min"))+'> <button type="submit" class="btn btn-primary btn-xs">Ok</button></form><hr><form  action="<?= base_url(); ?>deposito/egreso" method="POST">Despacho: <input type="hidden" value='+$(this).attr("id") +' name="lugar"><input style="width:50px;" type="number" name="cant" min="1" max='+$(this).attr("min")+'> <button type="submit" class="btn btn-primary btn-xs">Ok</button></form>';
+				return '<form  action="<?= base_url(); ?>deposito/ingreso" method="POST">Ingreso: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" value='+$(this).attr("id") +' name="lugar"><input style="width:50px;" type="number" name="cant" min="0" max='+($(this).attr("max")-$(this).attr("min"))+'> <button type="submit" class="btn btn-primary btn-xs">Ok</button></form><hr><form  action="<?= base_url(); ?>deposito/egreso" method="POST">Despacho: <input type="hidden" value='+$(this).attr("id") +' name="lugar"><input style="width:50px;" type="number" name="cant" min="0" max='+$(this).attr("min")+'> <button type="submit" class="btn btn-primary btn-xs">Ok</button></form>';
 			}
 		});	
 		$('div.lugar').tooltip({placement: "top"});	
@@ -420,6 +452,27 @@
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(5)').prepend('<br><br><h5 class="text-center">Nave 2</h5>')});
 		*/
 
+		$(".stats-link").each(function(){
+			var percent = ( $(this).children().html() ).substring(0, ( $(this).children().html() ).length-1);
+			console.log(percent);
+			switch( true )
+			{
+				case (percent == ""):
+					break;
+				case (percent > 70):
+					$(this).children().css("background-color", "rgb(19,103,103");
+					break;
+				case (percent > 50):
+					$(this).children().css("background-color", "rgb(119,118,0)");
+					break;
+				case (percent > 20):
+					$(this).children().css("background-color", "rgb(171,97,2)");
+					break;
+				case (percent >= 0):
+					$(this).children().css("background-color", "rgb(188,10,0)");
+					break;
+			}
+		});
 		
 	});
 

@@ -33,7 +33,7 @@ class Deposito extends CI_Controller {
 
 
 
-
+		$this->data['maximos'] = $this->model_deposito->get_maximos();
 
 		$this->data['medidas_aster'] = array("2.00", "2.20", "2.40", "2.60", "2.80", "3.00"); 
 		$this->data['medidas_a1'] = array("3.20", "3.40"); 
@@ -53,6 +53,14 @@ class Deposito extends CI_Controller {
 		$this->data['cantidades_d'] = array($this->get_stock_x_medida(56), $this->get_stock_x_medida(58), $this->get_stock_x_medida(60), $this->get_stock_x_medida(62)); 
 		$this->data['cantidades_e'] = array($this->get_stock_x_medida(64), $this->get_stock_x_medida(66), $this->get_stock_x_medida(68), $this->get_stock_x_medida(70), $this->get_stock_x_medida(72), $this->get_stock_x_medida(74), $this->get_stock_x_medida(76), $this->get_stock_x_medida(78), $this->get_stock_x_medida(80), $this->get_stock_x_medida(82));
 
+		$this->data['porcentajes_aster'] = array($this->get_percent_x_medida(20), $this->get_percent_x_medida(22), $this->get_percent_x_medida(24), $this->get_percent_x_medida(26), $this->get_percent_x_medida(28), $this->get_percent_x_medida(30)); 
+		$this->data['porcentajes_a1'] = array($this->get_percent_x_medida(32), $this->get_percent_x_medida(34)); 
+		$this->data['porcentajes_a2'] = array($this->get_percent_x_medida(35), $this->get_percent_x_medida(36), $this->get_percent_x_medida(38)); 
+		$this->data['porcentajes_b1'] = array($this->get_percent_x_medida(40), $this->get_percent_x_medida(42)); 
+		$this->data['porcentajes_b2'] = array($this->get_percent_x_medida(44), $this->get_percent_x_medida(45), $this->get_percent_x_medida(46)); 
+		$this->data['porcentajes_c'] = array($this->get_percent_x_medida(48), $this->get_percent_x_medida(50), $this->get_percent_x_medida(52), $this->get_percent_x_medida(54)); 
+		$this->data['porcentajes_d'] = array($this->get_percent_x_medida(56), $this->get_percent_x_medida(58), $this->get_percent_x_medida(60), $this->get_percent_x_medida(62)); 
+		$this->data['porcentajes_e'] = array($this->get_percent_x_medida(64), $this->get_percent_x_medida(66), $this->get_percent_x_medida(68), $this->get_percent_x_medida(70), $this->get_percent_x_medida(72), $this->get_percent_x_medida(74), $this->get_percent_x_medida(76), $this->get_percent_x_medida(78), $this->get_percent_x_medida(80), $this->get_percent_x_medida(82));
 
 
 
@@ -94,6 +102,21 @@ class Deposito extends CI_Controller {
 	public function get_stock_x_medida($medida)
 	{
 		return $this->model_deposito->get_stock_x_medida($medida);
+	}
+
+	public function get_percent_x_medida($medida)
+	{
+		return $this->model_deposito->get_percent_x_medida($medida);		
+	}
+
+	public function update_percents()
+	{
+		foreach ($this->input->post() as $key => $value) 
+		{
+			if($value != "")
+				$this->model_deposito->update_percents($key, $value);
+		}
+		redirect('deposito');
 	}
 }
 ?>
