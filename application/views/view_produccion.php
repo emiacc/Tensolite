@@ -451,6 +451,9 @@
 								<option value="82">8.2</option>											
 							</select>
 						</div>
+						<div class="form-group m-r-10" style="margin-top: 5px;">			
+							<input type="text" placeholder="Unidades" class="form-control" name="inputUnidades[]" id="inputUnidades" data-parsley-required="true" data-parsley-type="digits"/>			
+						</div>
 						<br>
 					</div>
 				</div>				

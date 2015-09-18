@@ -109,7 +109,7 @@ class Model_produccion extends CI_Model {
 	}
 
 	//orden produccion
-	public function ingreso_orden($fecha, $banco, $medida, $cortes, $confeccionado, $supervisor, $medidor, $cosechador, $jefe, $usuario) {
+	public function ingreso_orden($fecha, $banco, $medida, $cortes, $confeccionado, $supervisor, $medidor, $cosechador, $jefe, $usuario, $unidades) {
    		$data = array(
 	               'fecha' => $fecha,
 	               'confeccionado' => $confeccionado, 
@@ -128,6 +128,7 @@ class Model_produccion extends CI_Model {
 		               'nro_banco' => $banco,
 		               'medida' => $medida[$key],
 		               'cortes' => $val,
+		               'unidades' => $unidades[$key],
 		               'id_usuario' => $usuario,
 		               'id_orden' => $idOrden
 		            );
@@ -143,7 +144,7 @@ class Model_produccion extends CI_Model {
 		return $this->db->get_where('producciones', array('solicitud' => 0))->result();
 	}
 	public function getProduccion($id_orden) {
-		return $this->db->get_where('producciones', array('solicitud' => 0, 'id_orden' => $id_orden))->result();
+		return $this->db->order_by('medida', 'ASC')->get_where('producciones', array('solicitud' => 0, 'id_orden' => $id_orden))->result();
 	}
 
 	public function update_produccion($id, $produ, $cantidad, $usuario, $turno){
@@ -157,7 +158,7 @@ class Model_produccion extends CI_Model {
 			$data = array(
 	               'cantidad' => $cantidad[$key],
 	               'id_usuario' => $usuario,
-	               'turno' => $turno,
+	               'turno' => $turno[$key],
 	               'solicitud' => 1
 	            );
 			$this->db->where('id_produccion', $val);
