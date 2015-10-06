@@ -35,7 +35,7 @@ class Deposito extends CI_Controller {
 
 		$this->data['maximos'] = $this->model_deposito->get_maximos();
 
-		$this->data['medidas_aster'] = array("2.00", "2.20", "2.40", "2.60", "2.80", "3.00"); 
+		$this->data['medidas_aster'] = array("1.00","1.20","1.40","1.60","1.80","2.00", "2.20", "2.40", "2.60", "2.80", "3.00"); 
 		$this->data['medidas_a1'] = array("3.20", "3.40"); 
 		$this->data['medidas_a2'] = array("3.50", "3.60", "3.80"); 
 		$this->data['medidas_b1'] = array("4.00", "4.20"); 
@@ -44,7 +44,7 @@ class Deposito extends CI_Controller {
 		$this->data['medidas_d'] = array("5.60", "5.80", "6.00", "6.20"); 
 		$this->data['medidas_e'] = array("6.40", "6.60", "6.80", "7.00", "7.20", "7.40", "7.60", "7.80", "8.00", "8.20");
 
-		$this->data['cantidades_aster'] = array($this->get_stock_x_medida(20), $this->get_stock_x_medida(22), $this->get_stock_x_medida(24), $this->get_stock_x_medida(26), $this->get_stock_x_medida(28), $this->get_stock_x_medida(30)); 
+		$this->data['cantidades_aster'] = array($this->get_stock_x_medida(10), $this->get_stock_x_medida(12), $this->get_stock_x_medida(14), $this->get_stock_x_medida(16), $this->get_stock_x_medida(18), $this->get_stock_x_medida(20), $this->get_stock_x_medida(22), $this->get_stock_x_medida(24), $this->get_stock_x_medida(26), $this->get_stock_x_medida(28), $this->get_stock_x_medida(30)); 
 		$this->data['cantidades_a1'] = array($this->get_stock_x_medida(32), $this->get_stock_x_medida(34)); 
 		$this->data['cantidades_a2'] = array($this->get_stock_x_medida(35), $this->get_stock_x_medida(36), $this->get_stock_x_medida(38)); 
 		$this->data['cantidades_b1'] = array($this->get_stock_x_medida(40), $this->get_stock_x_medida(42)); 
@@ -53,7 +53,7 @@ class Deposito extends CI_Controller {
 		$this->data['cantidades_d'] = array($this->get_stock_x_medida(56), $this->get_stock_x_medida(58), $this->get_stock_x_medida(60), $this->get_stock_x_medida(62)); 
 		$this->data['cantidades_e'] = array($this->get_stock_x_medida(64), $this->get_stock_x_medida(66), $this->get_stock_x_medida(68), $this->get_stock_x_medida(70), $this->get_stock_x_medida(72), $this->get_stock_x_medida(74), $this->get_stock_x_medida(76), $this->get_stock_x_medida(78), $this->get_stock_x_medida(80), $this->get_stock_x_medida(82));
 
-		$this->data['porcentajes_aster'] = array($this->get_percent_x_medida(20), $this->get_percent_x_medida(22), $this->get_percent_x_medida(24), $this->get_percent_x_medida(26), $this->get_percent_x_medida(28), $this->get_percent_x_medida(30)); 
+		$this->data['porcentajes_aster'] = array($this->get_percent_x_medida(10),$this->get_percent_x_medida(12),$this->get_percent_x_medida(14),$this->get_percent_x_medida(16),$this->get_percent_x_medida(18),$this->get_percent_x_medida(20), $this->get_percent_x_medida(22), $this->get_percent_x_medida(24), $this->get_percent_x_medida(26), $this->get_percent_x_medida(28), $this->get_percent_x_medida(30)); 
 		$this->data['porcentajes_a1'] = array($this->get_percent_x_medida(32), $this->get_percent_x_medida(34)); 
 		$this->data['porcentajes_a2'] = array($this->get_percent_x_medida(35), $this->get_percent_x_medida(36), $this->get_percent_x_medida(38)); 
 		$this->data['porcentajes_b1'] = array($this->get_percent_x_medida(40), $this->get_percent_x_medida(42)); 

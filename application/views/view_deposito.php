@@ -236,7 +236,7 @@
 								</div>
 								<div class="form-group m-r-20">
 									<label>2.40</label>
-									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m22" name="22">							
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m24" name="24">							
 								</div>
 								
 								<div class="form-group m-r-20">
@@ -396,6 +396,31 @@
 									<label>8.20</label>
 									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m82" name="82">							
 								</div>
+
+								<br><br>
+								<h4>Serie AS</h4>
+								<div class="form-group m-r-20">
+									<label>1.00</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m10" name="10">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>1.20</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m12" name="12">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>1.40</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m14" name="14">							
+								</div>
+								
+								<div class="form-group m-r-20">
+									<label>1.60</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m16" name="16">							
+								</div>
+								<div class="form-group m-r-20">
+									<label>1.80</label>
+									<input type="number" min="0" value="<?php if($maximos[$em]->maximo != 0) echo $maximos[$em]->maximo; $em++;?>" class="form-control" id="m18" name="18">							
+								</div>
+								
 
 								<br><br><br>
 								<div class="form-group m-l-20 m-r-20">
