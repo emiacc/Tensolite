@@ -65,6 +65,36 @@ class MateriaPrima extends CI_Controller {
         redirect('materiaPrima/index/'.$materia.'/1');
 	}
 
+	public function eliminar($materia)
+	{
+		$id_materia = $this->input->post("materia");
+		$ingreso = $this->input->post("ingreso");
+		if($id_materia == $this->ids($materia))
+		{
+			$this->model_materia->eliminar($id_materia, $ingreso);
+        }
+        redirect('materiaPrima/index/'.$materia.'/1');
+	}
+
+	public function editar($materia = 'nada')
+	{
+		if($materia == 'nada') redirect('resumen');
+
+		$id_materia = $this->input->post('id_materia');
+		$id_ingreso = $this->input->post('id_ingreso');
+
+		$proveedor = $this->input->post('selectProveedorIngreso_edit');
+		$fecha = $this->input->post('inputFechaIngreso2');
+        $remito = $this->input->post('inputNroFactura_edit');
+        $cantidad = $this->input->post('inputCantidadIngreso_edit');
+        $precio = $this->input->post('inputPrecio_edit');
+
+        $fecha = date('Y-m-d',strtotime($fecha));
+
+        $this->model_materia->editar($id_materia, $id_ingreso, $fecha, $cantidad, $remito, $proveedor, $precio);
+        redirect('materiaPrima/index/'.$materia.'/1');
+	}
+
 	public function ids($materia) {
 		switch ($materia) {
 			case 'cemento':	return 1;

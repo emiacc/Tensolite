@@ -192,19 +192,31 @@
 									<th>Proveedor</th>
 									<th>Remito</th>
 									<th>Cantidad</th>									
-									<th>Consumo</th>									
+									<th>Consumo</th>		
+									<?php if($data['rol']==1): ?>							
+										<th>Accion</th>
+									<?php endif; ?>							
 								</tr>
 							</thead>
 							<tbody>
 								<?php									
 									foreach ($tabla as $row)
 									{
-										echo "<tr>";
+										echo "<tr data-materia='"; if(isset($row->id_materia)) echo $row->id_materia; echo "' data-ingreso='"; if(isset($row->id_ingreso)) echo $row->id_ingreso; echo "'>";
 										echo "<td>".$row->dia."</td>";
-										echo "<td>"; if(isset($row->nombre)) echo $row->nombre; echo "</td>";
-										echo "<td>"; if(isset($row->nro_remito)) echo $row->nro_remito; echo "</td>";
-										echo "<td>"; if(isset($row->cantidad)) echo $row->cantidad; echo "</td>";
+										echo "<td class='proveedor' data-proveedor='"; if(isset($row->id_proveedor)) echo $row->id_proveedor; echo "'>"; if(isset($row->nombre)) echo $row->nombre; echo "</td>";
+										echo "<td class='remito'>"; if(isset($row->nro_remito)) echo $row->nro_remito; echo "</td>";
+										echo "<td class='cantidad'>"; if(isset($row->cantidad)) echo $row->cantidad; echo "</td>";
 										echo "<td>"; if(isset($row->consumo)) echo $row->consumo; echo "</td>";
+										if($data['rol']==1 && (isset($row->id_materia)) )
+										{
+											echo "<td data-precio='"; echo $row->precio; echo "'>";
+											echo "<a class='btn btn-warning btn-icon btn-circle btn-sm btn-edit'><i class='fa fa-pencil'></i></a>
+												<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a>
+											</td>";
+										}
+										else
+											echo "<td></td>";
 										echo "</tr>";
 									} 
 								?>																		
@@ -219,6 +231,93 @@
 </div>
 <!-- end #content -->
 		
+<!-- modal delete -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_delete">
+   <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Eliminar ingreso</h4>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro que desea eliminar el ingreso?
+      </div>
+      <div class="modal-footer">
+        <form method="POST" action="<?=base_url()?>materiaPrima/eliminar/<?=$materia?>">
+        	<input type="hidden" name="materia" id="materia">
+        	<input type="hidden" name="ingreso" id="ingreso">
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        	<button type="submit" class="btn btn-primary">Aceptar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal delete -->
+
+<!-- modal edit -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_edit">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Editar ingreso</h4>
+			</div>
+			<div class="modal-body">
+				<form action="<?= base_url(); ?>materiaPrima/editar/<?=$materia;?>" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+					<input type="hidden" name="id_materia" id="id_materia">
+					<input type="hidden" name="id_ingreso" id="id_ingreso">
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="selectProveedorIngreso_edit">Proveedor:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<select class="form-control" id="selectProveedorIngreso_edit" name="selectProveedorIngreso_edit" data-parsley-required="true">											
+								<option value="">Seleccione</option>
+								<?php foreach ($proveedores as $proveedor) {
+									echo '<option value="'.$proveedor->id_proveedor.'">'.$proveedor->nombre.'</option>';
+								} ?>									
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputFechaIngreso2">Fecha:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<div class="input-group date" id="datepicker-autoClose3" data-date-format="dd-mm-yyyy" >
+								<input id="inputFechaIngreso2" name="inputFechaIngreso2" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputNroFactura_edit">Nro Remito:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<input class="form-control" type="text" id="inputNroFactura_edit" name="inputNroFactura_edit" placeholder="Número Factura" data-parsley-required="true"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputCantidadIngreso_edit">Cantidad:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
+							<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso_edit" name="inputCantidadIngreso_edit" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							<span class="input-group-addon">Kg</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputPrecio_edit">Precio:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<input class="form-control inputNumerico" type="text" id="inputPrecio_edit" name="inputPrecio_edit" data-parsley-type="number" placeholder="Precio" data-parsley-required="true"/>
+						</div>
+					</div>						
+					<div class="form-group">
+						<label class="control-label col-xs-4"></label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<button type="submit" class="btn btn-primary">Registrar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end modal edit -->
 	
 <?php $this->load->view('view_scripts') ?>
 
@@ -243,6 +342,7 @@
 		if(mes < 10) mes = "0"+mes;
 		currentDay = d.getDate()+"-"+mes+"-"+ d.getFullYear();
 		$("#inputFechaIngreso").attr("value",currentDay);
+		$("#inputFechaIngreso2").attr("value",currentDay);
 		$("#inputFechaEgreso").attr("value",currentDay);
 		$('#inputAnio').attr("value",d.getFullYear());
 		$('#selectMes').attr("value",d.getMonth()+1);
@@ -256,7 +356,40 @@
   			}			
 		});
 
-		if(<?=$mensaje;?>== 1) alert('Registrado con exito');		
+		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
+
+		<?php if($data['rol']==1): ?>
+			$(".btn-delete").click(function(){
+				$("#materia").val($(this).parent().parent().data("materia"));
+				$("#ingreso").val($(this).parent().parent().data("ingreso"));
+				$('#modal_delete').modal('show');
+			});
+
+			$('#modal_delete').on('hidden.bs.modal', function (){ $("#materia").val(""); $("#ingreso").val(""); });
+
+			$(".btn-edit").click(function(){
+				var padre = $(this).parent().parent();
+				$("#id_materia").val(padre.data("materia"));
+				$("#id_ingreso").val(padre.data("ingreso"));
+				
+				$("#inputNroFactura_edit").val(padre.children(".remito").text());
+				$("#inputCantidadIngreso_edit").val(padre.children(".cantidad").text());
+				$("#inputPrecio_edit").val($(this).parent().data("precio"));
+				
+				var id_prov = padre.children(".proveedor").data("proveedor");
+				$("#selectProveedorIngreso_edit").val(id_prov);
+
+				$('#modal_edit').modal('show');
+			});
+
+			$('#modal_edit').on('hidden.bs.modal', function (){ 
+				$("#id_materia").val(""); 
+				$("#id_ingreso").val(""); 
+				$("#inputNroFactura_edit").val("");
+				$("#inputCantidadIngreso_edit").val("");
+				$("#inputPrecio_edit").val("");
+			});
+		<?php endif; ?>		
 	});	
 </script>	
 </body>

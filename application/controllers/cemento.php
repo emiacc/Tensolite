@@ -60,6 +60,34 @@ class Cemento extends CI_Controller {
         $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Ingreso ".$fabrica." de cemento");
         redirect('cemento/index/1');
 	}
+
+	public function eliminar()
+	{
+		$id_silo = $this->input->post("silo");
+		$ingreso = $this->input->post("ingreso");
+		$this->model_materia->eliminar_cemento($id_silo, $ingreso);
+        
+        redirect('cemento/index/1');
+	}
+
+	public function editar()
+	{
+		
+
+		$id_silo = $this->input->post('id_silo');
+		$id_ingreso = $this->input->post('id_ingreso');
+
+		$fecha = $this->input->post('inputFechaIngreso2');
+        $remito = $this->input->post('inputNroFactura_edit');
+        $kgo = $this->input->post('inputKgOrigen_edit');
+        $kgd = $this->input->post('inputKgFabrica_edit');
+        $precio = $this->input->post('inputPrecio_edit');
+
+        $fecha = date('Y-m-d',strtotime($fecha));
+
+        $this->model_materia->editar_cemento($id_silo, $id_ingreso, $fecha, $kgo, $kgd, $remito, $precio);
+        redirect('cemento/index/1');
+	}
 	
 	public function meses($mes) {
 		switch ($mes) {
