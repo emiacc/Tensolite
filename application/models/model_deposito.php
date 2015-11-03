@@ -249,4 +249,17 @@ class Model_deposito extends CI_Model {
     return $this->db->get('medidas')->result();
   }
 
+  public function new_ingreso_delete_despacho($cantidad, $medida, $id_usuario)
+  {
+    $data = array(
+      'cantidad' => $cantidad,
+      'medida' => $medida,
+      'ingreso' => 1,
+      'id_usuario' => $id_usuario
+    );
+    $this->db->insert('deposito_new', $data); 
+    
+  }
+
+
 }

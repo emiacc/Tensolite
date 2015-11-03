@@ -10,6 +10,7 @@
 		padding-left: 8px;
 		padding-right: 0px;
 	}
+	.btn-edit{ display: none !important; }
 </style><?php 
 	$max = 0;
 	$min = 9999999;
@@ -495,6 +496,9 @@
 								<th>Fecha Registro</th>								
 								<th>Usuario</th>								
 								<th>Imprimir</th>								
+								<?php if($data['rol']==1): ?>							
+									<th>Eliminar</th>
+								<?php endif; ?>													
 							</tr>
 						</thead>
 						<tbody>
@@ -507,7 +511,14 @@
 								echo "<td>".$solicitud->id_orden."</td>";
 								echo "<td>".date_format($fechaR,'d-m-Y')."</td>";								
 								echo "<td>".$solicitud->nombre.", ".$solicitud->apellido."</td>";
-								echo "<td style='cursor:pointer'><i class='fa fa-print'></i></td>";
+								echo "<td class='print' style='cursor:pointer'><i class='fa fa-print'></i></td>";
+								if($data['rol']==1)
+								{
+									echo "<td class='accion'>
+										<a class='btn btn-warning btn-icon btn-circle btn-sm btn-edit'><i class='fa fa-pencil'></i></a>
+										<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a> 
+									</td>";
+								}
 								echo "</tr>";
 							}
 						?>							
@@ -521,6 +532,29 @@
 
 </div>
 <!-- end #content -->
+
+<!-- modal delete -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_delete">
+   <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Eliminar Despacho</h4>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro que desea eliminar el despacho?
+      </div>
+      <div class="modal-footer">
+        <form method="POST" action="<?=base_url()?>despacho/eliminar">
+        	<input type="hidden" name="id_orden" id="id_orden">
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        	<button type="submit" class="btn btn-primary">Aceptar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal delete -->
 		
 	
 <?php $this->load->view('view_scripts') ?>
@@ -589,20 +623,57 @@
 
 		});
 
+		imprimir();
+		acciones();
 
-		$('#data-table tbody').on('click', 'tr', function () {
-	        location.href = '<?= base_url(); ?>despacho/imprimir/'+$(this).attr('id');	        
-	    });
-		/*
-	    $(window).on('beforeunload', function(event){
-	    	if($('#modal-ingreso').data('bs.modal').isShown == true)
-	    	{	
-	    		$("#modal-ingreso").modal('hide');
-				return "Desea abandonar la pagina";
-			}
+		$("ul.pagination").click(function(){
+			imprimir();
+			acciones();
 		});
-*/
 	});
+	
+	function imprimir()
+	{
+		$('td.print').click(function () {
+			location.href = '<?= base_url(); ?>despacho/imprimir/'+$(this).parent().attr('id');	
+		});
+	}
+
+	function acciones()
+	{
+		<?php if($data['rol']==1): ?>
+			$(".btn-delete").click(function(){
+				$("#id_orden").val($(this).parent().parent().attr("id"));
+				$('#modal_delete').modal('show');
+			});
+
+			$('#modal_delete').on('hidden.bs.modal', function (){ $("#id_orden").val(""); });
+
+			$(".btn-edit").click(function(){
+				var padre = $(this).parent().parent();
+				$("#id_materia").val(padre.data("materia"));
+				$("#id_ingreso").val(padre.data("ingreso"));
+				
+				$("#inputNroFactura_edit").val(padre.children(".remito").text());
+				$("#inputCantidadIngreso_edit").val(padre.children(".cantidad").text());
+				$("#inputPrecio_edit").val($(this).parent().data("precio"));
+				
+				var id_prov = padre.children(".proveedor").data("proveedor");
+				$("#selectProveedorIngreso_edit").val(id_prov);
+
+				$('#modal_edit').modal('show');
+			});
+
+			$('#modal_edit').on('hidden.bs.modal', function (){ 
+				$("#id_materia").val(""); 
+				$("#id_ingreso").val(""); 
+				$("#inputNroFactura_edit").val("");
+				$("#inputCantidadIngreso_edit").val("");
+				$("#inputPrecio_edit").val("");
+			});
+		<?php endif; ?>	
+	}
+
 
 	function isNaturalNumber(n) {
 	    n = n.toString(); // force the value incase it is not

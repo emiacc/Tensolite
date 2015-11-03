@@ -214,6 +214,22 @@ class Despacho extends CI_Controller {
         
 	}
 
+	public function eliminar()
+	{
+		$id_orden = $this->input->post("id_orden");
+		$this->load->model('model_deposito');
+		$sumar = $this->model_produccion->get_cantidad_medida($id_orden);
+		
+		$this->db->trans_begin();
+		foreach ($sumar as $item) 
+		{
+			$this->model_deposito->new_ingreso_delete_despacho($item->cantidad, $item->medida, $this->data['data']['id_usuario']);
+		}
+        $this->model_produccion->delete_orden_despacho($id_orden);
+        $this->db->trans_commit();
+        redirect('despacho/index/1');
+	}
+
 
 	public function meses($mes) {
 		switch ($mes) {

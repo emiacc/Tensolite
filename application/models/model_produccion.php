@@ -202,6 +202,17 @@ class Model_produccion extends CI_Model {
         return $idOrden;
 	}
 
+	public function delete_orden_despacho($id_orden)
+	{
+		$this->db->delete('ordenes_despacho', array('id_orden' => $id_orden));
+		$this->db->delete('despachos', array('id_orden' => $id_orden));
+	}
+
+	public function get_cantidad_medida($id_orden)
+	{
+		return $this->db->get_where('despachos', array('id_orden' => $id_orden))->result();
+	}
+
 	//grafico perdidas
 	public function resumenPerdida($mes, $anio, $tipoPerdida){
    	$query = $this->db->query("SELECT SUM(cantidad*medida/10) as cant, DATE_FORMAT(fecha, '%j') as diaY, DATE_FORMAT (fecha, '%d') as dia, DATE_FORMAT (fecha, '%m') as mes, DATE_FORMAT (fecha, '%Y') as anio 
