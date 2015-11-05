@@ -271,7 +271,38 @@ class Model_produccion extends CI_Model {
 
 
 
+	public function delete_orden_produccion($id_orden)
+	{
+		$this->db->delete('ordenes_produccion', array('id_orden' => $id_orden));
+		$this->db->delete('producciones', array('id_orden' => $id_orden));
+	}
 
+	public function update_orden($id_orden, $fecha, $banco, $confeccionado, $supervisor, $medidor, $cosechador, $jefe)
+	{
+		$data = array(
+	               'nro_banco' => $banco,
+	               'fecha' => $fecha,
+	               'confeccionado' => $confeccionado,
+	               'supervisor' => $supervisor,
+	               'medidor' => $medidor,
+	               'cosechador' => $cosechador,
+	               'jefe' => $jefe
+	            );
+			$this->db->where('id_orden', $id_orden);
+			$this->db->update('ordenes_produccion', $data);
+	}
+
+	public function update_produ($id_produccion, $cortes, $medida, $unidades)
+	{
+		$data = array(
+	               'cortes' => $cortes,
+	               'medida' => $medida,
+	               'unidades' => $unidades
+	            );
+			$this->db->where('id_produccion', $id_produccion);
+			$this->db->update('producciones', $data);
+
+	}
 
 
 

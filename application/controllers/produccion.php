@@ -276,5 +276,54 @@ class Produccion extends CI_Controller {
 
         $this->load->view('impresion/produccion_print_view', $this->data);
     }
+
+    public function eliminar()
+    {
+        $id_orden = $this->input->post("id_orden");
+        
+        $this->model_produccion->delete_orden_produccion($id_orden);
+        redirect('produccion');
+    }
+
+    public function editar($id_orden = 0)
+    {
+        $this->data['solicitud'] = $this->model_produccion->getSolicitudesId($id_orden);
+        $this->data['detalles'] = $this->model_produccion->getDetallesId($id_orden);
+
+        $this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+        $this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
+        
+
+
+        $this->load->view('view_header', $this->data);
+        $this->load->view('view_produccion_editar', $this->data);
+    }
+
+    public function editarOrden()
+    {
+        $id_orden = $this->input->post("id_orden");
+        $fecha = $this->input->post("inputFechaOrden");
+        $fecha = date('Y-m-d',strtotime($fecha));
+        $banco = $this->input->post("selectBanco");
+        $confeccionado = $this->input->post("confeccionado");
+        $supervisor = $this->input->post("supervisor");
+        $medidor = $this->input->post("medidor");
+        $cosechador = $this->input->post("cosechador");
+        $jefe = $this->input->post("jefe");
+        
+        $this->model_produccion->update_orden($id_orden, $fecha, $banco, $confeccionado, $supervisor, $medidor, $cosechador, $jefe);
+
+        $id_producciones = $this->input->post("id_produccion");
+        $cortes = $this->input->post("inputCortes");
+        $medidas = $this->input->post("selectMedida");
+        $unidades = $this->input->post("inputUnidades");
+
+        foreach ($id_producciones as $key => $id_produccion) {
+            $this->model_produccion->update_produ($id_produccion, $cortes[$key], $medidas[$key], $unidades[$key]);
+        }
+        redirect('produccion');
+
+    }
+    
 }
 ?>

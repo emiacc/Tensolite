@@ -244,7 +244,10 @@
 								<th>Nº Orden</th>
 								<th>Fecha Registro</th>
 								<th>Banco</th>
-								<th>Imprimir</th>								
+								<th>Imprimir</th>	
+								<?php if($data['rol']==1): ?>							
+								<th>Acciones</th>	
+								<?php endif; ?>								
 							</tr>
 						</thead>
 						<tbody>
@@ -258,6 +261,10 @@
 								echo "<td>".date_format($fechaR,'d-m-Y')."</td>";								
 								echo "<td>".$orden->nro_banco."</td>";
 								echo "<td class='imp'>"."<i class='fa fa-print fa-2x'></i>"."</td>";
+								if($data['rol']==1){
+									echo "<td class='actions'>"."<a class='btn btn-warning btn-icon btn-circle btn-sm btn-edit'><i class='fa fa-pencil'></i></a>
+										<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a>" ."</td>";
+								}
 								echo "</tr>";
 							}
 						?>							
@@ -466,7 +473,30 @@
 			</div>
 		</div>
 	</div>
-<!-- end modal-orden -->		
+<!-- end modal-orden -->	
+
+<!-- modal delete -->
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_delete">
+	   <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Eliminar orden</h4>
+	      </div>
+	      <div class="modal-body">
+	        ¿Está seguro que desea eliminar la orden?
+	      </div>
+	      <div class="modal-footer">
+	        <form method="POST" action="<?=base_url()?>produccion/eliminar">
+	        	<input type="hidden" name="id_orden" id="id_orden">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        	<button type="submit" class="btn btn-primary">Aceptar</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<!-- end modal delete -->	
 	
 <?php $this->load->view('view_scripts') ?>
 
@@ -503,9 +533,11 @@
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
 		if(<?=$mensaje;?>!= 1 && <?=$mensaje;?>!= 0) alert('Registrado con exito. Nro de orden: '+<?=$mensaje;?>);
 
-		$("td").click(function(){
+		$("#data-table > tbody > tr > td").click(function(){
 			if($(this).hasClass("imp"))
 				location.href = '<?= base_url(); ?>produccion/imprimir/'+$(this).parent().attr('id');	   
+			else if($(this).hasClass("actions"))
+				return false;
 			else
 				location.href = '<?= base_url(); ?>produccion/indexOrden/'+$(this).parent().attr('id');
 		});
@@ -530,6 +562,23 @@
 		$("#mas").click(function(){			
 			$("#items").append($("#item").html());
 		});
+
+
+		<?php if($data['rol']==1): ?>
+			$(".btn-delete").click(function(){
+				$("#id_orden").val($(this).parent().parent().attr("id"));
+				$('#modal_delete').modal('show');
+			});
+
+			$('#modal_delete').on('hidden.bs.modal', function (){ $("#id_orden").val("");});
+
+			$(".btn-edit").click(function(){
+				var id = $(this).parent().parent().attr("id");
+				location.href = "<?=base_url()?>produccion/editar/"+id;
+			});
+
+			
+		<?php endif; ?>		
 	});
 </script>
 <style type="text/css">
