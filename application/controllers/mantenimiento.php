@@ -88,4 +88,10 @@ class Mantenimiento extends CI_Controller {
 		$this->load->view('view_mantenimiento_form', $this->data);
 
 	}
+
+	public function eliminar()
+	{
+		$this->model_mantenimiento->eliminar_mantenieminto($this->input->post('solicitud'));
+		redirect('mantenimiento');
+	}
 }

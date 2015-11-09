@@ -191,14 +191,15 @@ class Model_deposito extends CI_Model {
 
 
 
-  public function new_ingreso($cantidades, $medidas, $id_usuario)
+  public function new_ingreso($cantidades, $medidas, $id_usuario, $id_orden = NULL)
   {
     foreach($cantidades as $key=>$cantidad) {            
       $data = array(
                  'cantidad' => $cantidad,
                  'medida' => $medidas[$key],
                  'ingreso' => 1,
-                 'id_usuario' => $id_usuario
+                 'id_usuario' => $id_usuario,
+                 'id_orden_produccion' => $id_orden
               );
       $this->db->insert('deposito_new', $data); 
     }
@@ -259,6 +260,11 @@ class Model_deposito extends CI_Model {
     );
     $this->db->insert('deposito_new', $data); 
     
+  }
+
+  public function delete_ingresos_deposito($id_orden)
+  {
+    $this->db->delete('deposito_new', array('id_orden_produccion' => $id_orden));
   }
 
 

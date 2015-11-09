@@ -10,7 +10,7 @@ class Model_materia extends CI_Model {
    		return $this->db->get_where('usuarios', array('id_usuario' => $usuario))->row();
    	}
    	
-   	public function egreso($fecha, $cantidad, $usuario, $materia) {   	
+   	public function egreso($fecha, $cantidad, $usuario, $materia, $id_orden = NULL) {   	
 	   	//obtengo el numero de egreso para la materia prima actual
 	   	$this->db->select('MAX(id_egreso) as max');
 	    $this->db->from('egresos_aridos');
@@ -24,7 +24,8 @@ class Model_materia extends CI_Model {
 	               'id_egreso' => $egreso,
 	               'fecha' => $fecha,
 	               'consumo' => $cantidad,
-	               'id_usuario' => $usuario
+	               'id_usuario' => $usuario,
+	               'id_orden_produccion' => $id_orden
 	            );
 		$this->db->insert('egresos_aridos', $data); 
     }
@@ -78,7 +79,7 @@ class Model_materia extends CI_Model {
 	    return $tabla;
 	}
 
-	public function egresoCemento($fecha, $cantidad, $silo, $usuario) {   	
+	public function egresoCemento($fecha, $cantidad, $silo, $usuario, $id_orden = NULL) {   	
 	   	//obtengo el numero de egreso para la materia prima actual
 	   	$this->db->select('MAX(id_egreso) as max');
 	    $this->db->from('egresos_cemento');
@@ -92,7 +93,8 @@ class Model_materia extends CI_Model {
 	               'id_egreso' => $egreso,
 	               'fecha' => $fecha,
 	               'consumo' => $cantidad,
-	               'id_usuario' => $usuario
+	               'id_usuario' => $usuario,
+	               'id_orden_produccion' => $id_orden
 	            );
 		$this->db->insert('egresos_cemento', $data); 
     }
@@ -212,6 +214,12 @@ class Model_materia extends CI_Model {
 		$this->db->where('id_ingreso', $id_ingreso);
 		$this->db->update('ingresos_cemento');
 
+	}
+
+	public function delete_egresos($id_orden)
+	{
+		$this->db->delete('egresos_aridos', array('id_orden_produccion' => $id_orden));
+		$this->db->delete('egresos_cemento', array('id_orden_produccion' => $id_orden));
 	}
 }
 ?>

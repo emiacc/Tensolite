@@ -209,4 +209,12 @@ class Model_insumos extends CI_Model {
 		return $estados;
 	}
 
+
+
+	public function eliminar_insumos($id_solicitud)
+	{
+		$this->db->delete('solicitudes_insumo', array('id_solicitud' => $id_solicitud));
+		$this->db->delete('insumo_detalle', array('id_solicitud' => $id_solicitud));
+	}
+
 }

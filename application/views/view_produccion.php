@@ -354,7 +354,57 @@
 				</table>
 			</div>	
 		</div>
-	</div>	
+	</div>
+
+	<?php if($data['rol'] == 1): ?>	
+	<div class="panel panel-inverse">
+		<div class="panel-heading">
+			<div class="panel-heading-btn">
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>				
+			</div>
+			<h4 class="panel-title">Ordenes de Producción Procesadas</h4>
+		</div>
+		<div class="panel-body">
+			<br>
+			<div class="table">
+					<table id="data-table2" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Nº Orden</th>
+								<th>Fecha Registro</th>
+								<th>Banco</th>
+								<?php if($data['rol']==1): ?>							
+								<th>Acciones</th>	
+								<?php endif; ?>								
+							</tr>
+						</thead>
+						<tbody>
+						<?php 
+							foreach ($ordenesProcesadas as $orden) 
+							{
+								$fechaR = new DateTime($orden->fecha);
+								
+								echo "<tr id='".$orden->id_orden."'>";
+								echo "<td>".$orden->id_orden."</td>";
+								echo "<td>".date_format($fechaR,'d-m-Y')."</td>";								
+								echo "<td>".$orden->nro_banco."</td>";
+								if($data['rol']==1){
+									echo "<td class='actions'>".
+									//"<a class='btn btn-warning btn-icon btn-circle btn-sm btn-edit'><i class='fa fa-pencil'></i></a>".
+										"<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a>" ."</td>";
+								}
+								echo "</tr>";
+							}
+						?>							
+						</tbody>
+					</table>
+				</div>
+		</div>
+	</div>
+	<?php endif; ?>
+
 </div>
 <!-- end #content -->
 		
@@ -533,14 +583,14 @@
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
 		if(<?=$mensaje;?>!= 1 && <?=$mensaje;?>!= 0) alert('Registrado con exito. Nro de orden: '+<?=$mensaje;?>);
 
-		$("#data-table > tbody > tr > td").click(function(){
-			if($(this).hasClass("imp"))
-				location.href = '<?= base_url(); ?>produccion/imprimir/'+$(this).parent().attr('id');	   
-			else if($(this).hasClass("actions"))
-				return false;
-			else
-				location.href = '<?= base_url(); ?>produccion/indexOrden/'+$(this).parent().attr('id');
+
+		$("ul.pagination").click(function(){
+			mover();
 		});
+		
+		mover();
+
+
 
 		/*$('.orden').click(function(){
 			var id = $(this).data("id");
@@ -564,6 +614,29 @@
 		});
 
 
+		
+	});
+
+	function mover()
+	{
+		$("#data-table > tbody > tr > td").click(function(){
+			if($(this).hasClass("imp"))
+				location.href = '<?= base_url(); ?>produccion/imprimir/'+$(this).parent().attr('id');	   
+			else if($(this).hasClass("actions"))
+				return false;
+			else
+				location.href = '<?= base_url(); ?>produccion/indexOrden/'+$(this).parent().attr('id');
+		});
+
+		$("#data-table2 > tbody > tr > td").click(function(){
+			if($(this).hasClass("imp"))
+				location.href = '<?= base_url(); ?>produccion/imprimir/'+$(this).parent().attr('id');	   
+			else if($(this).hasClass("actions"))
+				return false;
+			else
+				location.href = '<?= base_url(); ?>produccion/indexOrden/'+$(this).parent().attr('id');
+		});
+
 		<?php if($data['rol']==1): ?>
 			$(".btn-delete").click(function(){
 				$("#id_orden").val($(this).parent().parent().attr("id"));
@@ -579,7 +652,7 @@
 
 			
 		<?php endif; ?>		
-	});
+	}
 </script>
 <style type="text/css">
 	#formulario{  border-left: 1px solid #E4E4E4; }

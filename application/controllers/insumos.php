@@ -89,4 +89,10 @@ class Insumos extends CI_Controller {
 		$this->load->view('view_insumos_form', $this->data);
 
 	}
+
+	public function eliminar()
+	{
+		$this->model_insumos->eliminar_insumos($this->input->post('solicitud'));
+		redirect('insumos');
+	}
 }

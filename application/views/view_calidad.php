@@ -63,6 +63,9 @@
 								<th>Fecha Detección</th>
 								<th>Usuario</th>
 								<th>Estado</th>
+								<?php if($data['rol'] == 1): ?>
+								<th>Eliminar</th>
+								<?php endif; ?>
 							</tr>
 						</thead>
 						<tbody>
@@ -84,6 +87,11 @@
 								echo "<td>".date_format($fechaD,'d-m-Y')."</td>";
 								echo "<td>".$formulario->nombre.", ".$formulario->apellido."</td>";
 								echo $estado;
+								if($data['rol'] == 1)
+									if($formulario->estado == 0)
+										echo "<td class='action'>"."<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a>"."</td>";
+									else
+										echo "<td></td>";
 								echo "</tr>";
 							}
 						?>							
@@ -189,7 +197,28 @@
 	<?php } */ ?>	
 
 </div>
-
+<!-- modal delete -->
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_delete">
+	   <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Eliminar orden</h4>
+	      </div>
+	      <div class="modal-body">
+	        ¿Está seguro que desea eliminar la orden?
+	      </div>
+	      <div class="modal-footer">
+	        <form method="POST" action="<?=base_url()?>calidad/eliminar">
+	        	<input type="hidden" name="id_formulario" id="id_formulario">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        	<button type="submit" class="btn btn-primary">Aceptar</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<!-- end modal delete -->	
 
 <?php $this->load->view('view_scripts') ?>
 
@@ -217,13 +246,22 @@
 		else if(<?=$mensaje;?>== 2) alert('Editado con exito');
 		else alert('Registrado con exito. Nro de Solicitud: '+<?=$mensaje;?>);
 
-		$('#data-table tbody').on('click', 'tr', function () {
-	        location.href = '<?= base_url(); ?>calidad/form/'+$(this).attr('id');	        
-	    });
-
 	    $('#nueva').click(function () {
 	        location.href = '<?= base_url(); ?>calidad/nuevoForm';	        
 	    });
+
+		$('#data-table tbody').on('click', 'tr > td', function () {
+			if($(this).hasClass('action'))
+			{
+				$("#id_formulario").val($(this).parent().attr("id"));
+				$('#modal_delete').modal('show');
+			}
+			else
+	        location.href = '<?= base_url(); ?>calidad/form/'+$(this).parent().attr('id');	        
+	    });
+		$('#modal_delete').on('hidden.bs.modal', function (){ $("#id_formulario").val("");});
+
+		
 	});
 </script>
 </body>
