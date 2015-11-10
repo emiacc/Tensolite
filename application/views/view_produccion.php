@@ -392,7 +392,7 @@
 								echo "<td>".$orden->nro_banco."</td>";
 								if($data['rol']==1){
 									echo "<td class='actions'>".
-									//"<a class='btn btn-warning btn-icon btn-circle btn-sm btn-edit'><i class='fa fa-pencil'></i></a>".
+									"<a class='btn btn-warning btn-icon btn-circle btn-sm btn-edit2'><i class='fa fa-pencil'></i></a>".
 										"<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a>" ."</td>";
 								}
 								echo "</tr>";
@@ -633,8 +633,7 @@
 				location.href = '<?= base_url(); ?>produccion/imprimir/'+$(this).parent().attr('id');	   
 			else if($(this).hasClass("actions"))
 				return false;
-			else
-				location.href = '<?= base_url(); ?>produccion/indexOrden/'+$(this).parent().attr('id');
+			
 		});
 
 		<?php if($data['rol']==1): ?>
@@ -648,6 +647,11 @@
 			$(".btn-edit").click(function(){
 				var id = $(this).parent().parent().attr("id");
 				location.href = "<?=base_url()?>produccion/editar/"+id;
+			});
+
+			$(".btn-edit2").click(function(){
+				var id = $(this).parent().parent().attr("id");
+				location.href = "<?=base_url()?>produccion/editarNuevaOrden/"+id;
 			});
 
 			

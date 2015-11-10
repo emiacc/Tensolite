@@ -56,6 +56,24 @@ class Produccion extends CI_Controller {
 
     }
 
+    public function editarNuevaOrden($id_orden = 0)
+    {
+        $this->data['producciones'] = $this->model_produccion->getProduccion($id_orden);
+        $this->data['consumos_aridos'] = $this->model_materia->getConsumosAridos($id_orden);
+        $this->data['consumos_cemento'] = $this->model_materia->getConsumosCemento($id_orden);
+
+
+        $this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
+        $this->data['notificaciones'] = $this->model_perfil->getNotificaciones($this->data['data']['id_usuario']);
+        
+
+        $this->data['silos'] = $this->model_materia->getSilos();
+
+        $this->load->view('view_header', $this->data);
+        $this->load->view('view_produccion_orden_editar', $this->data);
+
+    }
+
     public function ingresoOrden() {
         $fecha = $this->input->post('inputFechaOrden');
         $banco = $this->input->post('selectBanco');
@@ -102,49 +120,49 @@ class Produccion extends CI_Controller {
 
         foreach($medidas as $key=>$medida)
         {
-            $this->model_materia->egresoCemento($fecha, $cemento[$key], $silo[$key], $this->data['data']['id_usuario'], $id);
+            $this->model_materia->egresoCemento($fecha, $cemento[$key], $silo[$key], $this->data['data']['id_usuario'], $id, $produ[$key]);
             $stock = $this->model_materia->getStockCemento($silo[$key]);
             if($stock < 140)
                 $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo cemento en silo ".$silo[$key]);
 
             
-            $this->model_materia->egreso($fecha, $arena[$key], $this->data['data']['id_usuario'], 2, $id);
+            $this->model_materia->egreso($fecha, $arena[$key], $this->data['data']['id_usuario'], 2, $id, $produ[$key]);
             $stock = $this->model_materia->getStockMateria(2);
             if($stock < 30)
                 $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Arena tipo1");
 
-            $this->model_materia->egreso($fecha, $arena2[$key], $this->data['data']['id_usuario'], 8, $id);
+            $this->model_materia->egreso($fecha, $arena2[$key], $this->data['data']['id_usuario'], 8, $id, $produ[$key]);
             $stock = $this->model_materia->getStockMateria(8);
             if($stock < 30)
                 $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Arena tipo2");
             
-            $this->model_materia->egreso($fecha, $binder[$key], $this->data['data']['id_usuario'], 3, $id);
+            $this->model_materia->egreso($fecha, $binder[$key], $this->data['data']['id_usuario'], 3, $id, $produ[$key]);
             $stock = $this->model_materia->getStockMateria(3);
             if($stock < 30)
                 $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Binder");
             
-            $this->model_materia->egreso($fecha, $triturado[$key], $this->data['data']['id_usuario'], 6, $id);
+            $this->model_materia->egreso($fecha, $triturado[$key], $this->data['data']['id_usuario'], 6, $id, $produ[$key]);
             //$stock = $this->model_materia->getStockMateria(6);
             //if($stock < 30)
             //  $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Arena tipo1");
             
-            $this->model_materia->egreso($fecha, $acelerante[$key], $this->data['data']['id_usuario'], 4, $id);
+            $this->model_materia->egreso($fecha, $acelerante[$key], $this->data['data']['id_usuario'], 4, $id, $produ[$key]);
             $stock = $this->model_materia->getStockMateria(4);
             if($stock < 1000)
                 $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Acelerante");
             
-            $this->model_materia->egreso($fecha, $plastificante[$key], $this->data['data']['id_usuario'], 5, $id);
+            $this->model_materia->egreso($fecha, $plastificante[$key], $this->data['data']['id_usuario'], 5, $id, $produ[$key]);
             $stock = $this->model_materia->getStockMateria(5);
             if($stock < 1000)
                 $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Plastificante");
             
-            $this->model_materia->egreso($fecha, $ceniza[$key], $this->data['data']['id_usuario'], 7, $id);
+            $this->model_materia->egreso($fecha, $ceniza[$key], $this->data['data']['id_usuario'], 7, $id, $produ[$key]);
             $stock = $this->model_materia->getStockMateria(7);
             if($stock < 7)
                 $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock Ceniza");
             
             
-            $this->model_materia->egreso($fecha, $agua[$key], $this->data['data']['id_usuario'], 9, $id);
+            $this->model_materia->egreso($fecha, $agua[$key], $this->data['data']['id_usuario'], 9, $id, $produ[$key]);
             
 
             
@@ -161,7 +179,108 @@ class Produccion extends CI_Controller {
             elseif ($medida <= 82) $consumo = 750.30+1125.45+4003.99;
             else $consumo = 0;
 
-            $this->model_materia->egreso($fecha, $consumo, $this->data['data']['id_usuario'], 10, $id);
+            $this->model_materia->egreso($fecha, $consumo, $this->data['data']['id_usuario'], 10, $id, $produ[$key]);
+            
+        }
+
+        $this->load->model('model_deposito');
+        $this->model_deposito->new_ingreso($cantidad, $medidas, $this->data['data']['id_usuario'], $id);
+        redirect('produccion/index/1');
+        
+    }
+
+    public function ingresoUpdateUpdate() {
+
+        $id = $this->input->post('id_orden');
+        
+        $this->model_materia->delete_egresos($id);
+        $this->load->model('model_deposito');
+        $this->model_deposito->delete_ingresos_deposito($id);
+        
+        $produ = $this->input->post('id_produccion');
+        $cantidad = $this->input->post('inputCantidad');
+        $turno = $this->input->post('selectTurno');
+        
+        $fecha = date('Y-m-d');
+       
+        
+        $this->model_produccion->update_produccion($id, $produ, $cantidad, $this->data['data']['id_usuario'],$turno);
+        $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Producción Nº orden: ".$id);
+
+            $cemento = $this->input->post('inputCemento');
+            $silo = $this->input->post('selectSilo');
+            $arena = $this->input->post('inputArena');
+            $arena2 = $this->input->post('inputArena2');
+            $binder = $this->input->post('inputBinder');
+            $triturado = $this->input->post('inputTriturado');
+            $acelerante = $this->input->post('inputAcelerante');
+            $plastificante = $this->input->post('inputPlastificante');
+            $ceniza = $this->input->post('inputCeniza');
+            $agua = $this->input->post('inputAgua');
+            $medidas = $this->input->post('inputMedida');
+
+        foreach($medidas as $key=>$medida)
+        {
+            $this->model_materia->egresoCemento($fecha, $cemento[$key], $silo[$key], $this->data['data']['id_usuario'], $id, $produ[$key]);
+            $stock = $this->model_materia->getStockCemento($silo[$key]);
+            if($stock < 140)
+                $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo cemento en silo ".$silo[$key]);
+
+            
+            $this->model_materia->egreso($fecha, $arena[$key], $this->data['data']['id_usuario'], 2, $id, $produ[$key]);
+            $stock = $this->model_materia->getStockMateria(2);
+            if($stock < 30)
+                $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Arena tipo1");
+
+            $this->model_materia->egreso($fecha, $arena2[$key], $this->data['data']['id_usuario'], 8, $id, $produ[$key]);
+            $stock = $this->model_materia->getStockMateria(8);
+            if($stock < 30)
+                $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Arena tipo2");
+            
+            $this->model_materia->egreso($fecha, $binder[$key], $this->data['data']['id_usuario'], 3, $id, $produ[$key]);
+            $stock = $this->model_materia->getStockMateria(3);
+            if($stock < 30)
+                $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Binder");
+            
+            $this->model_materia->egreso($fecha, $triturado[$key], $this->data['data']['id_usuario'], 6, $id, $produ[$key]);
+            //$stock = $this->model_materia->getStockMateria(6);
+            //if($stock < 30)
+            //  $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Arena tipo1");
+            
+            $this->model_materia->egreso($fecha, $acelerante[$key], $this->data['data']['id_usuario'], 4, $id, $produ[$key]);
+            $stock = $this->model_materia->getStockMateria(4);
+            if($stock < 1000)
+                $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Acelerante");
+            
+            $this->model_materia->egreso($fecha, $plastificante[$key], $this->data['data']['id_usuario'], 5, $id, $produ[$key]);
+            $stock = $this->model_materia->getStockMateria(5);
+            if($stock < 1000)
+                $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock de Plastificante");
+            
+            $this->model_materia->egreso($fecha, $ceniza[$key], $this->data['data']['id_usuario'], 7, $id, $produ[$key]);
+            $stock = $this->model_materia->getStockMateria(7);
+            if($stock < 7)
+                $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Minimo stock Ceniza");
+            
+            
+            $this->model_materia->egreso($fecha, $agua[$key], $this->data['data']['id_usuario'], 9, $id, $produ[$key]);
+            
+
+            
+            //acero
+        
+            if ($medida <= 30) $consumo = 5752.28;
+            elseif ($medida <= 34) $consumo = 2125.84+3188.76;
+            elseif ($medida <= 38) $consumo = 7502.98;
+            elseif ($medida <= 42) $consumo = 3907.80+11254.46;
+            elseif ($medida <= 46) $consumo = 16318.97;
+            elseif ($medida <= 54) $consumo = 7252.88+10879.32;
+            elseif ($medida <= 62) $consumo = 1693.38+8675.32;
+            elseif ($medida <= 72) $consumo = 750.30+1125.45+4003.99;
+            elseif ($medida <= 82) $consumo = 750.30+1125.45+4003.99;
+            else $consumo = 0;
+
+            $this->model_materia->egreso($fecha, $consumo, $this->data['data']['id_usuario'], 10, $id, $produ[$key]);
             
         }
 

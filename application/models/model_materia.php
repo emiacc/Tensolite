@@ -10,7 +10,7 @@ class Model_materia extends CI_Model {
    		return $this->db->get_where('usuarios', array('id_usuario' => $usuario))->row();
    	}
    	
-   	public function egreso($fecha, $cantidad, $usuario, $materia, $id_orden = NULL) {   	
+   	public function egreso($fecha, $cantidad, $usuario, $materia, $id_orden = NULL, $id_produccion = NULL) {   	
 	   	//obtengo el numero de egreso para la materia prima actual
 	   	$this->db->select('MAX(id_egreso) as max');
 	    $this->db->from('egresos_aridos');
@@ -25,7 +25,8 @@ class Model_materia extends CI_Model {
 	               'fecha' => $fecha,
 	               'consumo' => $cantidad,
 	               'id_usuario' => $usuario,
-	               'id_orden_produccion' => $id_orden
+	               'id_orden_produccion' => $id_orden,
+	               'id_produccion' => $id_produccion
 	            );
 		$this->db->insert('egresos_aridos', $data); 
     }
@@ -79,7 +80,7 @@ class Model_materia extends CI_Model {
 	    return $tabla;
 	}
 
-	public function egresoCemento($fecha, $cantidad, $silo, $usuario, $id_orden = NULL) {   	
+	public function egresoCemento($fecha, $cantidad, $silo, $usuario, $id_orden = NULL, $id_produccion = NULL) {   	
 	   	//obtengo el numero de egreso para la materia prima actual
 	   	$this->db->select('MAX(id_egreso) as max');
 	    $this->db->from('egresos_cemento');
@@ -94,7 +95,8 @@ class Model_materia extends CI_Model {
 	               'fecha' => $fecha,
 	               'consumo' => $cantidad,
 	               'id_usuario' => $usuario,
-	               'id_orden_produccion' => $id_orden
+	               'id_orden_produccion' => $id_orden,
+	               'id_produccion' => $id_produccion
 	            );
 		$this->db->insert('egresos_cemento', $data); 
     }
@@ -220,6 +222,22 @@ class Model_materia extends CI_Model {
 	{
 		$this->db->delete('egresos_aridos', array('id_orden_produccion' => $id_orden));
 		$this->db->delete('egresos_cemento', array('id_orden_produccion' => $id_orden));
+	}
+
+	public function getConsumosAridos($id_orden)
+	{
+		$this->db->select('*');
+	    $this->db->from('egresos_aridos');
+	    $this->db->where('id_orden_produccion', $id_orden);
+	    return  $this->db->get()->result();
+	}
+
+	public function getConsumosCemento($id_orden)
+	{
+		$this->db->select('*');
+	    $this->db->from('egresos_cemento');
+	    $this->db->where('id_orden_produccion', $id_orden);
+	    return  $this->db->get()->result();
 	}
 }
 ?>
