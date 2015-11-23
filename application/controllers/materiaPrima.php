@@ -125,5 +125,20 @@ class MateriaPrima extends CI_Controller {
 			case 12: return 'Diciemrbe';
 		}
 	}
+
+	public function stock_real($materia)
+	{
+		$stockActual =  $this->model_materia->getStockMateria($this->ids($materia));
+		$res = $this->input->post('inputCantidadIngreso') - $stockActual;
+		if($res != 0)
+		{
+			//ingreso
+			$this->model_materia->ingreso(NULL, $res, "CORRECCION STOCK", 0, 0, $this->data['data']['id_usuario'], $this->ids($materia));
+
+		}
+		redirect("materiaPrima/index/$materia");		
+		
+
+	}
 }
 ?>

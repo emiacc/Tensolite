@@ -105,5 +105,17 @@ class Cemento extends CI_Controller {
 			case 12: return 'Diciemrbe';
 		}
 	}
+
+	public function stock_real($id_silo)
+	{
+
+		$stockActual =  $this->model_materia->getStockCemento($id_silo);
+		$res = $this->input->post('inputCantidadIngreso') - $stockActual;
+		if($res != 0)
+		{
+			$this->model_materia->ingresoCemento(NULL, $res, $res, "CORRECCION STOCK", $id_silo, 0,$this->data['data']['id_usuario']);
+		}
+		redirect('cemento');
+	}
 }
 ?>

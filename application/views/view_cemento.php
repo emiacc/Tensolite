@@ -135,7 +135,7 @@
 					<h5 class="text-center">Stock Actual: <?=$stockActual1?></h5>					
 					<h5 class="text-center"><?=number_format((($stockActual1*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
-					<form action="<?= base_url(); ?>materiaPrima/stock_real/1" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+					<form action="<?= base_url(); ?>cemento/stock_real/1" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
@@ -154,7 +154,7 @@
 					<h5 class="text-center">Stock Actual: <?=$stockActual2?></h5>					
 					<h5 class="text-center"><?=number_format((($stockActual2*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
-					<form action="<?= base_url(); ?>materiaPrima/stock_real/2" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+					<form action="<?= base_url(); ?>cemento/stock_real/2" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
@@ -173,7 +173,7 @@
 					<h5 class="text-center">Stock Actual: <?=$stockActual3?></h5>					
 					<h5 class="text-center"><?=number_format((($stockActual3*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
-					<form action="<?= base_url(); ?>materiaPrima/stock_real/3" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+					<form action="<?= base_url(); ?>cemento/stock_real/3" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
