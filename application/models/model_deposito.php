@@ -205,6 +205,19 @@ class Model_deposito extends CI_Model {
     }
   }
 
+  public function new_ingreso_recuperacion($cantidad, $medida, $id_usuario)
+  {
+      $data = array(
+                 'cantidad' => $cantidad,
+                 'medida' => $medida,
+                 'ingreso' => 1,
+                 'id_usuario' => $id_usuario,
+                 'id_orden_produccion' => 0
+              );
+      $this->db->insert('deposito_new', $data); 
+    
+  }
+
   public function new_egreso($cantidades, $medidas, $id_usuario)
   {
     foreach($cantidades as $key=>$cantidad) {            
@@ -216,6 +229,20 @@ class Model_deposito extends CI_Model {
               );
       $this->db->insert('deposito_new', $data); 
     }
+  }
+
+  public function new_egreso_perdida($cantidad, $medida, $id_usuario)
+  {
+              
+      $data = array(
+                 'cantidad' => $cantidad,
+                 'medida' => $medida,
+                 'ingreso' => 0,
+                 'id_usuario' => $id_usuario,
+                 'id_orden_produccion' => 0
+              );
+      $this->db->insert('deposito_new', $data); 
+    
   }
 
   public function get_stock_x_medida($medida)

@@ -131,6 +131,7 @@
 						    <li id="LIplastificante"><a href="<?= base_url(); ?>materiaPrima/index/plastificante">Plastificante</a></li>
 						    <li id="LItriturado"><a href="<?= base_url(); ?>materiaPrima/index/triturado">Triturado</a></li>
 						    <li id="LIceniza"><a href="<?= base_url(); ?>materiaPrima/index/ceniza">Ceniza</a></li>
+						    <li id="LIacero"><a href="<?= base_url(); ?>materiaPrima/index/acero">Acero</a></li>
 						</ul>
 					</li>
 

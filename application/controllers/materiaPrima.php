@@ -106,6 +106,7 @@ class MateriaPrima extends CI_Controller {
 			case 'ceniza' : return 7;	
 			case 'arena2' : return 8;	
 			case 'agua' : return 9;	
+			case 'acero' : return 10;	
 			default: return 0;
 		}
 	}
