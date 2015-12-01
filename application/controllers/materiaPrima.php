@@ -41,7 +41,8 @@ class MateriaPrima extends CI_Controller {
 		$this->load->view('view_materia', $this->data);		
 	}
 
-	public function egreso($materia = 'nada') {
+	public function egreso($materia = 'nada') 
+	{
 		if($materia == 'nada') redirect('resumen');
 
 		$fecha = $this->input->post('inputFechaEgreso');
