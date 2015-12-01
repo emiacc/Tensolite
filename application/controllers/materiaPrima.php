@@ -52,7 +52,8 @@ class MateriaPrima extends CI_Controller {
         redirect('materiaPrima/index/'.$materia.'/1');
 	}
 
-	public function ingreso($materia = 'nada') {
+	public function ingreso($materia = 'nada') 
+	{
 		if($materia == 'nada') redirect('resumen');
 
 		$fecha = $this->input->post('inputFechaIngreso');
