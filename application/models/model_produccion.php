@@ -343,5 +343,27 @@ class Model_produccion extends CI_Model {
 	{
 		$this->db->delete('recuperaciones', array('id_recuperacion' => $id_recuperacion));
 	}
+
+
+	public function getPerdidasPlaya()
+	{
+		return $this->db->get_where('perdidas', array('en_playa' => 1))->result();
+	}
+
+	public function get_cantidad_medida_perdida($id_perdida)
+	{
+		return $this->db->get_where('perdidas', array('id_perdida' => $id_perdida))->row();
+	}
+
+	public function delete_perdida($id_perdida)
+	{
+		$this->db->delete('perdidas', array('id_perdida' => $id_perdida));
+	}
+	
+	public function getPerdidasProduccion()
+	{
+		return $this->db->get_where('perdidas', array('en_playa' => 0))->result();
+	}
+
 }
 ?>

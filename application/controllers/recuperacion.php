@@ -98,7 +98,7 @@ class Recuperacion extends CI_Controller {
         $this->model_produccion->delete_recuperacion($id_recuperacion);
         $this->db->trans_commit();
 
-        redirect('despacho/index/1');
+        redirect('recuperacion/index/1');
 	}
 }
 ?>

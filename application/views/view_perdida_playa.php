@@ -1,6 +1,7 @@
 <link href="<?= base_url(); ?>assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
 <link href="<?= base_url(); ?>assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
 <link href="<?= base_url(); ?>assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
+<link href="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/css/data-table.css" rel="stylesheet" />
 <style type="text/css">
 	@media screen and (max-width:2500px){.table-responsive{width:100%;margin-bottom:15px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;-ms-overflow-style:-ms-autohiding-scrollbar;border:1px solid #ddd}.table-responsive>.table{margin-bottom:0}.table-responsive>.table>thead>tr>th,.table-responsive>.table>tbody>tr>th,.table-responsive>.table>tfoot>tr>th,.table-responsive>.table>thead>tr>td,.table-responsive>.table>tbody>tr>td,.table-responsive>.table>tfoot>tr>td{white-space:nowrap}.table-responsive>.table-bordered{border:0}.table-responsive>.table-bordered>thead>tr>th:first-child,.table-responsive>.table-bordered>tbody>tr>th:first-child,.table-responsive>.table-bordered>tfoot>tr>th:first-child,.table-responsive>.table-bordered>thead>tr>td:first-child,.table-responsive>.table-bordered>tbody>tr>td:first-child,.table-responsive>.table-bordered>tfoot>tr>td:first-child{border-left:0}.table-responsive>.table-bordered>thead>tr>th:last-child,.table-responsive>.table-bordered>tbody>tr>th:last-child,.table-responsive>.table-bordered>tfoot>tr>th:last-child,.table-responsive>.table-bordered>thead>tr>td:last-child,.table-responsive>.table-bordered>tbody>tr>td:last-child,.table-responsive>.table-bordered>tfoot>tr>td:last-child{border-right:0}.table-responsive>.table-bordered>tbody>tr:last-child>th,.table-responsive>.table-bordered>tfoot>tr:last-child>th,.table-responsive>.table-bordered>tbody>tr:last-child>td,.table-responsive>.table-bordered>tfoot>tr:last-child>td{border-bottom:0}}
 </style>
@@ -264,8 +265,82 @@
 			</div>	
 		</div>
 	</div>		
+	<div class="panel panel-inverse">
+		<div class="panel-heading">
+			<div class="panel-heading-btn">
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+				<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>				
+			</div>
+			<h4 class="panel-title">Histótico Perdida Playa</h4>
+		</div>
+		<div class="panel-body">
+			<div class="panel-body">
+				<table id="data-table" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Nº</th>
+								<th>Fecha Registro</th>								
+								<th>Medida</th>								
+								<th>Cantidad</th>								
+								<?php if($data['rol']==1): ?>							
+									<th>Eliminar</th>
+								<?php endif; ?>													
+							</tr>
+						</thead>
+						<tbody>
+						<?php 
+							foreach ($historico as $perdida) 
+							{
+								$fechaR = new DateTime($perdida->fecha);
+								
+								echo "<tr id='".$perdida->id_perdida."'>";
+								echo "<td>".$perdida->id_perdida."</td>";
+								echo "<td>".date_format($fechaR,'d-m-Y')."</td>";								
+								echo "<td>".number_format(($perdida->medida/10),1)."</td>";
+								echo "<td>".$perdida->cantidad."</td>";
+								if($data['rol']==1)
+								{
+									echo "<td class='accion'>
+										<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a> 
+									</td>";
+								}
+								echo "</tr>";
+							}
+						?>							
+						</tbody>
+					</table>
+				
+			</div>
+		</div>                
+	</div>
+
+
 </div>
 <!-- end #content -->
+
+<!-- modal delete -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_delete">
+   <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Eliminar Pérdida</h4>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro que desea eliminar la pérdida?
+      </div>
+      <div class="modal-footer">
+        <form method="POST" action="<?=base_url()?>perdidaPlaya/eliminar">
+        	<input type="hidden" name="id_perdida" id="id_perdida">
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        	<button type="submit" class="btn btn-primary">Aceptar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal delete -->	
 		
 	
 <?php $this->load->view('view_scripts') ?>
@@ -283,6 +358,10 @@
 <script src="<?= base_url(); ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?= base_url(); ?>assets/js/form-plugins.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
+
+<script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/data-table.js"></script>
+
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 	
@@ -306,7 +385,27 @@
 		$('#selectMes').attr("value",d.getMonth()+1);	
 
 		if(<?=$mensaje;?>== 1) alert('Registrado con exito');	
+
+		acciones();
+
+		$("ul.pagination").click(function(){
+			acciones();
+		});
 	});
+
+	function acciones()
+	{
+		<?php if($data['rol']==1): ?>
+			$(".btn-delete").click(function(){
+				$("#id_perdida").val($(this).parent().parent().attr("id"));
+				$('#modal_delete').modal('show');
+			});
+
+			$('#modal_delete').on('hidden.bs.modal', function (){ $("#id_perdida").val(""); });
+
+			
+		<?php endif; ?>	
+	}
 </script>	
 </body>
 </html>

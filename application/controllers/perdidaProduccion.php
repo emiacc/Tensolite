@@ -32,6 +32,8 @@ class PerdidaProduccion extends CI_Controller {
 		$this->data["resumenPerdida"] = $this->model_produccion->resumenPerdida($mes,$anio,0);
 		$this->data["widgetPerdida"] = $this->model_produccion->getPerdidaWidget($mes,$anio,0);
 
+		$this->data['historico'] = $this->model_produccion->getPerdidasProduccion();
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_perdida_produccion', $this->data);
 	}
@@ -62,6 +64,15 @@ class PerdidaProduccion extends CI_Controller {
 			case 11: return 'Noviembre';
 			case 12: return 'Diciemrbe';
 		}
+	}
+
+	public function eliminar()
+	{
+		$id_perdida = $this->input->post("id_perdida");
+		
+		$this->model_produccion->delete_perdida($id_perdida);
+
+        redirect('perdidaProduccion/index/1');
 	}
 }
 ?>
