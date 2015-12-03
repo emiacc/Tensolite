@@ -328,5 +328,20 @@ class Model_produccion extends CI_Model {
 		return $this->db->get_where('despachos', array('id_orden' => $id))->result();
 	}
 	
+
+	public function getRecuperaciones()
+	{
+		return $this->db->get('recuperaciones')->result();
+	}
+
+	public function get_cantidad_medida_recuperacion($id_recuperacion)
+	{
+		return $this->db->get_where('recuperaciones', array('id_recuperacion' => $id_recuperacion))->row();
+	}
+
+	public function delete_recuperacion($id_recuperacion)
+	{
+		$this->db->delete('recuperaciones', array('id_recuperacion' => $id_recuperacion));
+	}
 }
 ?>
