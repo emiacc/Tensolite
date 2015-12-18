@@ -161,6 +161,7 @@ $(document).ready(function() {
 		"sPaginationType": "bootstrap",
 		"oLanguage": {
 			"sLengthMenu": "_MENU_ filas por página"
-		}
+		},
+		"bSort": false
 	});
 } );

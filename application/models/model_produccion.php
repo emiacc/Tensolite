@@ -141,7 +141,7 @@ class Model_produccion extends CI_Model {
 		return $this->db->order_by("fecha", "asc")->get_where('ordenes_produccion', array('procesado' => 0))->result();
 	}
 	public function getOrdenesProcesadas() {
-		return $this->db->order_by("fecha", "asc")->get_where('ordenes_produccion', array('procesado' => 1))->result();
+		return $this->db->order_by("fecha", "DESC")->get_where('ordenes_produccion', array('procesado' => 1))->result();
 	}
 	public function getProducciones() {
 		return $this->db->get_where('producciones', array('solicitud' => 0))->result();

@@ -25,72 +25,11 @@
 					<form class="form-inline" action="<?= base_url(); ?>produccion/ingresoUpdateUpdate" method="POST" data-parsley-validate="true">	
 						<fieldset>
 							<input name="id_orden" type="hidden" id="id_orden" value="<?=$producciones[0]->id_orden?>">
-								<ul class='nav nav-tabs'>
-								<?php 
-									$bandAS = $bandA = $bandB = $bandC = $bandD = $bandE = TRUE;
-								foreach ($producciones as $produccion): ?>
-								<?php 
-
-									switch(true)
-									{
-										case $produccion->medida <= 30:
-											if($bandAS) 
-											{
-												echo "<li class=''><a href='#default-tab-1' data-toggle='tab'>ASTER</a></li>";
-												$bandAS = FALSE;
-											}
-											break;
-
-										case $produccion->medida <= 38:
-											if($bandA) 
-											{
-												echo "<li class=''><a href='#default-tab-2' data-toggle='tab'>Serie A</a></li>";
-												$bandA = FALSE;
-											}
-											break;
-
-										case $produccion->medida <= 46:
-											if($bandB) 
-											{
-												echo "<li class=''><a href='#default-tab-3' data-toggle='tab'>Serie B</a></li>";
-												$bandB = FALSE;
-											}
-											break;
-
-										case $produccion->medida <= 54:
-											if($bandC) 
-											{
-												echo "<li class=''><a href='#default-tab-4' data-toggle='tab'>Serie C</a></li>";
-												$bandC = FALSE;
-											}
-											break;
-
-										case $produccion->medida <= 62:
-											if($bandD) 
-											{
-												echo "<li class=''><a href='#default-tab-5' data-toggle='tab'>Serie D</a></li>";
-												$bandD = FALSE;
-											}
-											break;
-
-										case $produccion->medida <= 90:
-											if($bandE) 
-											{
-												echo "<li class=''><a href='#default-tab-6' data-toggle='tab'>Serie E</a></li>";
-												$bandE = FALSE;
-											}
-											break;
-
-									} 
-
-								endforeach;
-								?>
-							</ul>
-							<div class="tab-content">
+								<?php $bandera = true; ?>
 							<?php foreach ($producciones as $key => $produccion): ?>
 							<?php 
 							$cerrar = FALSE;
-								switch(true)
+								/*switch(true)
 								{
 									case ($produccion->medida <= 30):
 										if($bandAS == FALSE)
@@ -165,7 +104,7 @@
 										
 										break;
 									}
-
+*/
 							?>
 								<div id="producionesItem">
 									
@@ -178,6 +117,7 @@
 									
 								</div>
 								<br>
+								<div <?php if(!$bandera) echo "style='display:none'";?>>
 								<div class="form-group m-r-10" style="margin-top: 5px;">
 									<select class="form-control" name="selectTurno[]" id="selectTurno" data-parsley-required="true">
 										<?php if($produccion->turno == 0): ?>
@@ -198,6 +138,7 @@
 								</div>
 								<div class="form-group m-r-10" style="margin-top: 5px;">
 									<select class="form-control" name="selectSilo[]" id="selectSilo" data-id="<?=$key?>" data-parsley-required="true">
+										<?php if(!$bandera) echo "<option value='0'>Turno</option>";?>
 										<option value="">Seleccione</option>
 				                        <?php foreach ($silos as $silo) {
 											echo '<option value="'.$silo->id_silo.'">'.$silo->nombre.'</option>';
@@ -255,9 +196,12 @@
 									<input type="text" placeholder="Agua" class="form-control" name="inputAgua[]" id="inputAgua" data-parsley-required="true" data-parsley-type="number" value="<?=$consumo->consumo?>" />			
 									<span class="input-group-addon">Lt</span>
 									<?php endif; endforeach; ?>
-								</div><br><br> <?php if($cerrar){ echo "</div>"; $cerrar = FALSE; }?> 
+								</div>
+								</div>
+								<?php $bandera = false ?>
+								<br><br> 
 							<?php endforeach; ?>	
-						</div>
+					
 							
 							<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
 							<button type="button" id="volver" class="btn btn-sm btn-default m-r-5">Volver</button>

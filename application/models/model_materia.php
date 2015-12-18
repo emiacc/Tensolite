@@ -70,7 +70,7 @@ class Model_materia extends CI_Model {
 	    $tabla = $query->result();
 	    $query = $this->db->query("SELECT DATE_FORMAT(e.fecha,'%e') as dia, e.consumo 
 									FROM egresos_aridos e
-									WHERE e.id_materia = $materia AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
+									WHERE e.id_materia = $materia AND e.consumo <> 0 AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
 	    $tabla = array_merge($tabla,$query->result());
 	    foreach ($tabla as $key => $row) {
     		$aux[$key] = $row->dia;
@@ -130,7 +130,7 @@ class Model_materia extends CI_Model {
 	    $tabla = $query->result();
 	    $query = $this->db->query("SELECT DATE_FORMAT(e.fecha,'%e') as dia, e.consumo, s.nombre 
 									FROM egresos_cemento e, silos s
-									WHERE e.id_silo = s.id_silo AND e.id_silo = $silo AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
+									WHERE e.id_silo = s.id_silo AND e.consumo <> 0 AND e.id_silo = $silo AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
 	    $tabla = array_merge($tabla,$query->result());
 	    foreach ($tabla as $key => $row) {
     		$aux[$key] = $row->dia;
