@@ -147,7 +147,7 @@ class Model_produccion extends CI_Model {
 		return $this->db->get_where('producciones', array('solicitud' => 0))->result();
 	}
 	public function getProduccion($id_orden) {
-		return $this->db->order_by('medida', 'ASC')->get_where('producciones', array('id_orden' => $id_orden))->result();
+		return $this->db->get_where('producciones', array('id_orden' => $id_orden))->result();
 	}
 
 	public function update_produccion($id, $produ, $cantidad, $usuario, $turno){

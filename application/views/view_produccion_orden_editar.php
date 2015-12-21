@@ -106,11 +106,40 @@
 									}
 */
 							?>
+							<?php 
+								switch(true)
+									{
+										case $produccion->medida <= 30:
+											$ser = "ASTER";												
+											break;
+
+										case $produccion->medida <= 38:
+											$ser = "Serie A";												
+											break;
+
+										case $produccion->medida <= 46:
+											$ser = "Serie B";											
+											break;
+
+										case $produccion->medida <= 54:
+											$ser = "Serie C";
+											break;
+
+										case $produccion->medida <= 62:
+											$ser = "Serie D";
+											break;
+
+										case $produccion->medida <= 90:
+											$ser = "Serie E";
+											break;
+
+									} 
+								?>
 								<div id="producionesItem">
 									
 									<div class="form-group m-r-10" style="margin-top: 5px;">
 										<input name="id_produccion[]" type="hidden" id="id_produccion" value="<?= $produccion->id_produccion ?>">
-										- Cortes: <?=$produccion->cortes?>, Medida: <?= number_format((($produccion->medida)/10),2); ?> <?php if($produccion->unidades != NULL ) echo ", Unidades ".$produccion->unidades; ?>: 
+										<?=" ".$ser?> - Cortes: <?=$produccion->cortes?>, Medida: <?= number_format((($produccion->medida)/10),2); ?> <?php if($produccion->unidades != NULL ) echo ", Unidades ".$produccion->unidades; ?>: 
 										<input type="text" placeholder="Cantidad" class="form-control" name="inputCantidad[]" id="inputCantidad" requied data-parsley-type="digits" value="<?=$produccion->cantidad?>" />
 										<input type="hidden" name="inputMedida[]" id="inputMedida" value="<?=$produccion->medida?>" />
 									</div><br>
