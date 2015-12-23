@@ -347,7 +347,7 @@ class Model_produccion extends CI_Model {
 
 	public function getPerdidasPlaya()
 	{
-		return $this->db->get_where('perdidas', array('en_playa' => 1))->result();
+		return $this->db->order_by("fecha", "desc")->get_where('perdidas', array('en_playa' => 1))->result();
 	}
 
 	public function get_cantidad_medida_perdida($id_perdida)
@@ -362,7 +362,7 @@ class Model_produccion extends CI_Model {
 	
 	public function getPerdidasProduccion()
 	{
-		return $this->db->get_where('perdidas', array('en_playa' => 0))->result();
+		return $this->db->order_by("fecha", "desc")->get_where('perdidas', array('en_playa' => 0))->result();
 	}
 
 }

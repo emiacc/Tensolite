@@ -276,7 +276,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="panel-body">
-				<table id="data-table" class="table table-striped table-bordered">
+				<table id="data-table2" class="table table-striped table-bordered">
 						<thead>
 							<tr>
 								<th>Nº</th>

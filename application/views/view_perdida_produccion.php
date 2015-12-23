@@ -297,12 +297,13 @@
 		</div>
 		<div class="panel-body">
 			<div class="panel-body">
-				<table id="data-table" class="table table-striped table-bordered">
+				<table id="data-table2" class="table table-striped table-bordered">
 						<thead>
 							<tr>
 								<th>Nº</th>
 								<th>Fecha Registro</th>								
 								<th>Medida</th>								
+								<th>Banco</th>								
 								<th>Cantidad</th>								
 								<?php if($data['rol']==1): ?>							
 									<th>Eliminar</th>
@@ -319,6 +320,7 @@
 								echo "<td>".$perdida->id_perdida."</td>";
 								echo "<td>".date_format($fechaR,'d-m-Y')."</td>";								
 								echo "<td>".number_format(($perdida->medida/10),1)."</td>";
+								echo "<td>".$perdida->nro_banco."</td>";
 								echo "<td>".$perdida->cantidad."</td>";
 								if($data['rol']==1)
 								{
