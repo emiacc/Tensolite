@@ -25,7 +25,7 @@
 					<form class="form-inline" action="<?= base_url(); ?>produccion/ingresoUpdate" method="POST" data-parsley-validate="true">	
 						<fieldset>
 							<input name="id_orden" type="hidden" id="id_orden" value="<?=$producciones[0]->id_orden?>">
-								
+								<?php if($another != NULL) echo "Existe otra orden procesada de la misma serie en este día!"; ?>
 							
 								<?php $bandera = true; ?>
 							<?php foreach ($producciones as $key => $produccion): ?>
@@ -149,10 +149,10 @@
 								</div>
 								<br>
 
-								<div <?php if(!$bandera) echo "style='display:none'";?>>
+								<div <?php if(!$bandera || $another != NULL) echo "style='display:none'";?>>
 								<div class="form-group m-r-10" style="margin-top: 5px;">
 									<select class="form-control" name="selectTurno[]" id="selectTurno" data-parsley-required="true">
-										<?php if(!$bandera) echo "<option value='1'>Turno</option>";?>
+										<?php if(!$bandera || $another != NULL) echo "<option value='1'>Turno</option>";?>
 										<option value="">Turno</option>
 										<option value="0">Mañana</option>
 										<option value="1">Tarde</option>
@@ -160,12 +160,12 @@
 								</div>
 								<br>
 								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Cemento" class="form-control" name="inputCemento[]" id="inputCemento" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
+									<input type="text" placeholder="Cemento" class="form-control" name="inputCemento[]" id="inputCemento" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
 									<span class="input-group-addon">Kg</span>
 								</div>
 								<div class="form-group m-r-10" style="margin-top: 5px;">
 									<select class="form-control" name="selectSilo[]" id="selectSilo" data-parsley-required="true">
-										<?php if(!$bandera) echo "<option value='0'>Turno</option>";?>
+										<?php if(!$bandera || $another != NULL) echo "<option value='0'>Turno</option>";?>
 										<option value="">Seleccione</option>
 				                        <?php foreach ($silos as $silo) {
 											echo '<option value="'.$silo->id_silo.'">'.$silo->nombre.'</option>';
@@ -174,37 +174,37 @@
 								</div>
 								<br>
 								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Arena Tipo1" class="form-control" name="inputArena[]" id="inputArena" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
+									<input type="text" placeholder="Arena Tipo1" class="form-control" name="inputArena[]" id="inputArena" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
 									<span class="input-group-addon">Kg</span>
 								</div>
 								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Arena Tipo2" class="form-control" name="inputArena2[]" id="inputArena2" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
+									<input type="text" placeholder="Arena Tipo2" class="form-control" name="inputArena2[]" id="inputArena2" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
 									<span class="input-group-addon">Kg</span>
 								</div>
 								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Binder" class="form-control" name="inputBinder[]" id="inputBinder" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
-									<span class="input-group-addon">Kg</span>
-								</div>
-								<br>
-								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Triturado" class="form-control" name="inputTriturado[]" id="inputTriturado" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
-									<span class="input-group-addon">Kg</span>
-								</div>
-								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Acelerante" class="form-control" name="inputAcelerante[]" id="inputAcelerante" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
-									<span class="input-group-addon">Kg</span>
-								</div>
-								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Plastificante" class="form-control" name="inputPlastificante[]" id="inputPlastificante" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
+									<input type="text" placeholder="Binder" class="form-control" name="inputBinder[]" id="inputBinder" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
 									<span class="input-group-addon">Kg</span>
 								</div>
 								<br>
 								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Ceniza" class="form-control" name="inputCeniza[]" id="inputCeniza" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
+									<input type="text" placeholder="Triturado" class="form-control" name="inputTriturado[]" id="inputTriturado" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
 									<span class="input-group-addon">Kg</span>
 								</div>
 								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
-									<input type="text" placeholder="Agua" class="form-control" name="inputAgua[]" id="inputAgua" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera) echo "value='0'";?>/>			
+									<input type="text" placeholder="Acelerante" class="form-control" name="inputAcelerante[]" id="inputAcelerante" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
+									<span class="input-group-addon">Kg</span>
+								</div>
+								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
+									<input type="text" placeholder="Plastificante" class="form-control" name="inputPlastificante[]" id="inputPlastificante" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
+									<span class="input-group-addon">Kg</span>
+								</div>
+								<br>
+								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
+									<input type="text" placeholder="Ceniza" class="form-control" name="inputCeniza[]" id="inputCeniza" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
+									<span class="input-group-addon">Kg</span>
+								</div>
+								<div class="form-group m-r-10 input-group" style="margin-top: 5px;">			
+									<input type="text" placeholder="Agua" class="form-control" name="inputAgua[]" id="inputAgua" data-parsley-required="true" data-parsley-type="number" <?php if(!$bandera || $another != NULL) echo "value='0'";?>/>			
 									<span class="input-group-addon">Lt</span>
 								</div>
 								</div>

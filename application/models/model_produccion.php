@@ -149,6 +149,72 @@ class Model_produccion extends CI_Model {
 	public function getProduccion($id_orden) {
 		return $this->db->get_where('producciones', array('id_orden' => $id_orden))->result();
 	}
+	public function getAnotherProduccion($id_orden) {
+		$consulta = $this->db->query("select * from producciones 
+		where fecha = (select fecha from ordenes_produccion where id_orden = $id_orden)
+		and id_orden <> $id_orden
+		and solicitud = 1")->result();
+
+		$id_produccion_con_consumo = 0;
+		foreach ($consulta as $value) {
+			$id = $value->id_orden;
+			//var_dump($this->db->get_where('egresos_cemento', array('id_orden_produccion' => $id, "consumo !=" => 0))->result());
+			$egresos_cemento = $this->db->get_where('egresos_cemento', array('id_orden_produccion' => $id, "consumo !=" => 0))->row();
+			if(!empty($egresos_cemento))
+			{
+				$id_produccion_con_consumo = $egresos_cemento->id_produccion;  
+			} 
+		}
+
+
+		$medida_original = $this->db->get_where('producciones', array('id_orden' => $id_orden))->row()->medida;
+		echo $medida_original;
+		
+		$medida_con_consumo = $this->db->get_where('producciones', array('id_produccion' => $id_produccion_con_consumo))->row()->medida;
+		echo $medida_con_consumo;
+		 $bandera = FALSE;
+								switch(true)
+									{
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+							}
+
+
+
+		if($bandera == FALSE) return NULL;
+		if($id_produccion_con_consumo != 0)
+		{
+			$egreso_cemento = $this->db->get_where('egresos_cemento', array('id_produccion' => $id_produccion_con_consumo))->row();
+			$egresos_aridos = $this->db->get_where('egresos_aridos', array('id_produccion' => $id_produccion_con_consumo))->result();
+			
+			array_push($egresos_aridos, $egreso_cemento);
+			return $egresos_aridos;
+		}
+		return NULL;
+
+	}
 
 	public function update_produccion($id, $produ, $cantidad, $usuario, $turno){
 		$data = array(

@@ -43,6 +43,8 @@ class Produccion extends CI_Controller {
 
     public function indexOrden($id_orden = 0)
     {
+        $this->data['another'] = $this->model_produccion->getAnotherProduccion($id_orden);
+        
         $this->data['producciones'] = $this->model_produccion->getProduccion($id_orden);
 
         $this->data['usuario'] = $this->model_perfil->getUser($this->data['data']['id_usuario']);
