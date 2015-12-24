@@ -25,6 +25,25 @@
 					<form class="form-inline" action="<?= base_url(); ?>produccion/ingresoUpdateUpdate" method="POST" data-parsley-validate="true">	
 						<fieldset>
 							<input name="id_orden" type="hidden" id="id_orden" value="<?=$producciones[0]->id_orden?>">
+								<?php if($another != NULL): echo "<br>Existe otra orden procesada de la misma serie en esta fecha!"; ?>
+								<br>
+								<br>
+								<div id="consumo">
+									Consumo original de materia prima:
+									<div>Arena: <?=$another[0]->consumo?></div>
+									<div>Binder: <?=$another[1]->consumo?></div>
+									<div>Acelerante: <?=$another[2]->consumo?></div>
+									<div>Plastificante: <?=$another[3]->consumo?></div>
+									<div>Triturado: <?=$another[4]->consumo?></div>
+									<div>Ceniza: <?=$another[5]->consumo?></div>
+									<div>Arena tipo 2: <?=$another[6]->consumo?></div>
+									<div>Arena agua: <?=$another[7]->consumo?></div>
+									<div>Acero: <?=$another[8]->consumo?></div>
+									<div>Cemento: <?=$another[9]->consumo?></div>
+								</div>
+								
+							<?php endif; ?>
+
 								<?php $bandera = true; ?>
 							<?php foreach ($producciones as $key => $produccion): ?>
 							<?php 
@@ -146,7 +165,7 @@
 									
 								</div>
 								<br>
-								<div <?php if(!$bandera) echo "style='display:none'";?>>
+								<div <?php if(!$bandera || $another != NULL) echo "style='display:none'";?>>
 								<div class="form-group m-r-10" style="margin-top: 5px;">
 									<select class="form-control" name="selectTurno[]" id="selectTurno" data-parsley-required="true">
 										<?php if($produccion->turno == 0): ?>
@@ -167,7 +186,7 @@
 								</div>
 								<div class="form-group m-r-10" style="margin-top: 5px;">
 									<select class="form-control" name="selectSilo[]" id="selectSilo" data-id="<?=$key?>" data-parsley-required="true">
-										<?php if(!$bandera) echo "<option value='0'>Turno</option>";?>
+										<?php if(!$bandera || $another != NULL) echo "<option value='0'>Turno</option>";?>
 										<option value="">Seleccione</option>
 				                        <?php foreach ($silos as $silo) {
 											echo '<option value="'.$silo->id_silo.'">'.$silo->nombre.'</option>';

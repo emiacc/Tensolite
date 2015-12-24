@@ -60,6 +60,9 @@ class Produccion extends CI_Controller {
 
     public function editarNuevaOrden($id_orden = 0)
     {
+        $this->data['another'] = $this->model_produccion->getAnotherProduccion($id_orden);
+        
+        
         $this->data['producciones'] = $this->model_produccion->getProduccion($id_orden);
         $this->data['consumos_aridos'] = $this->model_materia->getConsumosAridos($id_orden);
         $this->data['consumos_cemento'] = $this->model_materia->getConsumosCemento($id_orden);

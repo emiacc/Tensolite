@@ -25,7 +25,24 @@
 					<form class="form-inline" action="<?= base_url(); ?>produccion/ingresoUpdate" method="POST" data-parsley-validate="true">	
 						<fieldset>
 							<input name="id_orden" type="hidden" id="id_orden" value="<?=$producciones[0]->id_orden?>">
-								<?php if($another != NULL) echo "Existe otra orden procesada de la misma serie en este día!"; ?>
+							<?php if($another != NULL): echo "<br>Existe otra orden procesada de la misma serie en esta fecha!"; ?>
+								<br>
+								<br>
+								<div id="consumo">
+									Consumo original de materia prima:
+									<div>Arena: <?=$another[0]->consumo?></div>
+									<div>Binder: <?=$another[1]->consumo?></div>
+									<div>Acelerante: <?=$another[2]->consumo?></div>
+									<div>Plastificante: <?=$another[3]->consumo?></div>
+									<div>Triturado: <?=$another[4]->consumo?></div>
+									<div>Ceniza: <?=$another[5]->consumo?></div>
+									<div>Arena tipo 2: <?=$another[6]->consumo?></div>
+									<div>Arena agua: <?=$another[7]->consumo?></div>
+									<div>Acero: <?=$another[8]->consumo?></div>
+									<div>Cemento: <?=$another[9]->consumo?></div>
+								</div>
+								
+							<?php endif; ?>
 							
 								<?php $bandera = true; ?>
 							<?php foreach ($producciones as $key => $produccion): ?>

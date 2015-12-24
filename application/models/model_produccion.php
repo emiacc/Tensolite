@@ -168,10 +168,9 @@ class Model_produccion extends CI_Model {
 
 
 		$medida_original = $this->db->get_where('producciones', array('id_orden' => $id_orden))->row()->medida;
-		echo $medida_original;
 		
-		$medida_con_consumo = $this->db->get_where('producciones', array('id_produccion' => $id_produccion_con_consumo))->row()->medida;
-		echo $medida_con_consumo;
+		$medida_con_consumo = $this->db->get_where('producciones', array('id_produccion' => $id_produccion_con_consumo))->row();
+		if(!empty($medida_con_consumo)) $medida_con_consumo = $medida_con_consumo->medida;
 		 $bandera = FALSE;
 								switch(true)
 									{
