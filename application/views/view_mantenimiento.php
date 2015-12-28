@@ -197,6 +197,7 @@
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/data-table.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 	
@@ -212,8 +213,19 @@
 		$("#LImantenimiento").addClass("active");
 		
 		
-		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
-		if(<?=$mensaje;?>!= 1 && <?=$mensaje;?>!= 0) alert('Registrado con exito. Nro de Solicitud: '+<?=$mensaje;?>);
+		
+	if(<?=$mensaje;?>== 1){
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito"
+	        });
+		}
+		if(<?=$mensaje;?>!= 1 && <?=$mensaje;?>!= 0) {
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito. Nro de Solicitud: "+<?=$mensaje;?>
+	        });
+		}
 
 		/*$('.orden').click(function(event){
 			event.preventDefault()

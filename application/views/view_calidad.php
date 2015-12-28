@@ -228,6 +228,7 @@
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/data-table.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 		
@@ -242,9 +243,24 @@
 		$("#LIcalidad").addClass("active");
 		
 		if(<?=$mensaje;?> == 0) console.log('0');
-		else if(<?=$mensaje;?>== 1) alert('Registrado con exito');
-		else if(<?=$mensaje;?>== 2) alert('Editado con exito');
-		else alert('Registrado con exito. Nro de Solicitud: '+<?=$mensaje;?>);
+		else if(<?=$mensaje;?>== 1){
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito"
+	        });
+		}
+		else if(<?=$mensaje;?>== 2){
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Editado con exito"
+	        });
+		}
+		else{
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito. Nro de Solicitud: "+<?=$mensaje;?>
+	        });
+		} 
 
 	    $('#nueva').click(function () {
 	        location.href = '<?= base_url(); ?>calidad/nuevoForm';	        

@@ -387,6 +387,7 @@
 <script src="<?= base_url(); ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?= base_url(); ?>assets/js/form-plugins.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 	
@@ -418,8 +419,18 @@
   			}			
 		});
 
-		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
-		if(<?=$mensaje;?>== 2) alert('Error');
+		if(<?=$mensaje;?>== 1){
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito"
+	        });
+		} 
+		if(<?=$mensaje;?>== 2){
+			$.gritter.add({
+	            title: "Error",
+	            text: "Error al guardar"
+	        });
+		} 
 
 		<?php if($data['rol']==1): ?>
 			$(".btn-delete").click(function(){

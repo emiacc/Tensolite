@@ -439,6 +439,7 @@
 <script src="<?= base_url(); ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?= base_url(); ?>assets/js/form-plugins.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <style type="text/css">
@@ -463,8 +464,18 @@
 		});	
 		$('div.lugar').tooltip({placement: "top"});	
 		*/
-		if(<?=$mensaje;?>== 1) alert('Registrado con exito');		
-		if(<?=$mensaje;?>== 2) alert('Número incorrecto');		
+		if(<?=$mensaje;?>== 1){
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito"
+	        });
+		} 		
+		if(<?=$mensaje;?>== 2) {
+			$.gritter.add({
+	            title: "Error",
+	            text: "Número Incorrecto"
+	        });
+		} 
 		/*
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(1)').prepend('<div class="naval">A</div>')});
 		$('.tab-pane').each(function(){ $(this).find('div.row:eq(2)').prepend('<div class="naval">B</div>')});

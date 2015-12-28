@@ -574,7 +574,7 @@
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/data-table.js"></script>
-
+<script src="<?= base_url(); ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 	
@@ -597,8 +597,18 @@
 		$('#inputAnio').attr("value",d.getFullYear());
 		$('#selectMes').attr("value",d.getMonth()+1);		
 
-		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
-		if(<?=$mensaje;?>== 2) alert('Error no hay suficiente stock en el lugar');
+		if(<?=$mensaje;?>== 1){
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito"
+	        });
+		}
+		if(<?=$mensaje;?>== 2) {
+			$.gritter.add({
+	            title: "Error",
+	            text: "No hay stock suficiente"
+	        });
+		}
 
 		$("#mas").click(function(){			
 			//$("#items").append($("#item").html());	

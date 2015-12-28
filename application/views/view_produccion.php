@@ -235,6 +235,7 @@
 			<h4 class="panel-title">Ordenes de Producción</h4>
 		</div>
 		<div class="panel-body">
+
 			<a href="#modal-orden" data-toggle="modal" class="btn btn-primary pull-right m-r-25">Generar Orden</a>
 			<br><br><br><br><br>
 			<div class="table">
@@ -556,6 +557,9 @@
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/data-table.js"></script>
+
+<script src="<?= base_url(); ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
+
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 	
@@ -566,6 +570,7 @@
 
 		App.init();
 		FormPlugins.init();
+		
 		//cambio el item activo en el sidebar
 		$("#ULsidebar > li").removeClass("active");
 		$("#LIproduccion").addClass("active");
@@ -580,8 +585,20 @@
 		$('#selectMes').attr("value",d.getMonth()+1);
 		$('#inputDia').attr("value",d.getDate());
 
-		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
-		if(<?=$mensaje;?>!= 1 && <?=$mensaje;?>!= 0) alert('Registrado con exito. Nro de orden: '+<?=$mensaje;?>);
+		if(<?=$mensaje;?>== 1)
+		{
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito"
+	        });
+		} 
+		if(<?=$mensaje;?>!= 1 && <?=$mensaje;?>!= 0)
+		{
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito. Nro de orden: "+<?=$mensaje;?>
+	        });
+		} 
 
 
 		$("ul.pagination").click(function(){

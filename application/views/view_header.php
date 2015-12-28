@@ -21,6 +21,7 @@
 	<link href="<?= base_url(); ?>assets/css/style-responsive.min.css" rel="stylesheet" />
 	<link href="<?= base_url(); ?>assets/css/theme/default.css" rel="stylesheet" id="theme" />
 	<link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" />
+	<link href="<?= base_url(); ?>assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />	
 	<!-- ================== END BASE CSS STYLE ================== -->
 </head>
 <body>
