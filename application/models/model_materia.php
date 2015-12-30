@@ -10,7 +10,7 @@ class Model_materia extends CI_Model {
    		return $this->db->get_where('usuarios', array('id_usuario' => $usuario))->row();
    	}
    	
-   	public function egreso($fecha, $cantidad, $usuario, $materia) {   	
+   	public function egreso($fecha, $cantidad, $usuario, $materia, $id_orden = NULL, $id_produccion = NULL) {   	
 	   	//obtengo el numero de egreso para la materia prima actual
 	   	$this->db->select('MAX(id_egreso) as max');
 	    $this->db->from('egresos_aridos');
@@ -24,7 +24,9 @@ class Model_materia extends CI_Model {
 	               'id_egreso' => $egreso,
 	               'fecha' => $fecha,
 	               'consumo' => $cantidad,
-	               'id_usuario' => $usuario
+	               'id_usuario' => $usuario,
+	               'id_orden_produccion' => $id_orden,
+	               'id_produccion' => $id_produccion
 	            );
 		$this->db->insert('egresos_aridos', $data); 
     }
@@ -62,13 +64,13 @@ class Model_materia extends CI_Model {
    	public function getTabla($materia, $mes, $anio, $proveedor){
    		$prov = '';
    		if($proveedor != -1) $prov = " AND i.id_proveedor = ".$proveedor;
-		$query = $this->db->query("SELECT DATE_FORMAT(i.fecha,'%e') as dia, p.nombre, i.nro_remito, i.cantidad 
+		$query = $this->db->query("SELECT DATE_FORMAT(i.fecha,'%e') as dia, p.nombre, i.nro_remito, i.cantidad, i.id_materia, i.id_ingreso, i.precio, i.id_proveedor
 									FROM ingresos_aridos i, proveedores p 
 									WHERE i.id_proveedor = p.id_proveedor AND i.id_materia = $materia AND YEAR(i.fecha) = $anio AND MONTH(i.fecha) = $mes".$prov." ORDER BY i.fecha");
 	    $tabla = $query->result();
 	    $query = $this->db->query("SELECT DATE_FORMAT(e.fecha,'%e') as dia, e.consumo 
 									FROM egresos_aridos e
-									WHERE e.id_materia = $materia AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
+									WHERE e.id_materia = $materia AND e.consumo <> 0 AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
 	    $tabla = array_merge($tabla,$query->result());
 	    foreach ($tabla as $key => $row) {
     		$aux[$key] = $row->dia;
@@ -78,7 +80,7 @@ class Model_materia extends CI_Model {
 	    return $tabla;
 	}
 
-	public function egresoCemento($fecha, $cantidad, $silo, $usuario) {   	
+	public function egresoCemento($fecha, $cantidad, $silo, $usuario, $id_orden = NULL, $id_produccion = NULL) {   	
 	   	//obtengo el numero de egreso para la materia prima actual
 	   	$this->db->select('MAX(id_egreso) as max');
 	    $this->db->from('egresos_cemento');
@@ -92,7 +94,9 @@ class Model_materia extends CI_Model {
 	               'id_egreso' => $egreso,
 	               'fecha' => $fecha,
 	               'consumo' => $cantidad,
-	               'id_usuario' => $usuario
+	               'id_usuario' => $usuario,
+	               'id_orden_produccion' => $id_orden,
+	               'id_produccion' => $id_produccion
 	            );
 		$this->db->insert('egresos_cemento', $data); 
     }
@@ -120,13 +124,13 @@ class Model_materia extends CI_Model {
    	}
 
    	public function getTablaCemento($mes, $anio, $silo){
-   		$query = $this->db->query("SELECT DATE_FORMAT(i.fecha,'%e') as dia, s.nombre, i.nro_factura, i.kg_origen, i.kg_fabrica, (i.kg_origen-i.kg_fabrica) as dif 
+   		$query = $this->db->query("SELECT DATE_FORMAT(i.fecha,'%e') as dia, s.nombre, i.nro_factura, i.id_silo, i.precio, i.id_ingreso, i.kg_origen, i.kg_fabrica, (i.kg_origen-i.kg_fabrica) as dif 
 									FROM ingresos_cemento i, silos s 
 									WHERE i.id_silo = s.id_silo AND YEAR(i.fecha) = $anio AND MONTH(i.fecha) = $mes AND i.id_silo = $silo ORDER BY i.fecha");
 	    $tabla = $query->result();
 	    $query = $this->db->query("SELECT DATE_FORMAT(e.fecha,'%e') as dia, e.consumo, s.nombre 
 									FROM egresos_cemento e, silos s
-									WHERE e.id_silo = s.id_silo AND e.id_silo = $silo AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
+									WHERE e.id_silo = s.id_silo AND e.consumo <> 0 AND e.id_silo = $silo AND YEAR(e.fecha) = $anio AND MONTH(e.fecha) = $mes ORDER BY e.fecha");
 	    $tabla = array_merge($tabla,$query->result());
 	    foreach ($tabla as $key => $row) {
     		$aux[$key] = $row->dia;
@@ -170,6 +174,70 @@ class Model_materia extends CI_Model {
 	    $this->db->from('materia_prima');
 	    $this->db->where('id_materia', $materia);
 	    return  $this->db->get()->row()->capacidad_max;
+	}
+
+	public function eliminar($id_materia, $ingreso)
+	{
+		$this->db->where('id_materia', $id_materia);
+		$this->db->where('id_ingreso', $ingreso);
+		$this->db->delete('ingresos_aridos');
+	}
+
+	public function eliminar_cemento($id_silo, $ingreso)
+	{
+		$this->db->where('id_silo', $id_silo);
+		$this->db->where('id_ingreso', $ingreso);
+		$this->db->delete('ingresos_cemento');
+	}
+
+	public function editar($id_materia, $id_ingreso, $fecha, $cantidad, $remito, $proveedor, $precio)
+	{
+		$this->db->set('fecha', $fecha);
+		$this->db->set('cantidad', $cantidad);
+		$this->db->set('precio', $precio);
+		$this->db->set('id_proveedor', $proveedor);
+		$this->db->set('nro_remito', $remito);
+
+		$this->db->where('id_materia', $id_materia);
+		$this->db->where('id_ingreso', $id_ingreso);
+		$this->db->update('ingresos_aridos');
+
+	}
+
+	public function editar_cemento($id_silo, $id_ingreso, $fecha, $kgo, $kgd, $remito, $precio)
+	{
+		$this->db->set('fecha', $fecha);
+		$this->db->set('kg_origen', $kgo);
+		$this->db->set('kg_fabrica', $kgd);
+		$this->db->set('nro_factura', $remito);
+		$this->db->set('precio', $precio);
+
+		$this->db->where('id_silo', $id_silo);
+		$this->db->where('id_ingreso', $id_ingreso);
+		$this->db->update('ingresos_cemento');
+
+	}
+
+	public function delete_egresos($id_orden)
+	{
+		$this->db->delete('egresos_aridos', array('id_orden_produccion' => $id_orden));
+		$this->db->delete('egresos_cemento', array('id_orden_produccion' => $id_orden));
+	}
+
+	public function getConsumosAridos($id_orden)
+	{
+		$this->db->select('*');
+	    $this->db->from('egresos_aridos');
+	    $this->db->where('id_orden_produccion', $id_orden);
+	    return  $this->db->get()->result();
+	}
+
+	public function getConsumosCemento($id_orden)
+	{
+		$this->db->select('*');
+	    $this->db->from('egresos_cemento');
+	    $this->db->where('id_orden_produccion', $id_orden);
+	    return  $this->db->get()->result();
 	}
 }
 ?>

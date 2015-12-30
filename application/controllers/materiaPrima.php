@@ -41,7 +41,8 @@ class MateriaPrima extends CI_Controller {
 		$this->load->view('view_materia', $this->data);		
 	}
 
-	public function egreso($materia = 'nada') {
+	public function egreso($materia = 'nada') 
+	{
 		if($materia == 'nada') redirect('resumen');
 
 		$fecha = $this->input->post('inputFechaEgreso');
@@ -51,7 +52,8 @@ class MateriaPrima extends CI_Controller {
         redirect('materiaPrima/index/'.$materia.'/1');
 	}
 
-	public function ingreso($materia = 'nada') {
+	public function ingreso($materia = 'nada') 
+	{
 		if($materia == 'nada') redirect('resumen');
 
 		$fecha = $this->input->post('inputFechaIngreso');
@@ -62,6 +64,36 @@ class MateriaPrima extends CI_Controller {
         $fecha = date('Y-m-d',strtotime($fecha));
         $this->model_materia->ingreso($fecha, $cantidad, $remito, $proveedor, $precio,$this->data['data']['id_usuario'], $this->ids($materia));
         $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Ingreso ".$cantidad." de ".$materia);
+        redirect('materiaPrima/index/'.$materia.'/1');
+	}
+
+	public function eliminar($materia)
+	{
+		$id_materia = $this->input->post("materia");
+		$ingreso = $this->input->post("ingreso");
+		if($id_materia == $this->ids($materia))
+		{
+			$this->model_materia->eliminar($id_materia, $ingreso);
+        }
+        redirect('materiaPrima/index/'.$materia.'/1');
+	}
+
+	public function editar($materia = 'nada')
+	{
+		if($materia == 'nada') redirect('resumen');
+
+		$id_materia = $this->input->post('id_materia');
+		$id_ingreso = $this->input->post('id_ingreso');
+
+		$proveedor = $this->input->post('selectProveedorIngreso_edit');
+		$fecha = $this->input->post('inputFechaIngreso2');
+        $remito = $this->input->post('inputNroFactura_edit');
+        $cantidad = $this->input->post('inputCantidadIngreso_edit');
+        $precio = $this->input->post('inputPrecio_edit');
+
+        $fecha = date('Y-m-d',strtotime($fecha));
+
+        $this->model_materia->editar($id_materia, $id_ingreso, $fecha, $cantidad, $remito, $proveedor, $precio);
         redirect('materiaPrima/index/'.$materia.'/1');
 	}
 
@@ -76,6 +108,7 @@ class MateriaPrima extends CI_Controller {
 			case 'ceniza' : return 7;	
 			case 'arena2' : return 8;	
 			case 'agua' : return 9;	
+			case 'acero' : return 10;	
 			default: return 0;
 		}
 	}
@@ -94,6 +127,21 @@ class MateriaPrima extends CI_Controller {
 			case 11: return 'Noviembre';
 			case 12: return 'Diciemrbe';
 		}
+	}
+
+	public function stock_real($materia)
+	{
+		$stockActual =  $this->model_materia->getStockMateria($this->ids($materia));
+		$res = $this->input->post('inputCantidadIngreso') - $stockActual;
+		if($res != 0)
+		{
+			//ingreso
+			$this->model_materia->ingreso(NULL, $res, "CORRECCION STOCK", 0, 0, $this->data['data']['id_usuario'], $this->ids($materia));
+
+		}
+		redirect("materiaPrima/index/$materia");		
+		
+
 	}
 }
 ?>

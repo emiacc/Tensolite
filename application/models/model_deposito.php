@@ -166,7 +166,7 @@ class Model_deposito extends CI_Model {
       (IFNULL((SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 1 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0) 
       - IFNULL((SELECT SUM(d.cantidad) FROM deposito d WHERE d.ingreso = 0 AND d.id_lugar = l.id_lugar GROUP BY d.id_lugar),0)) as cant 
       FROM lugares l
-      WHERE l.medida > 62 AND l.medida <= 72");
+      WHERE l.medida > 62 AND l.medida <= 82");
     $resultado = $query->result();
     $suma = 0;
     foreach ($resultado as $value) {
@@ -186,5 +186,113 @@ class Model_deposito extends CI_Model {
       as cant FROM lugares l Where l.id_lugar = $id_lugar")->row();
     return $query->cant;
   }
+
+
+
+
+
+  public function new_ingreso($cantidades, $medidas, $id_usuario, $id_orden = NULL)
+  {
+    foreach($cantidades as $key=>$cantidad) {            
+      $data = array(
+                 'cantidad' => $cantidad,
+                 'medida' => $medidas[$key],
+                 'ingreso' => 1,
+                 'id_usuario' => $id_usuario,
+                 'id_orden_produccion' => $id_orden
+              );
+      $this->db->insert('deposito_new', $data); 
+    }
+  }
+
+  public function new_ingreso_recuperacion($cantidad, $medida, $id_usuario)
+  {
+      $data = array(
+                 'cantidad' => $cantidad,
+                 'medida' => $medida,
+                 'ingreso' => 1,
+                 'id_usuario' => $id_usuario,
+                 'id_orden_produccion' => 0
+              );
+      $this->db->insert('deposito_new', $data); 
+    
+  }
+
+  public function new_egreso($cantidades, $medidas, $id_usuario)
+  {
+    foreach($cantidades as $key=>$cantidad) {            
+      $data = array(
+                 'cantidad' => $cantidad,
+                 'medida' => $medidas[$key],
+                 'ingreso' => 0,
+                 'id_usuario' => $id_usuario
+              );
+      $this->db->insert('deposito_new', $data); 
+    }
+  }
+
+  public function new_egreso_perdida($cantidad, $medida, $id_usuario)
+  {
+              
+      $data = array(
+                 'cantidad' => $cantidad,
+                 'medida' => $medida,
+                 'ingreso' => 0,
+                 'id_usuario' => $id_usuario,
+                 'id_orden_produccion' => 0
+              );
+      $this->db->insert('deposito_new', $data); 
+    
+  }
+
+  public function get_stock_x_medida($medida)
+  {
+    $query = $this->db->query("SELECT
+      ( IFNULL( (SELECT SUM(cantidad) FROM deposito_new WHERE ingreso = 1 and medida=$medida) , 0 ) -
+        IFNULL( (SELECT SUM(cantidad) FROM deposito_new WHERE ingreso = 0 and medida=$medida) , 0 ) ) as cant 
+       ")->row();
+    return $query->cant;
+  }
+
+  public function get_percent_x_medida($medida)
+  {
+    $cant = $this->get_stock_x_medida($medida);
+    $this->db->select('maximo');
+    $this->db->from('medidas');
+    $this->db->where('medida', $medida);
+    $maximo = $this->db->get()->row()->maximo;
+    if($maximo > 0)
+      return number_format( $cant * 100 / $maximo , 0);
+    return "";
+  }
+
+
+  public function update_percents($medida, $maximo)
+  {
+    $this->db->query("UPDATE medidas SET maximo = $maximo WHERE medida = $medida");
+  }
+
+  public function get_maximos()
+  {
+    return $this->db->get('medidas')->result();
+  }
+
+  public function new_ingreso_delete_despacho($cantidad, $medida, $id_usuario)
+  {
+    $data = array(
+      'cantidad' => $cantidad,
+      'medida' => $medida,
+      'ingreso' => 1,
+      'id_usuario' => $id_usuario
+    );
+    $this->db->insert('deposito_new', $data); 
+    
+  }
+
+  public function delete_ingresos_deposito($id_orden)
+  {
+    $this->db->delete('deposito_new', array('id_orden_produccion' => $id_orden));
+  }
+
 
 }

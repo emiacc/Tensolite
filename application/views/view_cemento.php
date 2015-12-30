@@ -132,14 +132,15 @@
 				<div class="panel-body panel-form">
 					<br>
 					<h4 class="text-center">Silo 1</h4>
-					<h5 class="text-center">Stock Actual: <?=$stockActual1?></h5>					
+					<h5 class="text-center">Stock Actual: <?=$stockActual1?> Kg</h5>					
 					<h5 class="text-center"><?=number_format((($stockActual1*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
-					<form action="<?= base_url(); ?>materiaPrima/stock_real/1" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+					<form action="<?= base_url(); ?>cemento/stock_real/1" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140"/>
+								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -151,33 +152,35 @@
 					</form>	
 					<br><hr><br>
 					<h4 class="text-center">Silo 2</h4>
-					<h5 class="text-center">Stock Actual: <?=$stockActual2?></h5>					
+					<h5 class="text-center">Stock Actual: <?=$stockActual2?> Kg</h5>					
 					<h5 class="text-center"><?=number_format((($stockActual2*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
-					<form action="<?= base_url(); ?>materiaPrima/stock_real/2" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+					<form action="<?= base_url(); ?>cemento/stock_real/2" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140" />
+								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-4"></label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<button type="submit" class="btn btn-primary">Registrar</button>
+								<button type="submit" class="btn btn-primary">Registrar</button>								
 							</div>
 						</div>
 					</form>	
 					<br><hr><br>
 					<h4 class="text-center">Silo 3</h4>
-					<h5 class="text-center">Stock Actual: <?=$stockActual3?></h5>					
+					<h5 class="text-center">Stock Actual: <?=$stockActual3?> Kg</h5>					
 					<h5 class="text-center"><?=number_format((($stockActual3*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
-					<form action="<?= base_url(); ?>materiaPrima/stock_real/3" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+					<form action="<?= base_url(); ?>cemento/stock_real/3" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140"/>
+								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -247,20 +250,32 @@
 									<th>Kg Fab</th>
 									<th>Dif</th>
 									<th>Consumo</th>
+									<?php if($data['rol']==1): ?>							
+										<th>Accion</th>
+									<?php endif; ?>	
 								</tr>
 							</thead>
 							<tbody>
 								<?php									
 									foreach ($tabla as $row)
 									{
-										echo "<tr>";
+										echo "<tr data-silo='"; if(isset($row->id_silo)) echo $row->id_silo; echo "' data-ingreso='"; if(isset($row->id_ingreso)) echo $row->id_ingreso; echo "'>";			
 										echo "<td>".$row->dia."</td>";
-										echo "<td>"; if(isset($row->nombre)) echo $row->nombre; echo "</td>";
-										echo "<td>"; if(isset($row->nro_factura)) echo $row->nro_factura; echo "</td>";
-										echo "<td>"; if(isset($row->kg_origen)) echo $row->kg_origen; echo "</td>";
-										echo "<td>"; if(isset($row->kg_fabrica)) echo $row->kg_fabrica; echo "</td>";
+										echo "<td class='silo' data-silo='"; if(isset($row->id_silo)) echo $row->id_silo; echo "'>"; if(isset($row->nombre)) echo $row->nombre; echo "</td>";
+										echo "<td class='factura'>"; if(isset($row->nro_factura)) echo $row->nro_factura; echo "</td>";
+										echo "<td class='kgo'>"; if(isset($row->kg_origen)) echo $row->kg_origen; echo "</td>";
+										echo "<td class='kgd'>"; if(isset($row->kg_fabrica)) echo $row->kg_fabrica; echo "</td>";
 										echo "<td>"; if(isset($row->dif)) echo $row->dif; echo "</td>";
 										echo "<td>"; if(isset($row->consumo)) echo $row->consumo; echo "</td>";
+										if($data['rol']==1 && (isset($row->id_silo)) )
+										{
+											echo "<td data-precio='"; echo $row->precio; echo "'>";
+											echo "<a class='btn btn-warning btn-icon btn-circle btn-sm btn-edit'><i class='fa fa-pencil'></i></a>
+												<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a>
+											</td>";
+										}
+										else
+											echo "<td></td>";
 										echo "</tr>";
 									} 
 								?>												
@@ -274,6 +289,99 @@
 	</div>
 </div>
 <!-- end #content -->
+
+<!-- modal delete -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_delete">
+   <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Eliminar ingreso</h4>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro que desea eliminar el ingreso?
+      </div>
+      <div class="modal-footer">
+        <form method="POST" action="<?=base_url()?>cemento/eliminar">
+        	<input type="hidden" name="silo" id="silo">
+        	<input type="hidden" name="ingreso" id="ingreso">
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        	<button type="submit" class="btn btn-primary">Aceptar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal delete -->
+
+<!-- modal edit -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_edit">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Eliminar ingreso</h4>
+			</div>
+			<div class="modal-body">
+				<form action="<?= base_url(); ?>cemento/editar" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
+					<input type="hidden" name="id_silo" id="id_silo">
+					<input type="hidden" name="id_ingreso" id="id_ingreso">
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="selectSiloIngreso_edit">Silo:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<select class="form-control" id="selectSiloIngreso_edit" name="selectSiloIngreso_edit" data-parsley-required="true" disabled>											
+								<option value="">Seleccione</option>
+								<?php foreach ($silos as $silo) {
+									echo '<option value="'.$silo->id_silo.'">'.$silo->nombre.'</option>';
+								} ?>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputFechaIngreso2">Fecha:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<div class="input-group date" id="datepicker-autoClose3" data-date-format="dd-mm-yyyy" >
+								<input id="inputFechaIngreso2" name="inputFechaIngreso2" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputNroFactura_edit">Nro Factura:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<input class="form-control" type="text" id="inputNroFactura_edit" name="inputNroFactura_edit" placeholder="Número Factura" data-parsley-required="true"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputKgOrigen_edit">Kg Origen:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<input class="form-control inputNumerico" type="text" id="inputKgOrigen_edit" name="inputKgOrigen_edit" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputKgFabrica_edit">Kg Fábrica:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<input class="form-control inputNumerico" type="text" id="inputKgFabrica_edit" name="inputKgFabrica_edit" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4" for="inputPrecio_edit">Precio:</label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<input class="form-control inputNumerico" type="text" id="inputPrecio_edit" name="inputPrecio_edit" data-parsley-type="number" placeholder="Precio" data-parsley-required="true"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-4"></label>
+						<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
+							<button type="submit" class="btn btn-primary">Registrar</button>
+						</div>
+					</div>
+				</form>				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end modal edit -->
 		
 	
 <?php $this->load->view('view_scripts') ?>
@@ -282,6 +390,7 @@
 <script src="<?= base_url(); ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="<?= base_url(); ?>assets/js/form-plugins.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 	
@@ -299,6 +408,7 @@
 		if(mes < 10) mes = "0"+mes;
 		currentDay = d.getDate()+"-"+mes+"-"+ d.getFullYear();
 		$("#inputFechaIngreso").attr("value",currentDay);
+		$("#inputFechaIngreso2").attr("value",currentDay);
 		$("#inputFechaEgreso").attr("value",currentDay);
 		$('#inputAnio').attr("value",d.getFullYear());
 		$('#selectMes').attr("value",d.getMonth()+1);
@@ -312,8 +422,53 @@
   			}			
 		});
 
-		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
-		if(<?=$mensaje;?>== 2) alert('Error');
+		if(<?=$mensaje;?>== 1){
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito"
+	        });
+		} 
+		if(<?=$mensaje;?>== 2){
+			$.gritter.add({
+	            title: "Error",
+	            text: "Error al guardar"
+	        });
+		} 
+
+		<?php if($data['rol']==1): ?>
+			$(".btn-delete").click(function(){
+				$("#silo").val($(this).parent().parent().data("silo"));
+				$("#ingreso").val($(this).parent().parent().data("ingreso"));
+				$('#modal_delete').modal('show');
+			});
+
+			$('#modal_delete').on('hidden.bs.modal', function (){ $("#silo").val(""); $("#ingreso").val(""); });
+
+			$(".btn-edit").click(function(){
+				var padre = $(this).parent().parent();
+				$("#id_silo").val(padre.data("silo"));
+				$("#id_ingreso").val(padre.data("ingreso"));
+				
+				$("#inputNroFactura_edit").val(padre.children(".factura").text());
+				$("#inputKgOrigen_edit").val(padre.children(".kgo").text());
+				$("#inputKgFabrica_edit").val(padre.children(".kgd").text());
+				$("#inputPrecio_edit").val($(this).parent().data("precio"));
+				
+				var id_silo = padre.children(".silo").data("silo");
+				$("#selectSiloIngreso_edit").val(id_silo);
+
+				$('#modal_edit').modal('show');
+			});
+
+			$('#modal_edit').on('hidden.bs.modal', function (){ 
+				$("#id_silo").val(""); 
+				$("#id_ingreso").val(""); 
+				$("#inputKgOrigen_edit").val("");
+				$("#inputKgFabrica_edit").val("");
+				$("#inputPrecio_edit").val("");
+				$("#selectSiloIngreso_edit").val("");
+			});
+		<?php endif; ?>		
 	});
 </script>	
 </body>

@@ -117,6 +117,9 @@
 								<th>Cierre</th>
 								<th>Fecha Cierre</th>
 								<th>Estado</th>
+								<?php if($data['rol'] == 1): ?>
+								<th>Eliminar</th>
+								<?php endif; ?>
 							</tr>
 						</thead>
 						<tbody>
@@ -145,6 +148,11 @@
 								echo "<td>".$solicitud->nombre.", ".$solicitud->apellido."</td>";
 								echo "<td>".$fechaC."</td>";								
 								echo $estado;
+								if($data['rol'] == 1)
+									if($solicitud->estado == 0)
+										echo "<td class='action'>"."<a class='btn btn-danger btn-icon btn-circle btn-sm btn-delete'><i class='fa fa-times'></i></a>"."</td>";
+									else
+										echo "<td></td>";
 								echo "</tr>";
 							}
 						?>							
@@ -158,6 +166,28 @@
 </div>
 <!-- end #content -->
 		
+<!-- modal delete -->
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="modal_delete">
+	   <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Eliminar orden</h4>
+	      </div>
+	      <div class="modal-body">
+	        ¿Está seguro que desea eliminar la orden?
+	      </div>
+	      <div class="modal-footer">
+	        <form method="POST" action="<?=base_url()?>insumos/eliminar">
+	        	<input type="hidden" name="solicitud" id="solicitud">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        	<button type="submit" class="btn btn-primary">Aceptar</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<!-- end modal delete -->	
 	
 <?php $this->load->view('view_scripts') ?>
 
@@ -167,6 +197,7 @@
 <script src="<?= base_url(); ?>assets/plugins/parsley/dist/parsley.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/jquery.dataTables.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/DataTables-1.9.4/js/data-table.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/gritter/js/jquery.gritter.js"></script>
 <script src="<?= base_url(); ?>assets/js/apps.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 	
@@ -182,8 +213,18 @@
 		$("#LIinsumos").addClass("active");
 		
 		
-		if(<?=$mensaje;?>== 1) alert('Registrado con exito');
-		if(<?=$mensaje;?>!= 1 && <?=$mensaje;?>!= 0) alert('Registrado con exito. Nro de Solicitud: '+<?=$mensaje;?>);
+		if(<?=$mensaje;?>== 1){
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito"
+	        });
+		}
+		if(<?=$mensaje;?>!= 1 && <?=$mensaje;?>!= 0) {
+			$.gritter.add({
+	            title: "Exito",
+	            text: "Registrado con exito. Nro de Solicitud: "+<?=$mensaje;?>
+	        });
+		}
 
 		/*$('.orden').click(function(event){
 			event.preventDefault()
@@ -226,9 +267,21 @@
 			location.href="<?=base_url()?>insumos/nuevaSolicitud";
 		});
 
-		$('#data-table tbody').on('click', 'tr', function () {
-	        location.href = '<?= base_url(); ?>insumos/form/'+$(this).attr('id');	        
+		
+
+		$('#data-table tbody').on('click', 'tr > td', function () {
+			if($(this).hasClass('action'))
+			{
+				$("#solicitud").val($(this).parent().attr("id"));
+				$('#modal_delete').modal('show');
+			}
+			else
+	        location.href = '<?= base_url(); ?>insumos/form/'+$(this).parent().attr('id');	    	        
 	    });
+		$('#modal_delete').on('hidden.bs.modal', function (){ $("#solicitud").val("");});
+
+
+
 	});
 </script>
 <style type="text/css">

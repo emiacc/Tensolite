@@ -30,6 +30,8 @@ class Recuperacion extends CI_Controller {
 		$this->data["resumenRecuperacion"] = $this->model_produccion->resumenRecuperacion($mes,$anio);
 		$this->data["widgetRecuperacion"] = $this->model_produccion->getRecuperacionWidget($mes,$anio);
 
+		$this->data['historico'] = $this->model_produccion->getRecuperaciones();
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_recuperacion', $this->data);
 	}
@@ -41,6 +43,11 @@ class Recuperacion extends CI_Controller {
         $fecha = date('Y-m-d',strtotime($fecha));
         $this->model_produccion->ingreso_recuperacion($fecha, $medida, $cantidad, $this->data['data']['id_usuario']);
         $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Recuperación ".$cantidad." de ".number_format((($medida)/10),2));
+
+
+		$this->load->model('model_deposito');
+        $this->model_deposito->new_ingreso_recuperacion($cantidad, $medida, $this->data['data']['id_usuario']);
+
         redirect('recuperacion/index/1');
 	}
 
@@ -76,6 +83,22 @@ class Recuperacion extends CI_Controller {
 			case 11: return 30;
 			case 12: return 31;
 		}
+	}
+
+	public function eliminar()
+	{
+		$id_recuperacion = $this->input->post("id_recuperacion");
+		$datos = $this->model_produccion->get_cantidad_medida_recuperacion($id_recuperacion);
+		
+		$datos->medida;
+		$datos->cantidad;
+		$this->load->model('model_deposito');
+		$this->db->trans_begin();
+		$this->model_deposito->new_egreso_perdida($datos->cantidad, $datos->medida, $this->data['data']['id_usuario']);
+        $this->model_produccion->delete_recuperacion($id_recuperacion);
+        $this->db->trans_commit();
+
+        redirect('recuperacion/index/1');
 	}
 }
 ?>

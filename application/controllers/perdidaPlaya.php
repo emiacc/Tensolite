@@ -31,6 +31,8 @@ class PerdidaPlaya extends CI_Controller {
 		$this->data["resumenPerdida"] = $this->model_produccion->resumenPerdida($mes,$anio,1);
 		$this->data["widgetPerdida"] = $this->model_produccion->getPerdidaWidget($mes,$anio,1);
 
+		$this->data['historico'] = $this->model_produccion->getPerdidasPlaya();
+
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_perdida_playa', $this->data);
 	}
@@ -42,6 +44,9 @@ class PerdidaPlaya extends CI_Controller {
         $fecha = date('Y-m-d',strtotime($fecha));
         $this->model_produccion->ingreso_perdida_playa($fecha, $medida, $cantidad, $this->data['data']['id_usuario']);
         $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Perdida en playa ".$cantidad." de ".number_format((($medida)/10),2));
+
+		$this->load->model('model_deposito');
+        $this->model_deposito->new_egreso_perdida($cantidad, $medida, $this->data['data']['id_usuario']);
         redirect('perdidaPlaya/index/1');
 	}
 
@@ -77,6 +82,20 @@ class PerdidaPlaya extends CI_Controller {
 			case 11: return 30;
 			case 12: return 31;
 		}
+	}
+
+	public function eliminar()
+	{
+		$id_perdida = $this->input->post("id_perdida");
+		$datos = $this->model_produccion->get_cantidad_medida_perdida($id_perdida);
+		
+		$this->load->model('model_deposito');
+		$this->db->trans_begin();
+		$this->model_deposito->new_ingreso_delete_despacho($datos->cantidad, $datos->medida, $this->data['data']['id_usuario']);
+        $this->model_produccion->delete_perdida($id_perdida);
+        $this->db->trans_commit();
+
+        redirect('perdidaPlaya/index/1');
 	}
 }
 ?>

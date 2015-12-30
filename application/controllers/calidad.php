@@ -87,4 +87,10 @@ class Calidad extends CI_Controller {
 		
 		$this->load->view('impresion/calidad_print_view', $this->data);
 	}
+
+	public function eliminar()
+	{
+		$this->model_mantenimiento->eliminar_calidad($this->input->post('id_formulario'));
+		redirect('calidad');
+	}
 }

@@ -214,4 +214,17 @@ class Model_mantenimiento extends CI_Model {
 		return $estados;
 	}
 
+
+
+	public function eliminar_calidad($id_formulario)
+	{
+		$this->db->delete('formularios_calidad', array('id_formulario' => $id_formulario));
+	}
+
+	public function eliminar_mantenieminto($id_solicitud)
+	{
+		$this->db->delete('solicitudes_mantenimiento', array('id_solicitud' => $id_solicitud));
+		$this->db->delete('mantenimiento_detalle', array('id_solicitud' => $id_solicitud));
+	}
+
 }

@@ -13,10 +13,14 @@ class PerdidaProduccion extends CI_Controller {
 
 	public function index($mensaje = 0)	{
 		$this->data['mensaje'] = $mensaje;
-		
-		$dia = $this->input->post('inputDia');
-		$mes = $this->input->post('selectMes');
-        $anio = $this->input->post('inputAnio');
+		$fecha = new Datetime($this->input->post('inputFechaPerdidaProduccion2'));
+		$dia = $fecha->format('d');
+		$mes = $fecha->format('m');
+		$anio = $fecha->format('Y');
+		//$dia = $this->input->post('inputDia');
+		//$mes = $this->input->post('selectMes');
+        //$anio = $this->input->post('inputAnio');
+        
         if($dia == '') $dia = date('j'); 
         if($mes == '') $mes = date('n'); 
        	if($anio == '')	$anio = date('Y');
@@ -31,6 +35,8 @@ class PerdidaProduccion extends CI_Controller {
 		//grafico
 		$this->data["resumenPerdida"] = $this->model_produccion->resumenPerdida($mes,$anio,0);
 		$this->data["widgetPerdida"] = $this->model_produccion->getPerdidaWidget($mes,$anio,0);
+
+		$this->data['historico'] = $this->model_produccion->getPerdidasProduccion();
 
 		$this->load->view('view_header', $this->data);
 		$this->load->view('view_perdida_produccion', $this->data);
@@ -62,6 +68,15 @@ class PerdidaProduccion extends CI_Controller {
 			case 11: return 'Noviembre';
 			case 12: return 'Diciemrbe';
 		}
+	}
+
+	public function eliminar()
+	{
+		$id_perdida = $this->input->post("id_perdida");
+		
+		$this->model_produccion->delete_perdida($id_perdida);
+
+        redirect('perdidaProduccion/index/1');
 	}
 }
 ?>

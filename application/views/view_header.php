@@ -21,6 +21,7 @@
 	<link href="<?= base_url(); ?>assets/css/style-responsive.min.css" rel="stylesheet" />
 	<link href="<?= base_url(); ?>assets/css/theme/default.css" rel="stylesheet" id="theme" />
 	<link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" />
+	<link href="<?= base_url(); ?>assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />	
 	<!-- ================== END BASE CSS STYLE ================== -->
 </head>
 <body>
@@ -131,6 +132,7 @@
 						    <li id="LIplastificante"><a href="<?= base_url(); ?>materiaPrima/index/plastificante">Plastificante</a></li>
 						    <li id="LItriturado"><a href="<?= base_url(); ?>materiaPrima/index/triturado">Triturado</a></li>
 						    <li id="LIceniza"><a href="<?= base_url(); ?>materiaPrima/index/ceniza">Ceniza</a></li>
+						    <li id="LIacero"><a href="<?= base_url(); ?>materiaPrima/index/acero">Acero</a></li>
 						</ul>
 					</li>
 

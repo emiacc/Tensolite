@@ -109,7 +109,7 @@ class Model_produccion extends CI_Model {
 	}
 
 	//orden produccion
-	public function ingreso_orden($fecha, $banco, $medida, $cortes, $confeccionado, $supervisor, $medidor, $cosechador, $jefe, $usuario) {
+	public function ingreso_orden($fecha, $banco, $medida, $cortes, $confeccionado, $supervisor, $medidor, $cosechador, $jefe, $usuario, $unidades) {
    		$data = array(
 	               'fecha' => $fecha,
 	               'confeccionado' => $confeccionado, 
@@ -128,6 +128,7 @@ class Model_produccion extends CI_Model {
 		               'nro_banco' => $banco,
 		               'medida' => $medida[$key],
 		               'cortes' => $val,
+		               'unidades' => $unidades[$key],
 		               'id_usuario' => $usuario,
 		               'id_orden' => $idOrden
 		            );
@@ -139,8 +140,79 @@ class Model_produccion extends CI_Model {
 	public function getOrdenes() {
 		return $this->db->order_by("fecha", "asc")->get_where('ordenes_produccion', array('procesado' => 0))->result();
 	}
+	public function getOrdenesProcesadas() {
+		return $this->db->order_by("fecha", "DESC")->get_where('ordenes_produccion', array('procesado' => 1))->result();
+	}
 	public function getProducciones() {
 		return $this->db->get_where('producciones', array('solicitud' => 0))->result();
+	}
+	public function getProduccion($id_orden) {
+		return $this->db->get_where('producciones', array('id_orden' => $id_orden))->result();
+	}
+	public function getAnotherProduccion($id_orden) {
+		$consulta = $this->db->query("select * from producciones 
+		where fecha = (select fecha from ordenes_produccion where id_orden = $id_orden)
+		and id_orden <> $id_orden
+		and solicitud = 1")->result();
+
+		$id_produccion_con_consumo = 0;
+		foreach ($consulta as $value) {
+			$id = $value->id_orden;
+			//var_dump($this->db->get_where('egresos_cemento', array('id_orden_produccion' => $id, "consumo !=" => 0))->result());
+			$egresos_cemento = $this->db->get_where('egresos_cemento', array('id_orden_produccion' => $id, "consumo !=" => 0))->row();
+			if(!empty($egresos_cemento))
+			{
+				$id_produccion_con_consumo = $egresos_cemento->id_produccion;  
+			} 
+		}
+
+
+		$medida_original = $this->db->get_where('producciones', array('id_orden' => $id_orden))->row()->medida;
+		
+		$medida_con_consumo = $this->db->get_where('producciones', array('id_produccion' => $id_produccion_con_consumo))->row();
+		if(!empty($medida_con_consumo)) $medida_con_consumo = $medida_con_consumo->medida;
+		 $bandera = FALSE;
+								switch(true)
+									{
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+										case $medida_original <= 30 && $medida_con_consumo <= 30:
+											$bandera = TRUE;
+											break;
+
+							}
+
+
+
+		if($bandera == FALSE) return NULL;
+		if($id_produccion_con_consumo != 0)
+		{
+			$egreso_cemento = $this->db->get_where('egresos_cemento', array('id_produccion' => $id_produccion_con_consumo))->row();
+			$egresos_aridos = $this->db->get_where('egresos_aridos', array('id_produccion' => $id_produccion_con_consumo))->result();
+			
+			array_push($egresos_aridos, $egreso_cemento);
+			return $egresos_aridos;
+		}
+		return NULL;
+
 	}
 
 	public function update_produccion($id, $produ, $cantidad, $usuario, $turno){
@@ -154,7 +226,7 @@ class Model_produccion extends CI_Model {
 			$data = array(
 	               'cantidad' => $cantidad[$key],
 	               'id_usuario' => $usuario,
-	               'turno' => $turno,
+	               'turno' => $turno[$key],
 	               'solicitud' => 1
 	            );
 			$this->db->where('id_produccion', $val);
@@ -196,6 +268,17 @@ class Model_produccion extends CI_Model {
 			$this->db->insert('despachos', $data); 
         }
         return $idOrden;
+	}
+
+	public function delete_orden_despacho($id_orden)
+	{
+		$this->db->delete('ordenes_despacho', array('id_orden' => $id_orden));
+		$this->db->delete('despachos', array('id_orden' => $id_orden));
+	}
+
+	public function get_cantidad_medida($id_orden)
+	{
+		return $this->db->get_where('despachos', array('id_orden' => $id_orden))->result();
 	}
 
 	//grafico perdidas
@@ -256,7 +339,38 @@ class Model_produccion extends CI_Model {
 
 
 
+	public function delete_orden_produccion($id_orden)
+	{
+		$this->db->delete('ordenes_produccion', array('id_orden' => $id_orden));
+		$this->db->delete('producciones', array('id_orden' => $id_orden));
+	}
+	
+	public function update_orden($id_orden, $fecha, $banco, $confeccionado, $supervisor, $medidor, $cosechador, $jefe)
+	{
+		$data = array(
+	               'nro_banco' => $banco,
+	               'fecha' => $fecha,
+	               'confeccionado' => $confeccionado,
+	               'supervisor' => $supervisor,
+	               'medidor' => $medidor,
+	               'cosechador' => $cosechador,
+	               'jefe' => $jefe
+	            );
+			$this->db->where('id_orden', $id_orden);
+			$this->db->update('ordenes_produccion', $data);
+	}
 
+	public function update_produ($id_produccion, $cortes, $medida, $unidades)
+	{
+		$data = array(
+	               'cortes' => $cortes,
+	               'medida' => $medida,
+	               'unidades' => $unidades
+	            );
+			$this->db->where('id_produccion', $id_produccion);
+			$this->db->update('producciones', $data);
+
+	}
 
 
 
@@ -279,5 +393,42 @@ class Model_produccion extends CI_Model {
 		return $this->db->get_where('despachos', array('id_orden' => $id))->result();
 	}
 	
+
+	public function getRecuperaciones()
+	{
+		return $this->db->get('recuperaciones')->result();
+	}
+
+	public function get_cantidad_medida_recuperacion($id_recuperacion)
+	{
+		return $this->db->get_where('recuperaciones', array('id_recuperacion' => $id_recuperacion))->row();
+	}
+
+	public function delete_recuperacion($id_recuperacion)
+	{
+		$this->db->delete('recuperaciones', array('id_recuperacion' => $id_recuperacion));
+	}
+
+
+	public function getPerdidasPlaya()
+	{
+		return $this->db->order_by("fecha", "desc")->get_where('perdidas', array('en_playa' => 1))->result();
+	}
+
+	public function get_cantidad_medida_perdida($id_perdida)
+	{
+		return $this->db->get_where('perdidas', array('id_perdida' => $id_perdida))->row();
+	}
+
+	public function delete_perdida($id_perdida)
+	{
+		$this->db->delete('perdidas', array('id_perdida' => $id_perdida));
+	}
+	
+	public function getPerdidasProduccion()
+	{
+		return $this->db->order_by("fecha", "desc")->get_where('perdidas', array('en_playa' => 0))->result();
+	}
+
 }
 ?>

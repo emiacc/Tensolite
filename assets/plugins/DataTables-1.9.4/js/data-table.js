@@ -155,4 +155,13 @@ $(document).ready(function() {
 			"sLengthMenu": "_MENU_ filas por página"
 		}
 	});
+
+	$('#data-table2').dataTable( {
+		"sDom": "<'row'<'col-md-6 col-sm-6'l><'col-md-6 col-sm-6'f>r>t<'row'<'col-md-6 col-sm-6'i><'col-md-6 col-sm-6'p>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sLengthMenu": "_MENU_ filas por página"
+		},
+		"bSort": false
+	});
 } );
