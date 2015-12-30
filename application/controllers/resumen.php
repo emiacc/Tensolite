@@ -26,8 +26,12 @@ class Resumen extends CI_Controller {
        	$this->data["resumenDespacho"] = $this->model_resumen->resumenDespacho($mes,$anio,$mes,$anio);
        	$this->data["produccionProd"] = $this->model_resumen->produccionProd($mes,$anio,$mes,$anio);
        	$this->data["produccionRecu"] = $this->model_resumen->produccionRecu($mes,$anio,$mes,$anio);
-       	$this->data["stockSilos"] = $this->model_resumen->getStockSilos($mes,$anio,$mes,$anio);
        	
+       	//$this->data["stockSilos"] = $this->model_resumen->getStockSilos($mes,$anio,$mes,$anio);
+       	$this->load->model('model_materia');
+       	$this->data["stockSilos"] = array($this->model_materia->getStockCemento(1),$this->model_materia->getStockCemento(2),$this->model_materia->getStockCemento(3));
+
+
        	//consumo materia prima
        	$this->data["consumoCemento"] = $this->model_resumen->getConsumoCemento($mes,$anio,$mes,$anio);
        	$this->data["consumoArena"] = $this->model_resumen->getConsumoArena($mes,$anio,$mes,$anio);

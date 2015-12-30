@@ -161,6 +161,16 @@
 				<div class="modal-body">
 					<form class="form-horizontal" id="fil" action="<?= base_url(); ?>perdidaProduccion" method="POST" data-parsley-validate="true">
 						<div class="form-group">
+							<label class="col-md-3 control-label ui-sortable">Fecha</label>
+							<div class="col-md-9 ui-sortable">
+								<div class="input-group date" id="datepicker-autoClose2" data-date-format="dd-mm-yyyy" >
+									<input id="inputFechaPerdidaProduccion2" name="inputFechaPerdidaProduccion2" type="text" class="form-control" value="" placeholder="Seleccione Fecha" data-parsley-required="true" />
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+<!--
+						<div class="form-group">
 							<label class="col-md-3 control-label ui-sortable">Día</label>
 							<div class="col-md-9 ui-sortable">
 								<input type="text" size="2" placeholder="Día" maxlength="2" class="form-control" name="inputDia" id="inputDia" data-parsley-required="true" data-parsley-range="[1,31]"/>
@@ -191,6 +201,7 @@
 								<input type="text" size="4" placeholder="Año" maxlength="4" class="form-control" name="inputAnio" id="inputAnio" data-parsley-required="true" data-parsley-range="[1900,2050]"/>			
 							</div>
 						</div>
+-->
 						<div class="form-group">
 							<div class="col-md-9 col-md-offset-3 ui-sortable">
 								<button type="submit" class="btn btn-sm btn-primary m-r-5">Filtrar</button>
@@ -404,6 +415,7 @@
 		if(mes < 10) mes = "0"+mes;
 		currentDay = d.getDate()+"-"+mes+"-"+ d.getFullYear();
 		$("#inputFechaPerdidaProduccion").attr("value",currentDay);
+		$("#inputFechaPerdidaProduccion2").attr("value",currentDay);
 		$('#inputAnio').attr("value",d.getFullYear());
 		$('#selectMes').attr("value",d.getMonth()+1);
 		$('#inputDia').attr("value",d.getDate());

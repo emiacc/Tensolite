@@ -132,14 +132,15 @@
 				<div class="panel-body panel-form">
 					<br>
 					<h4 class="text-center">Silo 1</h4>
-					<h5 class="text-center">Stock Actual: <?=$stockActual1?></h5>					
+					<h5 class="text-center">Stock Actual: <?=$stockActual1?> Kg</h5>					
 					<h5 class="text-center"><?=number_format((($stockActual1*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
 					<form action="<?= base_url(); ?>cemento/stock_real/1" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140"/>
+								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -151,33 +152,35 @@
 					</form>	
 					<br><hr><br>
 					<h4 class="text-center">Silo 2</h4>
-					<h5 class="text-center">Stock Actual: <?=$stockActual2?></h5>					
+					<h5 class="text-center">Stock Actual: <?=$stockActual2?> Kg</h5>					
 					<h5 class="text-center"><?=number_format((($stockActual2*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
 					<form action="<?= base_url(); ?>cemento/stock_real/2" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140" />
+								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-4"></label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<button type="submit" class="btn btn-primary">Registrar</button>
+								<button type="submit" class="btn btn-primary">Registrar</button>								
 							</div>
 						</div>
 					</form>	
 					<br><hr><br>
 					<h4 class="text-center">Silo 3</h4>
-					<h5 class="text-center">Stock Actual: <?=$stockActual3?></h5>					
+					<h5 class="text-center">Stock Actual: <?=$stockActual3?> Kg</h5>					
 					<h5 class="text-center"><?=number_format((($stockActual3*100)/140),2)."%"?> en Silo</h5>					
 					<hr>
 					<form action="<?= base_url(); ?>cemento/stock_real/3" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140"/>
+								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
 						<div class="form-group">

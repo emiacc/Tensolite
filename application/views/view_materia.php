@@ -115,7 +115,7 @@
 				</div>
 				<div class="panel-body panel-form">
 					<br>
-					<h4 class="text-center">Stock Actual: <?=$stockActual?></h4>
+					<h4 class="text-center">Stock Actual: <?=$stockActual?> Kg</h4>
 					<?php if($stockMaximo!=0){ ?>
 					<h4 class="text-center"><?=number_format((($stockActual*100)/$stockMaximo),2)."%"?> en Silo</h4>
 					<?php } ?>
@@ -123,8 +123,9 @@
 					<form action="<?= base_url(); ?>materiaPrima/stock_real/<?=$materia;?>" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
-							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true"/>
+							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" <?php if($stockMaximo!=0):?> data-parsley-max="<?=$stockMaximo?>" <?php endif; ?> />
+								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
 						<div class="form-group">

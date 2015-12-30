@@ -13,10 +13,14 @@ class PerdidaProduccion extends CI_Controller {
 
 	public function index($mensaje = 0)	{
 		$this->data['mensaje'] = $mensaje;
-		
-		$dia = $this->input->post('inputDia');
-		$mes = $this->input->post('selectMes');
-        $anio = $this->input->post('inputAnio');
+		$fecha = new Datetime($this->input->post('inputFechaPerdidaProduccion2'));
+		$dia = $fecha->format('d');
+		$mes = $fecha->format('m');
+		$anio = $fecha->format('Y');
+		//$dia = $this->input->post('inputDia');
+		//$mes = $this->input->post('selectMes');
+        //$anio = $this->input->post('inputAnio');
+        
         if($dia == '') $dia = date('j'); 
         if($mes == '') $mes = date('n'); 
        	if($anio == '')	$anio = date('Y');
