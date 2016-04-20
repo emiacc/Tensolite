@@ -50,6 +50,9 @@ class PerdidaProduccion extends CI_Controller {
         $fecha = date('Y-m-d',strtotime($fecha));
         $this->model_produccion->ingreso_perdida_produccion($fecha, $banco, $medida, $cantidad, $this->data['data']['id_usuario']);
         $this->model_perfil->insertarNotificacion($this->data['data']['id_usuario'], "Perdida en producción ".$cantidad." de ".number_format((($medida)/10),2));
+        
+		$this->load->model('model_deposito');
+        $this->model_deposito->new_egreso_perdida($cantidad, $medida, $this->data['data']['id_usuario']);
         redirect('perdidaProduccion/index/1');
 	}
 
