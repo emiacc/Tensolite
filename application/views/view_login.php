@@ -48,7 +48,7 @@
             </div>
             <!-- end brand -->
             <div class="login-content">
-                <form action="<?= base_url(); ?>login/iniciar_sesion_post" method="POST" class="margin-bottom-0">
+                <form action="<?= base_url(); ?>index.php/login/iniciar_sesion_post" method="POST" class="margin-bottom-0">
                     <div class="form-group m-b-20">
                         <input type="text" class="form-control input-lg" placeholder="Email" name="nombre_usuario" />
                     </div>

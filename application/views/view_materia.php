@@ -117,7 +117,7 @@
 					<br>
 					<h4 class="text-center">Stock Actual: <?=$stockActual?> Kg</h4>
 					<?php if($stockMaximo!=0){ ?>
-					<h4 class="text-center"><?=number_format((($stockActual*100)/$stockMaximo),2)."%"?> en Silo</h4>
+						<h4 class="text-center"><?=number_format((($stockActual*100)/$stockMaximo),2)."%"?> en Silo</h4>
 					<?php } ?>
 					<hr>
 					<form action="<?= base_url(); ?>materiaPrima/stock_real/<?=$materia;?>" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
@@ -331,7 +331,7 @@
 <!-- ================== END PAGE LEVEL JS ================== -->
 	
 <script>
-	$(document).ready(function() {
+	$(document).ready(function() {	
 		App.init();
 		FormPlugins.init();
 		//cambio el item activo en el sidebar
@@ -396,7 +396,8 @@
 				$("#inputCantidadIngreso_edit").val("");
 				$("#inputPrecio_edit").val("");
 			});
-		<?php endif; ?>		
+		<?php endif; ?>
+
 	});	
 </script>	
 </body>

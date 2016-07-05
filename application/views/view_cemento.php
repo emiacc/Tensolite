@@ -113,7 +113,7 @@
 						<div class="form-group">
 							<label class="control-label col-xs-4"></label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8">
-								<button type="submit" class="btn btn-primary">Registrar</button>
+								<button type="submit" id="registrarIngreso" class="btn btn-primary">Registrar</button>
 							</div>
 						</div>
 					</form>					
@@ -133,13 +133,13 @@
 					<br>
 					<h4 class="text-center">Silo 1</h4>
 					<h5 class="text-center">Stock Actual: <?=$stockActual1?> Kg</h5>					
-					<h5 class="text-center"><?=number_format((($stockActual1*100)/140),2)."%"?> en Silo</h5>					
+					<h5 class="text-center"><?=number_format((($stockActual1*100)/70000),2)."%"?> en Silo</h5>					
 					<hr>
 					<form action="<?= base_url(); ?>cemento/stock_real/1" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140"/>
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="70000"/>
 								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
@@ -153,13 +153,13 @@
 					<br><hr><br>
 					<h4 class="text-center">Silo 2</h4>
 					<h5 class="text-center">Stock Actual: <?=$stockActual2?> Kg</h5>					
-					<h5 class="text-center"><?=number_format((($stockActual2*100)/140),2)."%"?> en Silo</h5>					
+					<h5 class="text-center"><?=number_format((($stockActual2*100)/70000),2)."%"?> en Silo</h5>					
 					<hr>
 					<form action="<?= base_url(); ?>cemento/stock_real/2" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140" />
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="70000" />
 								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
@@ -173,13 +173,13 @@
 					<br><hr><br>
 					<h4 class="text-center">Silo 3</h4>
 					<h5 class="text-center">Stock Actual: <?=$stockActual3?> Kg</h5>					
-					<h5 class="text-center"><?=number_format((($stockActual3*100)/140),2)."%"?> en Silo</h5>					
+					<h5 class="text-center"><?=number_format((($stockActual3*100)/70000),2)."%"?> en Silo</h5>					
 					<hr>
 					<form action="<?= base_url(); ?>cemento/stock_real/3" method="POST" class="form-horizontal form-bordered" data-parsley-validate="true">
 						<div class="form-group">
 							<label class="control-label col-xs-4" for="inputCantidadIngreso">Stock Real:</label>
 							<div class="col-lg-6 col-md-8 col-sm-6 col-xs-8 input-group">
-								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="140"/>
+								<input class="form-control inputNumerico" type="text" id="inputCantidadIngreso" name="inputCantidadIngreso" data-parsley-type="number" placeholder="Cantidad" data-parsley-required="true" data-parsley-min="0" data-parsley-max="70000"/>
 								<span class="input-group-addon">Kg</span>
 							</div>
 						</div>
@@ -396,6 +396,67 @@
 	
 <script>
 	$(document).ready(function() {
+
+		/*[Start_control_ingreso_cemento]*/
+		$('#registrarIngreso').attr('disabled', 'disabled');;
+		$('#selectSiloIngreso').on('change', function(event) {
+			var valor = $('#selectSiloIngreso').val()
+			switch (valor) {
+				case "1":
+					 if( <?php echo(number_format((($stockActual1*100)/70000),2)) ?> > 90){
+					 	alert('Stock en Silo 1 mayor a 90%')
+					 }
+					break;
+				case "2":
+					if( <?php echo(number_format((($stockActual2*100)/70000),2)) ?> > 90){
+					 	alert('Stock en Silo 2 mayor a 90%')
+					 }
+					break;
+				case "3":
+					if( <?php echo(number_format((($stockActual3*100)/70000),2)) ?> > 90){
+					 	alert('Stock en Silo 3 mayor a 90%')
+					 }
+					break;
+				default:
+					// statements_def
+					break;
+			}
+			
+		});
+		$('#inputKgFabrica').on('change', function(event) {
+			var silo = $('#selectSiloIngreso').val()
+			switch (silo) {
+				case "1":
+					 if( (<?php echo(number_format((($stockActual1*100)/70000),2)) ?> + 
+					 			parseInt($('#inputKgFabrica').val())*100/70000)  > 100){
+					 	alert('Error: stock del Silo 1 mayor a 100%')
+					 }else{
+					 	$('#registrarIngreso').removeAttr('disabled'); //Enable
+					 }
+					break;
+				case "2":
+					if( (<?php echo(number_format((($stockActual2*100)/70000),2)) ?> + 
+					 			parseInt($('#inputKgFabrica').val())*100/70000)  > 100){
+					 	alert('Error: stock del Silo 1 mayor a 100%')
+					 }else{
+					 	$('#registrarIngreso').removeAttr('disabled'); //Enable
+					 }
+					break;
+				case "3":
+					if( (<?php echo(number_format((($stockActual3*100)/70000),2)) ?> + 
+					 			parseInt($('#inputKgFabrica').val())*100/70000)  > 100){
+					 	alert('Error: stock del Silo 1 mayor a 100%')
+					 }else{
+					 	$('#registrarIngreso').removeAttr('disabled'); //Enable
+					 }
+					break;
+				default:
+					// statements_def
+					break;
+			}
+			
+		});
+		/*[End_control_ingreso_cemento]*/
 		App.init();
 		FormPlugins.init();
 		//cambio el item activo en el sidebar

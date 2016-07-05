@@ -55,7 +55,11 @@
 	echo "]; </script>";
 
 	//grafico cemento por silo
-	echo '<script>var stockSilos = [["Silo A",'.($stockSilos[0]*100/140).'],["Silo B",'.($stockSilos[1]*100/140).'],["Silo C",'.($stockSilos[2]*100/140).']];</script>';	
+	echo '	<script>
+				var stockSilos = [["Silo 1",'.($stockSilos[0]*100/70000).'],
+								["Silo 2",'.($stockSilos[1]*100/70000).'],
+								["Silo 3",'.(($stockSilos[2]*100)/70000).']];
+			</script>';	
 	
 	//consumo materia
 	echo '<script>var consumoCemento = [';
@@ -434,32 +438,32 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><a class="no-print" href="<?= base_url(); ?>cemento"><label class="label label-danger">Cemento</label></a><label class="print">Cemento</label></td>
+								<td><a class="no-print" href="<?= base_url(); ?>cemento"><label class="label label-danger">Cemento (Kg)</label></a><label class="print">Cemento</label></td>
 								<td><?=$consumoTotalCemento;?></td>
 								<td><div id="sparkline-cemento"></div></td>
 							</tr>
 							<tr>
-								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/arena"><label class="label label-warning">Arena</label></a><label class="print">Arena</label></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/arena"><label class="label label-warning">Arena (m3)</label></a><label class="print">Arena</label></td>
 								<td><?=$consumoTotalArena;?></td>
 								<td><div id="sparkline-arena"></div></td>
 							</tr>
 							<tr>
-								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/binder"><label class="label label-success">Binder</label></a><label class="print">Binder</label></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/binder"><label class="label label-success">Binder (m3)</label></a><label class="print">Binder</label></td>
 								<td><?=$consumoTotalBinder;?></td>
 								<td><div id="sparkline-binder"></div></td>
 							</tr>
 							<tr>
-								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/acelerante"><label class="label label-primary">Acelerante</label></a><label class="print">Acelerante</label></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/acelerante"><label class="label label-primary">Acelerante (Lts.)</label></a><label class="print">Acelerante</label></td>
 								<td><?=$consumoTotalAcelerante;?></td>
 								<td><div id="sparkline-acelerante"></div></td>
 							</tr>
 							<tr>
-								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/plastificante"><label class="label label-default">Plastificante</label></a><label class="print">Plastificante</label></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/plastificante"><label class="label label-default">Plastificante (Lts.)</label></a><label class="print">Plastificante</label></td>
 								<td><?=$consumoTotalPlastificante;?></td>
 								<td><div id="sparkline-plastificante"></div></td>
 							</tr>
 							<tr>
-								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/ceniza"><label class="label label-inverse">Ceniza</label></a><label class="print">Ceniza</label></td>
+								<td><a class="no-print" href="<?= base_url(); ?>materiaPrima/index/ceniza"><label class="label label-inverse">Ceniza (m3)</label></a><label class="print">Ceniza</label></td>
 								<td><?=$consumoTotalCeniza;?></td>
 								<td><div id="sparkline-ceniza"></div></td>
 							</tr>							

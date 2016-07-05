@@ -52,7 +52,12 @@ class Produccion extends CI_Controller {
         
 
         $this->data['silos'] = $this->model_materia->getSilos();
-
+//[Start_Fix_Egreso_Cemento]: ingreso los valores del stock para poder hacer el calculo de cantidad de kilos antes de 
+//ingresarlos en la orden
+        $this->data['stockActual1'] =  $this->model_materia->getStockCemento(1);
+        $this->data['stockActual2'] =  $this->model_materia->getStockCemento(2);
+        $this->data['stockActual3'] =  $this->model_materia->getStockCemento(3);
+//[End_Fix_Egreso_Cemento]
         $this->load->view('view_header', $this->data);
         $this->load->view('view_produccion_orden', $this->data);
 

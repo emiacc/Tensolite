@@ -229,7 +229,7 @@
 								<br><br> 
 							<?php endforeach; ?>	
 						
-							<button type="submit" class="btn btn-sm btn-primary m-r-5">Registrar</button>
+							<button type="submit" id="registrarEgreso" class="btn btn-sm btn-primary m-r-5">Registrar</button>
 							<button type="button" id="volver" class="btn btn-sm btn-default m-r-5">Volver</button>
 						</fieldset>
 					</form>
@@ -256,7 +256,42 @@
 	
 <script>
 	$(document).ready(function() {
-		
+		//[Start_Control_Egreso_Cemento]
+		$('#registrarEgreso').attr('disabled', 'disabled');
+		$('#selectSilo').on('change', function(event) {
+			var silo = $('#selectSilo').val()
+			switch (silo) {
+				case "1":
+					 if( (<?php echo(number_format((($stockActual1*100)/70000),2)) ?> - 
+					 			parseInt($('#inputCemento').val())*100/70000)  < 0){
+					 	alert('Error: stock del Silo 1 insuficiente')
+					 }else{
+					 	$('#registrarEgreso').removeAttr('disabled'); //Enable
+					 }
+					break;
+				case "2":
+					if( (<?php echo(number_format((($stockActual2*100)/70000),2)) ?> - 
+					 			parseInt($('#inputCemento').val())*100/70000)  < 0){
+					 	alert('Error: stock del Silo 2 insuficiente')
+					 }else{
+					 	$('#registrarEgreso').removeAttr('disabled'); //Enable
+					 }
+					break;
+				case "3":
+					if( (<?php echo(number_format((($stockActual3*100)/70000),2)) ?> - 
+					 			parseInt($('#inputCemento').val())*100/70000)  < 0){
+					 	alert('Error: stock del Silo 3 insuficiente')
+					 }else{
+					 	$('#registrarEgreso').removeAttr('disabled'); //Enable
+					 }
+					break;
+				default:
+					// statements_def
+					break;
+			}
+			
+		});
+		//[End_Control_Egreso_Cemento]
 
 		App.init();
 		FormPlugins.init();
